@@ -12,6 +12,7 @@ import {
   Database,
   ShieldCheck,
   Activity,
+  Layers,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -36,12 +37,9 @@ export const Sidebar: React.FC = () => {
             A
           </div>
           <div>
-            <h1 className="font-headline text-[17px] font-semibold tracking-tight text-[#0B1C30] leading-none">
+            <h1 className="font-headline text-[18px] font-bold tracking-tight text-[#0B1C30] leading-none">
               Ads Tracker
             </h1>
-            <span className="font-sans text-[11px] text-[#64748B] tracking-wider uppercase font-semibold">
-              Evidence Engine
-            </span>
           </div>
         </Link>
 
