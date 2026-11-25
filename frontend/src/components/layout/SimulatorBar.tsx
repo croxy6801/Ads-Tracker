@@ -8,8 +8,8 @@ import { connectSSE } from "@/lib/sse";
 export const SimulatorBar: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [speed, setSpeed] = useState<number>(1);
-  const [currentDay, setCurrentDay] = useState<number>(14);
-  const [currentDate, setCurrentDate] = useState<string>("Day 14 | Oct 28");
+  const [currentDay, setCurrentDay] = useState<number>(0);
+  const [currentDate, setCurrentDate] = useState<string>("Day 0 | Nov 1");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
