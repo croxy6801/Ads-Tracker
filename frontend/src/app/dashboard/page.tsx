@@ -16,17 +16,17 @@ import {
   Layers,
 } from "lucide-react";
 
-// Initial seed mock data for smooth immediate hydration
+// Initial seed mock data for smooth immediate hydration (Day 0 Baseline)
 const INITIAL_SUMMARY: DashboardSummary = {
-  today_spend: 18450,
-  total_spend: 258300,
-  total_conversions: 215,
-  blended_cpa: 1201,
-  estimated_waste: 42650,
+  today_spend: 0,
+  total_spend: 0,
+  total_conversions: 0,
+  blended_cpa: 0,
+  estimated_waste: 0,
   campaign_count: 6,
-  underperforming_count: 1,
-  current_day: 14,
-  current_date: "Oct 28",
+  underperforming_count: 0,
+  current_day: 0,
+  current_date: "Nov 1",
   is_playing: true,
   speed: 1,
 };
