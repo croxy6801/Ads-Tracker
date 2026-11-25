@@ -1,0 +1,9 @@
+{
+  "name": "ads-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ads Tracker - Live Ad Campaign Waste Tracker",
+  "scripts": {
+    "build": "echo 'Static build ready'"
+  }
+}
