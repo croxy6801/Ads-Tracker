@@ -108,39 +108,16 @@ export const SimulatorBar: React.FC = () => {
         </div>
       </div>
 
-      {/* Right: Planted scenario triggers */}
+      {/* Right: Reset control */}
       <div className="flex items-center gap-2">
-        <span className="font-sans text-[11px] font-semibold uppercase tracking-wider text-[#64748B] mr-1 hidden lg:inline">
-          Test Scenarios:
-        </span>
-        <button
-          onClick={() => handleScenario("sudden_failure")}
-          disabled={isLoading}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#FFB4AB] hover:bg-[#FFDAD6] text-[#BA1A1A] font-sans text-[12px] font-medium rounded-[4px] shadow-sm transition-colors"
-          title="Simulate sudden conversion rate crash on campaign"
-        >
-          <AlertTriangle className="w-3.5 h-3.5" />
-          <span>Sudden Failure</span>
-        </button>
-
-        <button
-          onClick={() => handleScenario("lag_spike")}
-          disabled={isLoading}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#FDE68A] hover:bg-[#FFFBEB] text-[#92400E] font-sans text-[12px] font-medium rounded-[4px] shadow-sm transition-colors"
-          title="Inject 3-day attribution latency spike"
-        >
-          <Clock className="w-3.5 h-3.5" />
-          <span>Inject Lag Spike</span>
-        </button>
-
         <button
           onClick={() => handleScenario("reset_seed")}
           disabled={isLoading}
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-[#C6C6CD] hover:bg-[#EFF4FF] text-[#0F172A] font-sans text-[12px] font-medium rounded-[4px] shadow-sm transition-colors"
-          title="Reset to Day 1 deterministic state"
+          title="Reset to Day 0 baseline state"
         >
           <RefreshCw className="w-3.5 h-3.5 text-[#76777D]" />
-          <span>Reset to Seed</span>
+          <span>Reset Seed</span>
         </button>
       </div>
     </div>
