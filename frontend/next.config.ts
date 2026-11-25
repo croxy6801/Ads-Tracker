@@ -2,11 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  rewrites: async () => {
+  async redirects() {
     return [
       {
-        source: "/:path*",
+        source: "/",
         destination: "/index.html",
+        permanent: false,
+      },
+      {
+        source: "/dashboard",
+        destination: "/index.html",
+        permanent: false,
       },
     ];
   },
