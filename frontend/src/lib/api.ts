@@ -1,4 +1,9 @@
-const BASE_URL = "http://localhost:8000/api/v1";
+const BASE_URL =
+  typeof window !== "undefined"
+    ? "/api/v1"
+    : process.env.BACKEND_URL
+    ? `${process.env.BACKEND_URL}/api/v1`
+    : "http://localhost:8000/api/v1";
 
 async function request<T>(
   path: string,
