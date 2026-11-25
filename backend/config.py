@@ -13,10 +13,10 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # Database
-    DATABASE_URL: str = "sqlite+aiosqlite:///backend/ad_waste_finder.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///ad_waste_finder.db"
 
     # CORS
-    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: list[str] = ["*"]
 
     # Default analysis settings (written into `settings` table on first boot)
     DEFAULT_MIN_DAYS: int = 14
