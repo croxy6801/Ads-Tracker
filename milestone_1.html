@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Milestone 1: Requirement Analysis & Architectural Design</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 8pt;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #64748b;
+    }
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  /* Cover Page */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+    padding-top: 40px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 32pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #09090b;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.03em;
+  }
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #475569;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .cover-meta {
+    border-top: 2px solid #0f172a;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    font-size: 9pt;
+  }
+  .cover-meta strong {
+    display: block;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .cover-meta span {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Section Styles */
+  .page-break {
+    page-break-before: always;
+  }
+  
+  h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #e2e8f0;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+    color: #334155;
+  }
+
+  ul, ol {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+    color: #334155;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  /* Callout Boxes */
+  .callout {
+    background: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 4px;
+  }
+
+  .callout-warning {
+    background: #fffbeb;
+    border-left-color: #d97706;
+  }
+  .callout-warning .callout-title {
+    color: #b45309;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px 0;
+    font-size: 8.5pt;
+  }
+
+  th {
+    background: #f1f5f9;
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1.5px solid #cbd5e1;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    color: #334155;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* Diagram Box */
+  .diagram-container {
+    background: #090d16;
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 14px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+  }
+
+  /* Code Block */
+  pre {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.4;
+    overflow-x: hidden;
+    margin: 10px 0;
+    color: #0f172a;
+  }
+
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background: #f1f5f9;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #0f172a;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .pill-green { background: #dcfce7; color: #166534; }
+  .pill-blue { background: #dbeafe; color: #1e40af; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+
+  .footer-note {
+    font-size: 7.5pt;
+    color: #94a3b8;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div>
+    <div class="cover-badge">System Specification & Architectural Deliverable</div>
+    <h1>Milestone 1:<br>Requirement Analysis &amp; Architectural Design</h1>
+    <div class="cover-subtitle">
+      Comprehensive technical blueprint, cross-platform metric unified data schema, architectural block diagrams, non-functional guarantees, and local development environment setup for the <strong>Ads Tracker (Ad Waste Finder)</strong> platform.
+    </div>
+  </div>
+
+  <div>
+    <div class="callout">
+      <div class="callout-title">Project Mission Statement</div>
+      Empower marketing leaders and founders with an evidence-based, read-only analytics platform that shields against attribution lag, isolates wasted ad spend with Bayesian statistical confidence, and executes conservative 25% budget reallocations with zero write-risk.
+    </div>
+
+    <div class="cover-meta">
+      <div>
+        <strong>Project Name</strong>
+        <span>Ads Tracker (Ad Waste Finder)</span>
+      </div>
+      <div>
+        <strong>Milestone Version</strong>
+        <span>1.0.0 (Final Approved Architecture)</span>
+      </div>
+      <div>
+        <strong>Target Environment</strong>
+        <span>Node.js / Next.js / Python FastAPI / Supabase PostgreSQL</span>
+      </div>
+      <div>
+        <strong>Classification</strong>
+        <span>Confidential / Internal Engineering Architecture</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: EXECUTIVE OVERVIEW & CORE PHILOSOPHY -->
+<h2>1. Executive Overview &amp; Architectural Philosophy</h2>
+<p>
+  Digital marketing teams on Google Ads, Meta Ads, and LinkedIn Ads collectively lose 15% to 35% of their monthly spend on underperforming campaigns due to two core human fallacies: <em>premature budget slashing</em> during early attribution lag, and <em>prolonged inaction</em> while waiting for ambiguous dashboards to clarify.
+</p>
+<p>
+  <strong>Ads Tracker</strong> solves this through rigorous statistical design, real-world attribution modeling, and a strictly read-only, human-in-the-loop governance structure.
+</p>
+
+<div class="callout callout-warning">
+  <div class="callout-title">Core Design Invariants (Non-Negotiables)</div>
+  <ol style="margin-bottom:0;">
+    <li><strong>Evidence Before Advice:</strong> Never issue a pause or shift recommendation until the 3-day maturity lag window has closed and statistical confidence exceeds &ge; 80%.</li>
+    <li><strong>Read-Only by Design:</strong> Zero write-back access or automatic account execution. Recommendations produce human-executable shifts (Approve, Snooze, Dismiss).</li>
+    <li><strong>Conservative 25% Reallocation Protocol:</strong> Budgets shift exclusively in 25% tranches with mandatory 7-day re-evaluation windows to detect audience saturation.</li>
+    <li><strong>Constructive Funnel Rehabilitation:</strong> Underperforming campaigns provide actionable remediation (Creative, Audience, Funnel, Bidding) before recommending budget deprecation.</li>
+  </ol>
+</div>
+
+<!-- SECTION 2: FUNCTIONAL REQUIREMENTS -->
+<div class="page-break"></div>
+<h2>2. Functional Requirements (FR)</h2>
+<p>
+  The system's functional requirements define all user-facing interactions, statistical calculation pipelines, and background processing capabilities.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 14%;">Req ID</th>
+      <th style="width: 26%;">Feature Module</th>
+      <th style="width: 42%;">Functional Specification</th>
+      <th style="width: 18%;">Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>FR-101</strong></td>
+      <td><strong>Unified Data Ingestion</strong></td>
+      <td>Ingest daily ad metrics (spend, impressions, clicks, conversions, revenue) via normalized CSV uploads, REST endpoints, and mock simulation drivers.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-102</strong></td>
+      <td><strong>Attribution Lag Shield</strong></td>
+      <td>Implement a mandatory rolling 3-day holdout window. Days within $t_{-2}$ to $t_0$ are explicitly shaded as <em>Immature Data</em> and excluded from waste and CPA alerts.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-103</strong></td>
+      <td><strong>Bayesian Performance Classification</strong></td>
+      <td>Compute Bayesian probability distributions (Beta-Binomial) against target benchmarks (Target CPA, Target ROAS). Categorize campaigns into: <code>Collecting Data</code>, <code>Healthy</code>, <code>Watch</code>, <code>Underperforming</code>, and <code>Saturated</code>.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-104</strong></td>
+      <td><strong>Capital Waste Quantifier</strong></td>
+      <td>For campaigns flagged as <code>Underperforming</code> beyond the maturity window, calculate capital waste: <br>
+      $\text{Waste} = \sum (\text{Daily Spend} - (\text{Conversions} \times \text{Benchmark CPA}))$.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-105</strong></td>
+      <td><strong>Conservative Shift Protocol</strong></td>
+      <td>Generate safe 25% budget reallocations transferring spend from verified underperformers to high-performing campaigns or offline reserve cash.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-106</strong></td>
+      <td><strong>Campaign Funnel Rehabilitation</strong></td>
+      <td>On-demand diagnostic engine evaluating funnel drop-offs: Click-Through Rate (Creative issue), Landing Page Conversion Rate (Value prop/UX issue), or High CPC (Audience bid saturation).</td>
+      <td><span class="pill pill-blue">P1 - High</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-107</strong></td>
+      <td><strong>Real-Time Virtual Simulator</strong></td>
+      <td>Time-travel simulation engine featuring real calendar date rollovers (e.g., Nov 30 &rarr; Dec 1), Day 0 zero baseline, variable playback speeds (1x, 2x, 5x, 10x), and pause controls.</td>
+      <td><span class="pill pill-green">P0 - Mandatory</span></td>
+    </tr>
+    <tr>
+      <td><strong>FR-108</strong></td>
+      <td><strong>Governance &amp; Audit Trail</strong></td>
+      <td>Maintain an immutable log of all recommendation states (Pending, Approved, Snoozed, Dismissed) with timestamps and operator notes.</td>
+      <td><span class="pill pill-blue">P1 - High</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- SECTION 3: NON-FUNCTIONAL REQUIREMENTS -->
+<h2>3. Non-Functional Requirements (NFR)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Dimension</th>
+      <th style="width: 48%;">Specification &amp; Acceptance Criteria</th>
+      <th style="width: 34%;">Verification Method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>NFR-1: Security &amp; Privacy</strong></td>
+      <td>Zero write-back authorization tokens requested. Read-only OAuth tokens stored using AES-256-GCM encryption. Zero customer PII retention (ad performance aggregated by campaign ID).</td>
+      <td>Automated security scan &amp; token permission audit.</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-2: Latency &amp; Performance</strong></td>
+      <td>Web dashboard initial render &lt; 800ms. Analytical calculation API latency &lt; 150ms for 365 daily rows. Server-Sent Events (SSE) telemetry tick broadcast latency &lt; 50ms.</td>
+      <td>Lighthouse audit &amp; Locust load testing (100 concurrent streams).</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-3: Statistical Reliability</strong></td>
+      <td>Zero false-positive waste alarms within the 3-day maturity window. Minimum 80% Bayesian statistical confidence required before emitting an underperformance warning.</td>
+      <td>Monte Carlo backtesting over synthetic historical campaign traces.</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-4: Availability &amp; Reliability</strong></td>
+      <td>99.9% uptime target. Graceful client-side degradation with offline simulation playback when backend API connectivity is interrupted.</td>
+      <td>Chaos engineering disconnect tests; health check probe monitoring.</td>
+    </tr>
+    <tr>
+      <td><strong>NFR-5: Accessibility &amp; UX</strong></td>
+      <td>WCAG 2.1 AA compliant contrast ratios. High-density responsive layout with clear mathematical transparency (plain-language explanations for all metrics).</td>
+      <td>Automated axe-core accessibility testing &amp; manual UI review.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- SECTION 4: SYSTEM ARCHITECTURE -->
+<div class="page-break"></div>
+<h2>4. System Architecture &amp; Component Decomposition</h2>
+<p>
+  The system is built as a modular, decoupled architecture consisting of a high-performance presentation layer, an asynchronous statistical analytical API, and a unified relational database.
+</p>
+
+<div class="diagram-container">
+========================================================================================================
+                                     ADS TRACKER SYSTEM ARCHITECTURE
+========================================================================================================
+
+ [ PRESENTATION LAYER (Next.js 14 / TypeScript / Tailwind CSS / Recharts) ]
+   +-------------------------------------------------------------------------------------------------+
+   |  * Executive Landing Page (Value Pillars, Brand Pitch, Setup Onboarding)                       |
+   |  * Real-Time Mission Control Dashboard (Real Calendar Rollover, Day 0 Baseline)                 |
+   |  * Performance Trajectory Canvas (Maturity Shading: Solid Mature vs Striped Lag Window)         |
+   |  * 25% Conservative Shift Drawer & Funnel Rehabilitation Modal                                  |
+   +-------------------------------------------------------------------------------------------------+
+                                      |                                   ^
+                           REST API   |                                   |  Server-Sent Events (SSE)
+                           (JSON)     v                                   |  (Simulation Stream)
+ +---------------------------------------------------------------------------------------------------+
+ |  APPLICATION & INGESTION BACKEND (FastAPI / Python 3.11 / Pydantic v2)                            |
+ |                                                                                                   |
+ |   [API Gateway & Router]             [Virtual Simulation Engine]       [Diagnostic Engine]       |
+ |   - /api/v1/campaigns                - Clock tick generator (3s, 1.5s) - Funnel drop-off analyzer |
+ |   - /api/v1/recommendations          - Calendar rollover generator     - Creative/Audience healer |
+ |   - /api/v1/stream (SSE)             - Day 0 zero baseline driver      - Saturation detector      |
+ |                                                                                                   |
+ |   [Ingestion & Normalizer]           [Statistical Analytical Core]                               |
+ |   - Multi-platform Schema Mapper     - 3-day Rolling Maturity Filter                              |
+ |   - Csv / Google Ads / Meta Parsers  - Bayesian Beta-Binomial Posterior Evaluator                |
+ |   - Currency & Timestamp Harmonizer  - Cumulative Capital Waste Quantifier                        |
+ +---------------------------------------------------------------------------------------------------+
+                                      |
+                           SQLAlchemy | ORM / Raw SQL
+                                      v
+ +---------------------------------------------------------------------------------------------------+
+ |  PERSISTENCE LAYER (PostgreSQL / Supabase / SQLite Embedded)                                      |
+ |   - organizations & users (Multi-tenant partition)                                                |
+ |   - campaigns & data_sources (Metadata, target benchmarks)                                        |
+ |   - daily_metrics (Time-series ad metrics: spend, impressions, clicks, conversions)               |
+ |   - analysis_snapshots (Precomputed Bayesian scores, waste sums, status flags)                    |
+ |   - recommendations & audit_log (Shift proposals, user actions, governance trail)                |
+ +---------------------------------------------------------------------------------------------------+
+</div>
+
+<h3>4.1 Component Roles &amp; Data Pipeline</h3>
+<ul>
+  <li><strong>Ingestion Pipeline:</strong> Ingests heterogeneous reporting outputs from Google Ads API (search, display, pMax) and Meta Graph API (feed, stories). Maps divergent cost schemas into uniform integer-precision micro-units.</li>
+  <li><strong>Maturity Filter:</strong> Intercepts raw metrics and tags records younger than 72 hours as <code>is_mature = FALSE</code>. Prevents premature statistical evaluation during attribution lag.</li>
+  <li><strong>Bayesian Analytical Engine:</strong> Employs a conjugate Beta-Binomial model to compute the posterior distribution of conversion rates and CPA against benchmark goals.</li>
+  <li><strong>Simulator Engine:</strong> Provides an on-demand virtual simulation loop generating real-time calendar ticks, realistic spend volatility, and progressive attribution maturation from Day 0.</li>
+</ul>
+
+<!-- SECTION 5: UNIFIED DATA SCHEMA -->
+<div class="page-break"></div>
+<h2>5. Unified Data Schema for Cross-Platform Metrics</h2>
+<p>
+  Different ad platforms use disparate naming conventions, attribution delays, and data representations. The unified schema harmonizes all sources into a single source of truth.
+</p>
+
+<h3>5.1 Cross-Platform Field Harmonization</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Unified Field</th>
+      <th style="width: 25%;">Google Ads API</th>
+      <th style="width: 25%;">Meta Marketing API</th>
+      <th style="width: 30%;">Data Representation &amp; Normalization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>spend</code></td>
+      <td><code>metrics.cost_micros</code></td>
+      <td><code>spend</code> (float string)</td>
+      <td>Stored as <strong>cents / smallest currency unit</strong> (integer) to eliminate floating-point rounding errors.</td>
+    </tr>
+    <tr>
+      <td><code>impressions</code></td>
+      <td><code>metrics.impressions</code></td>
+      <td><code>impressions</code></td>
+      <td>Integer count of visual impressions served.</td>
+    </tr>
+    <tr>
+      <td><code>clicks</code></td>
+      <td><code>metrics.clicks</code></td>
+      <td><code>clicks</code> / <code>inline_link_clicks</code></td>
+      <td>Integer count of outbound user clicks.</td>
+    </tr>
+    <tr>
+      <td><code>conversions</code></td>
+      <td><code>metrics.conversions</code></td>
+      <td><code>actions[action_type='purchase']</code></td>
+      <td>Decimal(10,2) or Integer count of attributed conversions.</td>
+    </tr>
+    <tr>
+      <td><code>revenue</code></td>
+      <td><code>metrics.conversions_value</code></td>
+      <td><code>action_values[action_type='purchase']</code></td>
+      <td>Stored as currency cents; used for ROAS computation.</td>
+    </tr>
+    <tr>
+      <td><code>is_mature</code></td>
+      <td><em>Derived</em> ($\text{Date} \le \text{Now} - 3\text{d}$)</td>
+      <td><em>Derived</em> ($\text{Date} \le \text{Now} - 3\text{d}$)</td>
+      <td>Boolean flag isolating data subject to attribution lag.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 Relational Entity-Relationship DDL (PostgreSQL)</h3>
+<pre>
+-- 1. Campaigns Definition Table
+CREATE TABLE campaigns (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    org_id UUID NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    platform VARCHAR(50) NOT NULL CHECK (platform IN ('google_ads', 'meta_ads', 'linkedin_ads', 'simulator')),
+    target_cpa_cents BIGINT NOT NULL,          -- e.g., 120000 = ₹1,200.00
+    daily_budget_cents BIGINT NOT NULL,
+    status VARCHAR(30) NOT NULL DEFAULT 'collecting_data',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 2. Daily Time-Series Metrics Table
+CREATE TABLE daily_metrics (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    campaign_id UUID NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    spend_cents BIGINT NOT NULL DEFAULT 0,
+    impressions INT NOT NULL DEFAULT 0,
+    clicks INT NOT NULL DEFAULT 0,
+    conversions INT NOT NULL DEFAULT 0,
+    revenue_cents BIGINT NOT NULL DEFAULT 0,
+    is_mature BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT unique_campaign_date UNIQUE (campaign_id, date)
+);
+
+-- 3. Daily Analytical Snapshots
+CREATE TABLE analysis_snapshots (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    campaign_id UUID NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+    snapshot_date DATE NOT NULL,
+    mature_spend_cents BIGINT NOT NULL,
+    mature_conversions INT NOT NULL,
+    mature_cpa_cents BIGINT,
+    bayesian_confidence NUMERIC(5, 4),        -- e.g., 0.9425 = 94.25% confidence
+    status VARCHAR(30) NOT NULL,
+    estimated_waste_cents BIGINT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 4. Recommendations & Human Governance Log
+CREATE TABLE recommendations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    from_campaign_id UUID REFERENCES campaigns(id),
+    to_campaign_id UUID REFERENCES campaigns(id),
+    reallocation_pct INT NOT NULL DEFAULT 25,
+    daily_amount_cents BIGINT NOT NULL,
+    rationale TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'snoozed', 'dismissed')),
+    decided_at TIMESTAMP WITH TIME ZONE,
+    decided_by VARCHAR(255)
+);
+</pre>
+
+<!-- SECTION 6: TECHNOLOGY STACK SELECTION -->
+<div class="page-break"></div>
+<h2>6. Technology Stack Selection &amp; Rationales</h2>
+<p>
+  Every tier in the stack has been selected to meet our strict requirements for statistical precision, real-time feedback, operational maintainability, and zero write-back risk.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Layer</th>
+      <th style="width: 22%;">Technology</th>
+      <th style="width: 58%;">Architectural Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Frontend UI</strong></td>
+      <td>Next.js 14+ / React 19<br>Tailwind CSS</td>
+      <td>
+        <strong>React 19 &amp; Server Components:</strong> Instant initial paint with high-speed client hydration. <br>
+        <strong>Tailwind CSS:</strong> Highly uniform design tokens, zero runtime style overhead, and seamless dark/light responsive presentation.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Data Visualization</strong></td>
+      <td>Recharts / Native SVG Canvas</td>
+      <td>Declarative time-series charting supporting custom SVG rendering for two-tone maturity shading (solid mature region vs striped rolling 3-day holdout region).</td>
+    </tr>
+    <tr>
+      <td><strong>API &amp; Backend</strong></td>
+      <td>FastAPI<br>(Python 3.11+)</td>
+      <td>
+        <strong>Asynchronous Throughput:</strong> Native ASGI server handling high-concurrency SSE stream loops.<br>
+        <strong>Pydantic v2:</strong> Strict validation of cross-platform schemas at microsecond speeds.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Statistical Engine</strong></td>
+      <td>NumPy, SciPy &amp; Pandas</td>
+      <td>Vectorized computation of Bayesian Beta-Binomial posteriors, confidence interval bounds, and Monte Carlo expectation simulations directly in Python memory.</td>
+    </tr>
+    <tr>
+      <td><strong>Database &amp; Storage</strong></td>
+      <td>PostgreSQL (Supabase) + SQLite Dev Fallback</td>
+      <td>
+        <strong>Production:</strong> PostgreSQL provides strict relational integrity, date-partitioned indexes for time-series queries, and native JSONB metadata support.<br>
+        <strong>Local Dev:</strong> Zero-dependency SQLite / in-memory simulator enables instant bootstrapping without Docker dependencies.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Real-Time Pipeline</strong></td>
+      <td>Server-Sent Events (SSE)</td>
+      <td>Unidirectional, lightweight HTTP-based streaming. Avoids the connection state overhead and handshake complexity of WebSockets while offering automatic browser reconnection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- SECTION 7: DEVELOPMENT ENVIRONMENT SETUP -->
+<h2>7. Development Environment Setup Guide</h2>
+<p>
+  Follow these standardized instructions to bootstrap the complete Ads Tracker development environment on any macOS, Linux, or Windows workstation.
+</p>
+
+<h3>7.1 Prerequisites</h3>
+<ul>
+  <li><strong>Node.js:</strong> Version 18.17.0 LTS or higher (verified with <code>node -v</code>)</li>
+  <li><strong>Python:</strong> Version 3.11.0 or higher (verified with <code>python --version</code>)</li>
+  <li><strong>PowerShell / Bash:</strong> Terminal shell supporting environment variable injection</li>
+</ul>
+
+<h3>7.2 Directory Structure</h3>
+<pre>
+add-waste-finder/
+├── backend/                  # FastAPI Statistical Application
+│   ├── app/
+│   │   ├── api/              # REST & SSE route handlers
+│   │   ├── core/             # Configuration, logging & security
+│   │   ├── models/           # SQLAlchemy & Pydantic models
+│   │   ├── services/         # Bayesian stats, maturity filter, simulator
+│   │   └── main.py           # Application entrypoint
+│   └── requirements.txt      # Python dependencies
+├── frontend/                 # Next.js Web Application
+│   ├── src/
+│   │   ├── components/       # Metric cards, Trajectory canvas, drawers
+│   │   ├── hooks/            # useSimulator, useSSE subscriptions
+│   │   └── pages/ or app/    # Next.js App Router views
+│   └── package.json          # Frontend dependencies
+├── index.html                # Standalone Zero-Dependency All-in-One Engine
+├── server.ps1                # Lightweight Local HTTP Daemon (port 3000)
+└── docs/                     # Architectural specs & milestone deliverables
+</pre>
+
+<h3>7.3 Quickstart Execution Commands</h3>
+<p>
+  To immediately test and verify the complete application with the standalone zero-dependency distribution:
+</p>
+<pre>
+# 1. Launch the local lightweight server on port 3000
+powershell -ExecutionPolicy Bypass -File server.ps1 -port 3000
+
+# 2. Access the live interface in your web browser
+# Navigate to: http://localhost:3000/
+</pre>
+
+<div class="footer-note">
+  Ads Tracker &bull; Milestone 1: Requirement Analysis & Architectural Design &bull; Generated & Approved &bull; November 2026
+</div>
+
+</body>
+</html>

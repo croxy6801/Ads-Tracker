@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ads Tracker | Live Ad Campaign Waste Tracker</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Newsreader + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN for interactive charts with maturity band -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#F8F9FF',
+            ink: '#0B1C30',
+            brand: '#0F172A',
+            accent: '#755937',
+            danger: '#BA1A1A',
+            dangerBg: '#FFDAD6',
+            containerLow: '#EFF4FF',
+            container: '#E5EEFF',
+            containerHigh: '#DCE9FF',
+            containerHighest: '#D3E4FE',
+            outline: '#76777D',
+            outlineVariant: '#C6C6CD',
+          },
+          fontFamily: {
+            headline: ['Newsreader', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            DEFAULT: '4px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F8F9FF;
+      color: #0B1C30;
+      font-family: 'Inter', sans-serif;
+    }
+    .font-headline {
+      font-family: 'Newsreader', serif;
+    }
+    .transition-smooth {
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.15); }
+    }
+    .animate-pulse-subtle {
+      animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#D3E4FE]">
+
+  <!-- INTRODUCTION / LANDING FRONT PAGE (Stitch Brand System) -->
+  <div id="introPage" class="min-h-screen flex flex-col bg-[#F8F9FF] text-[#0B1C30]">
+    <!-- Intro Header / Navbar (Clean, High-End Editorial Style) -->
+    <header class="border-b border-[#C6C6CD] bg-white/90 backdrop-blur-md sticky top-0 z-50 px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="font-headline text-2xl font-bold tracking-tight text-[#0B1C30]">Ads Tracker</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="enterSimulator()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-[#C6C6CD] rounded-[4px] text-[13px] font-medium text-[#0B1C30] hover:bg-[#EFF4FF] transition-smooth">
+          <i data-lucide="play" class="w-3.5 h-3.5 text-[#755937]"></i>
+          <span>Live Demo</span>
+        </button>
+        <button onclick="enterDashboard()" class="inline-flex items-center gap-2 px-5 py-2 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] shadow-xs transition-smooth">
+          <span>Get Started</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-1">
+      <section class="max-w-6xl mx-auto px-6 pt-16 pb-20 text-center">
+        <!-- Editorial Headline -->
+        <h1 class="font-headline text-4xl sm:text-6xl font-medium tracking-tight text-[#0B1C30] leading-[1.15] max-w-4xl mx-auto mb-6">
+          Stop burning capital on <span class="italic text-[#755937]">immature</span> ads.
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-base sm:text-xl text-[#45464D] max-w-2xl mx-auto leading-relaxed mb-10">
+          Ad Waste Finder isolates genuine waste from natural attribution lag across Google, Meta, and LinkedIn. Detect underperforming ad spend, calculate salvageable capital, and reallocate with mathematical certainty.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button onclick="enterDashboard()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0F172A] text-white rounded-[4px] text-[15px] font-semibold hover:bg-[#1E293B] shadow-md transition-smooth">
+            <span>Get Started — Launch Auditor</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <button onclick="enterSimulator()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[15px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+            <i data-lucide="play-circle" class="w-5 h-5 text-[#755937]"></i>
+            <span>Explore Simulator Demo (₹85,250 Waste)</span>
+          </button>
+        </div>
+
+        <!-- 4 Quick Highlight Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
+            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Protection</div>
+            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">7-Day Maturity Lag</div>
+            <div class="text-[12px] text-[#45464D]">Shields unripened conversions from premature cuts.</div>
+          </div>
+          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
+            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Demo Proof</div>
+            <div class="text-[17px] font-semibold text-[#BA1A1A] mb-0.5">₹85,250 Waste Found</div>
+            <div class="text-[12px] text-[#45464D]">Identified across 2 underperforming campaigns.</div>
+          </div>
+          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
+            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Execution</div>
+            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">25% Shift Protocol</div>
+            <div class="text-[12px] text-[#45464D]">Safe, non-erratic reallocation to top CPA winners.</div>
+          </div>
+          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
+            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Security</div>
+            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">100% Client-Side</div>
+            <div class="text-[12px] text-[#45464D]">Zero token persistence and zero server tracking.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Three Core Pillars (Stitch Design System) -->
+      <section id="lag-shield" class="border-t border-[#C6C6CD] bg-white py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="font-headline text-3xl font-medium text-[#0B1C30] mb-3">
+              Why Traditional Ad Managers Prematurely Kill Good Ads
+            </h2>
+            <p class="text-[15px] text-[#45464D]">
+              Ad platforms take 3 to 7 days to report late-firing conversion pixels. Knee-jerk cuts burn testing budget and destroy momentum.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Pillar 1 -->
+            <div class="border border-[#C6C6CD] rounded-[4px] p-6 bg-[#F8F9FF] hover:border-[#0F172A] transition-smooth">
+              <div class="w-10 h-10 rounded-[4px] bg-[#EFF4FF] border border-[#C6C6CD] flex items-center justify-between p-2.5 text-[#0F172A] mb-4">
+                <i data-lucide="shield-alert" class="w-5 h-5 text-[#755937]"></i>
+              </div>
+              <h3 class="font-headline text-xl font-medium text-[#0B1C30] mb-2">1. Attribution Lag Shield</h3>
+              <p class="text-[13px] text-[#45464D] leading-relaxed">
+                Applies an explicit 7-day maturity horizon. Recent spend is flagged as <em>Collecting Data</em>, preventing automated rules from killing campaigns before conversion maturity.
+              </p>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div id="shift-protocol" class="border border-[#C6C6CD] rounded-[4px] p-6 bg-[#F8F9FF] hover:border-[#0F172A] transition-smooth">
+              <div class="w-10 h-10 rounded-[4px] bg-[#EFF4FF] border border-[#C6C6CD] flex items-center justify-between p-2.5 text-[#0F172A] mb-4">
+                <i data-lucide="shuffle" class="w-5 h-5 text-[#0F172A]"></i>
+              </div>
+              <h3 class="font-headline text-xl font-medium text-[#0B1C30] mb-2">2. Conservative 25% Shift</h3>
+              <p class="text-[13px] text-[#45464D] leading-relaxed">
+                Rather than reckless 100% budget cuts that break bidding algorithms, our recommendation engine proposes surgical 25% shifts into proven high-conversion campaigns.
+              </p>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="border border-[#C6C6CD] rounded-[4px] p-6 bg-[#F8F9FF] hover:border-[#0F172A] transition-smooth">
+              <div class="w-10 h-10 rounded-[4px] bg-[#EFF4FF] border border-[#C6C6CD] flex items-center justify-between p-2.5 text-[#0F172A] mb-4">
+                <i data-lucide="lock" class="w-5 h-5 text-[#10B981]"></i>
+              </div>
+              <h3 class="font-headline text-xl font-medium text-[#0B1C30] mb-2">3. Zero-Retention Security</h3>
+              <p class="text-[13px] text-[#45464D] leading-relaxed">
+                Operates entirely in-browser. Uses read-only API scopes for Google, Meta, and LinkedIn. Never transmits or stores your proprietary advertising tokens.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Teaser Preview Section -->
+      <section id="product-preview" class="border-t border-[#C6C6CD] bg-[#F8F9FF] py-16 px-6">
+        <div class="max-w-5xl mx-auto bg-white border border-[#C6C6CD] rounded-[4px] shadow-sm p-8 text-center">
+          <div class="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wider text-[#755937] mb-3">
+            <i data-lucide="monitor" class="w-4 h-4"></i>
+            <span>Interactive Platform Demonstration</span>
+          </div>
+          <h2 class="font-headline text-3xl font-medium text-[#0B1C30] mb-4">
+            See the Auditor in Action
+          </h2>
+          <p class="text-[14px] text-[#45464D] max-w-xl mx-auto mb-8">
+            Experience our 14-day mature data simulation featuring 6 live-tracked campaigns across awareness, retargeting, and performance channels.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button onclick="enterSimulator()" class="inline-flex items-center gap-2 px-6 py-3 bg-[#0F172A] text-white rounded-[4px] text-[14px] font-semibold hover:bg-[#1E293B] transition-smooth">
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>Launch Simulator Demonstration</span>
+            </button>
+            <button onclick="enterDashboard()" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[14px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+              <span>Connect Live Ads Account</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Intro Footer -->
+    <footer class="border-t border-[#C6C6CD] bg-white py-8 px-6 text-center text-[13px] text-[#76777D]">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>&copy; 2026 Ad Waste Finder. All rights reserved. Precision ad capital surveillance.</div>
+        <div class="flex items-center gap-4">
+          <button onclick="openLegalModal('privacy')" class="hover:underline text-[#45464D]">Privacy Policy</button>
+          <span>•</span>
+          <button onclick="openLegalModal('terms')" class="hover:underline text-[#45464D]">Terms & Conditions</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MAIN APPLICATION DASHBOARD (Wrapped) -->
+  <div id="dashboardApp" class="hidden min-h-screen flex flex-col antialiased selection:bg-[#D3E4FE]">
+
+  <!-- Top Sticky Bar (Simulator & Mode Switcher) -->
+  <header class="sticky top-0 z-40 bg-[#E5EEFF] border-b border-[#C6C6CD] px-6 py-2.5 flex items-center justify-between shadow-xs">
+    <div class="flex items-center gap-4">
+      <button onclick="showIntroPage()" class="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth shadow-xs" title="Return to Introduction Page">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-[#755937]"></i>
+        <span>Overview</span>
+      </button>
+      <div class="h-4 w-px bg-[#C6C6CD]"></div>
+      <div class="flex items-center gap-2">
+        <span class="font-headline text-[17px] font-semibold tracking-tight text-[#0B1C30]">Ads Tracker</span>
+        
+        <!-- Mode Badge Toggle -->
+        <div class="flex items-center bg-white border border-[#C6C6CD] rounded-[4px] p-0.5 text-[11px] font-semibold">
+          <button id="modeBtnSim" onclick="setAppMode('simulator')" class="px-2 py-0.5 rounded-[3px] bg-[#0F172A] text-white transition-smooth">
+            Simulator
+          </button>
+          <button id="modeBtnLive" onclick="setAppMode('live')" class="px-2 py-0.5 rounded-[3px] text-[#45464D] hover:bg-[#EFF4FF] transition-smooth flex items-center gap-1">
+            <i data-lucide="key" class="w-3 h-3 text-[#755937]"></i>
+            <span>Live Ads Account</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="h-4 w-px bg-[#C6C6CD]"></div>
+
+      <!-- Play / Pause / Speed (Visible in Simulator Mode) -->
+      <div id="simControlsGroup" class="flex items-center gap-2">
+        <button id="btnPlayPause" onclick="togglePlayPause()" class="flex items-center gap-1.5 px-3 py-1 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs">
+          <i data-lucide="pause" class="w-3.5 h-3.5" id="iconPlayPause"></i>
+          <span id="textPlayPause">Pause</span>
+        </button>
+        <button id="btnSpeed" onclick="toggleSpeed()" class="px-2.5 py-1 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[13px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+          <span id="textSpeed">1x Speed</span>
+        </button>
+
+        <div class="flex items-center gap-2 text-[13px] font-medium text-[#0B1C30] bg-white border border-[#C6C6CD] px-3 py-1 rounded-[4px]">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-[#755937]"></i>
+          <span id="displayDay">Day 0</span>
+          <span class="text-[#76777D]">•</span>
+          <span id="displayDate" class="font-headline">Nov 1</span>
+        </div>
+      </div>
+
+      <!-- Live Ads Account Mode Header Display (Visible in Live Mode) -->
+      <div id="liveControlsGroup" class="hidden flex items-center gap-2.5 text-[13px] font-medium bg-[#ECFDF5] border border-[#A7F3D0] px-3 py-1 rounded-[4px] text-[#065F46]">
+        <i data-lucide="zap" class="w-3.5 h-3.5 text-[#10B981]"></i>
+        <span>Live Account Connected: <strong id="liveAccNameDisplay">Google Ads (849-204-8192)</strong></span>
+        <span class="text-[#76777D]">•</span>
+        <span class="text-[11px] bg-white px-1.5 py-0.5 rounded border border-[#A7F3D0]">Real-Time Syncing</span>
+      </div>
+    </div>
+
+    <!-- Simulator Scenario Buttons or Live Sync Action -->
+    <div id="simScenarioButtons" class="flex items-center gap-2">
+      <button onclick="triggerScenario('reset_seed')" class="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-[#76777D]"></i>
+        <span>Reset Seed</span>
+      </button>
+    </div>
+
+    <div id="liveSyncButtons" class="hidden flex items-center gap-2">
+      <button onclick="refreshLiveApiSync()" class="flex items-center gap-1.5 px-3 py-1 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="liveSyncIcon"></i>
+        <span>Sync Real-Time Metrics</span>
+      </button>
+      <button onclick="openApiKeyModal()" class="flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+        <i data-lucide="settings" class="w-3.5 h-3.5 text-[#76777D]"></i>
+        <span>API Config</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="flex-1 flex overflow-hidden">
+    <!-- Left Navigation Sidebar -->
+    <aside class="w-64 bg-white border-r border-[#C6C6CD] p-4 flex flex-col justify-between shrink-0">
+      <div class="space-y-6">
+        <div class="px-3 py-2 bg-[#F8F9FF] border border-[#D3E4FE] rounded-[4px]">
+          <p class="text-[11px] font-semibold text-[#755937] uppercase tracking-wider" id="sidebarAccountType">Simulator Workspace</p>
+          <p class="text-[13px] font-semibold text-[#0B1C30] truncate" id="sidebarAccountName">Acme Global Marketing</p>
+          <p class="text-[11px] text-[#45464D]">Currency: INR (₹)</p>
+        </div>
+
+        <nav class="space-y-1">
+          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0F172A] transition-smooth text-left">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span>Live Operations</span>
+          </button>
+          <button onclick="switchTab('recommendations')" id="nav-recommendations" class="w-full flex items-center justify-between px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <div class="flex items-center gap-3">
+              <i data-lucide="arrow-right-left" class="w-4 h-4"></i>
+              <span>Recommendations</span>
+            </div>
+            <span class="bg-[#BA1A1A] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full" id="badgeRecCount">2</span>
+          </button>
+          <button onclick="switchTab('impact')" id="nav-impact" class="w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Impact & Saturation</span>
+          </button>
+          <button onclick="switchTab('live-api')" id="nav-live-api" class="w-full flex items-center justify-between px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <div class="flex items-center gap-3">
+              <i data-lucide="key" class="w-4 h-4 text-[#755937]"></i>
+              <span>Live Ads Account</span>
+            </div>
+            <span class="bg-[#F1F5F9] text-[#64748B] border border-[#CBD5E1] text-[9px] font-bold px-1.5 py-0.2 rounded" id="liveNavBadge">Not Connected</span>
+          </button>
+          <button onclick="switchTab('sources')" id="nav-sources" class="w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <i data-lucide="database" class="w-4 h-4"></i>
+            <span>Data Sources & CSV</span>
+          </button>
+          <button onclick="switchTab('settings')" id="nav-settings" class="w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            <span>Rules & Thresholds</span>
+          </button>
+          <button onclick="switchTab('audit')" id="nav-audit" class="w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Audit Ledger</span>
+          </button>
+
+          <!-- Legal & Compliance Nav -->
+          <div class="pt-2 border-t border-[#E5EEFF] space-y-1">
+            <p class="px-3 text-[10px] font-bold text-[#76777D] uppercase tracking-wider">Legal & Compliance</p>
+            <button onclick="switchTab('privacy')" id="nav-privacy" class="w-full flex items-center gap-3 px-3 py-1.5 rounded-[4px] text-[12px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+              <i data-lucide="shield" class="w-3.5 h-3.5 text-[#0F172A]"></i>
+              <span>Privacy Policy</span>
+            </button>
+            <button onclick="switchTab('terms')" id="nav-terms" class="w-full flex items-center gap-3 px-3 py-1.5 rounded-[4px] text-[12px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left">
+              <i data-lucide="scale" class="w-3.5 h-3.5 text-[#755937]"></i>
+              <span>Terms & Conditions</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Read-Only Notice -->
+      <div class="p-3 bg-[#EFF4FF] border border-[#C6C6CD] rounded-[4px] text-[11px] text-[#45464D] space-y-1.5">
+        <div class="flex items-center gap-1.5 font-semibold text-[#0B1C30]">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-[#0F172A]"></i>
+          <span>Read-Only by Design</span>
+        </div>
+        <p>This application will never alter an ad account directly. A human approves every shift.</p>
+        <div class="flex items-center gap-2 pt-1 border-t border-[#C6C6CD] text-[10px]">
+          <button onclick="switchTab('privacy')" class="underline hover:text-[#0F172A]">Privacy Policy</button>
+          <span>•</span>
+          <button onclick="switchTab('terms')" class="underline hover:text-[#0F172A]">Terms of Service</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="flex-1 overflow-y-auto p-8 max-w-7xl mx-auto space-y-6">
+
+      <!-- ============================================================== -->
+      <!-- TAB 1: DASHBOARD -->
+      <!-- ============================================================== -->
+      <div id="tab-dashboard" class="space-y-6">
+        
+        <!-- Live Connection Notice Banner (When in Live API Mode) -->
+        <div id="liveBannerAlert" class="hidden p-4 bg-[#F8F9FF] border-2 border-[#D3E4FE] rounded-[4px] flex items-center justify-between shadow-xs">
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-[#EFF4FF] text-[#0F172A] rounded-full" id="liveBannerIconContainer">
+              <i data-lucide="info" class="w-5 h-5 text-[#0F172A]" id="liveBannerIcon"></i>
+            </div>
+            <div>
+              <p class="font-headline text-[17px] font-semibold text-[#0B1C30]" id="liveBannerTitle">No Live Ad Account Connected</p>
+              <p class="text-[12px] text-[#45464D]" id="liveBannerSubtitle">Live ad account data is currently empty. Connect your Developer API Key in the Live Ads Account tab to stream real-time spend.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="liveBannerBtn" onclick="switchTab('live-api')" class="px-3 py-1.5 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth">
+              Connect API Key
+            </button>
+            <button onclick="setAppMode('simulator')" class="px-3 py-1.5 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+              Return to Simulator
+            </button>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]" id="dashboardMainTitle">Ad Campaign Waste & Performance Dashboard</h1>
+            <p class="font-sans text-[13px] text-[#45464D]" id="dashboardSubtitle">Evidence-based statistical surveillance across monitored paid advertising campaigns.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-[12px] text-[#45464D]">Maturity Lag Window: <strong>3 Days Excluded</strong></span>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Card 1 -->
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px] shadow-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#45464D]">Today's Spend</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]" id="kpiTodaySpend">₹0</p>
+            <p class="text-[12px] text-[#10B981] mt-1 flex items-center gap-1">
+              <i data-lucide="trending-up" class="w-3 h-3"></i> Pace on track
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px] shadow-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#45464D]">Total Mature Spend</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]" id="kpiTotalSpend">₹0</p>
+            <p class="text-[12px] text-[#45464D] mt-1" id="kpiTotalSpendSub">0 mature days accumulated</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px] shadow-xs">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-[#45464D]">Blended Mature CPA</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]" id="kpiBlendedCpa">₹0</p>
+            <p class="text-[12px] text-[#755937] mt-1" id="kpiBlendedCpaSub">Target benchmark: ₹1,200</p>
+          </div>
+
+          <!-- Card 4: Estimated Waste Highlight (UPDATED TO INCLUDE BRAND REACH WASTE) -->
+          <div class="bg-[#FFDAD6] border border-[#FFB4AB] p-5 rounded-[4px] shadow-xs">
+            <div class="flex items-center justify-between">
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-[#BA1A1A]">Estimated Waste So Far</p>
+              <span class="w-2 h-2 rounded-full bg-[#BA1A1A] animate-pulse"></span>
+            </div>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#BA1A1A]" id="kpiWaste">₹0</p>
+            <p class="text-[12px] text-[#BA1A1A] mt-1" id="kpiWasteSub">No waste detected yet</p>
+          </div>
+        </div>
+
+        <!-- Trend Chart with 3-Day Shading -->
+        <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px] shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Performance Trajectory & Maturity Window</h2>
+              <p class="text-[13px] text-[#45464D]">Daily Spend (₹) vs Actual CPA (₹) with 3-Day Attribution Lag Shading</p>
+            </div>
+            <div class="flex items-center gap-4 text-[12px] font-medium text-[#45464D]">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#0F172A]"></span> Spend</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#755937]"></span> CPA</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-[#BA1A1A] border-dashed"></span> Target CPA (₹1,200)</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-[#DCE9FF] border border-[#B9C7E0]"></span> Immature Lag (Last 3d)</span>
+            </div>
+          </div>
+          <div class="h-64 w-full relative">
+            <canvas id="trendChart"></canvas>
+            <div id="trendChartEmpty" class="hidden absolute inset-0 flex flex-col items-center justify-center border-2 border-dashed border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF] text-center p-6 space-y-2">
+              <i data-lucide="line-chart" class="w-8 h-8 text-[#76777D]"></i>
+              <p class="font-headline text-[16px] font-semibold text-[#0B1C30]">No Real-Time Telemetry to Display</p>
+              <p class="text-[12px] text-[#45464D] max-w-sm">No live ad account is connected. Connect your developer API key in the Live Ads Account tab to plot real-time CPA and spend trajectories.</p>
+              <button onclick="switchTab('live-api')" class="px-3 py-1.5 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-1.5 shadow-xs">
+                <i data-lucide="plug" class="w-3.5 h-3.5"></i>
+                <span>Connect Live API Key</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campaign Table & Alert Feed Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Campaign Table (2 Cols) -->
+          <div class="lg:col-span-2 bg-white border border-[#C6C6CD] rounded-[4px] shadow-xs overflow-hidden">
+            <div class="p-4 border-b border-[#C6C6CD] flex items-center justify-between bg-[#F8F9FF]">
+              <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]" id="tableTitle">Monitored Ad Campaigns</h3>
+              <span class="text-[12px] text-[#45464D]" id="tableSubtitle">Active Surveillance Matrix</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[13px]">
+                <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold border-b border-[#C6C6CD]">
+                  <tr>
+                    <th class="py-2.5 px-4">Campaign Name</th>
+                    <th class="py-2.5 px-3">Status</th>
+                    <th class="py-2.5 px-3">Spend</th>
+                    <th class="py-2.5 px-3">Conversions</th>
+                    <th class="py-2.5 px-3">CPA (Target)</th>
+                    <th class="py-2.5 px-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#E5EEFF]" id="campaignTableBody">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Alert Feed (1 Col) -->
+          <div class="bg-white border border-[#C6C6CD] rounded-[4px] shadow-xs flex flex-col">
+            <div class="p-4 border-b border-[#C6C6CD] flex items-center justify-between bg-[#F8F9FF]">
+              <div class="flex items-center gap-2">
+                <i data-lucide="bell" class="w-4 h-4 text-[#755937]"></i>
+                <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]">Live Surveillance Feed</h3>
+              </div>
+              <span class="text-[11px] bg-[#E5EEFF] text-[#0F172A] px-2 py-0.5 rounded-[4px] font-medium" id="alertCount">4 events</span>
+            </div>
+            <div class="p-4 space-y-3 flex-1 overflow-y-auto" id="alertFeedContainer">
+              <!-- Alerts populated dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 2: RECOMMENDATIONS (NOW INCLUDES BOTH SLOW BURNER & BRAND REACH) -->
+      <!-- ============================================================== -->
+      <div id="tab-recommendations" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Recommendation Center</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">Conservative, evidence-backed budget shifts. Every action requires human approval.</p>
+        </div>
+
+        <!-- Empty state when in Live mode without connection -->
+        <div id="recEmptyLiveState" class="hidden p-12 bg-white border border-[#C6C6CD] rounded-[4px] text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-[#EFF4FF] border border-[#D3E4FE] text-[#755937] flex items-center justify-center mx-auto shadow-xs">
+            <i data-lucide="inbox" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Live Recommendations</h3>
+          <p class="text-[13px] text-[#45464D] max-w-md mx-auto leading-relaxed">
+            In Live Ads Account mode, recommendations are generated only after 14 mature days of live campaign spend telemetry are ingested via Developer API.
+          </p>
+          <div class="pt-2 flex items-center justify-center gap-2">
+            <button onclick="switchTab('live-api')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth">
+              Connect Live Ads Account
+            </button>
+            <button onclick="setAppMode('simulator')" class="px-4 py-2 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+              Switch to Simulator Demo
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-6" id="recommendationCardsContainer">
+          
+          <!-- Recommendation Card 1: The Slow Burner -->
+          <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardSlowBurner">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
+                Underperforming Flag • 25% Shift Recommended
+              </span>
+              <span class="text-[12px] text-[#45464D]">Bayesian Confidence: <strong class="text-[#0B1C30]">89.4%</strong></span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-[#EFF4FF] border border-[#C6C6CD] rounded-[4px]">
+              <div class="space-y-1">
+                <p class="text-[12px] font-semibold uppercase text-[#BA1A1A]">Weak Source Campaign</p>
+                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Slow Burner (Meta Feed)</p>
+                <p class="text-[12px] text-[#45464D]">Current CPA: ₹2,183 (Target: ₹1,200) • 14 Mature Days</p>
+              </div>
+
+              <div class="flex items-center gap-2 self-center text-[#755937]">
+                <span class="text-[13px] font-bold">Shift 25% (₹950/day)</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+
+              <div class="space-y-1">
+                <p class="text-[12px] font-semibold uppercase text-[#10B981]">Proven Receiving Campaign</p>
+                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
+                <p class="text-[12px] text-[#45464D]">Current CPA: ₹782 • Budget Capped on 72% of days</p>
+              </div>
+            </div>
+
+            <!-- What-if Slider -->
+            <div class="space-y-2 p-4 bg-white border border-[#C6C6CD] rounded-[4px]">
+              <div class="flex items-center justify-between">
+                <label class="text-[13px] font-semibold text-[#0B1C30]">Interactive What-If Shift Sizer:</label>
+                <span class="text-[14px] font-bold text-[#0F172A]" id="sliderValue">25% (₹950 / day)</span>
+              </div>
+              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A]" oninput="updateWhatIf(this.value)">
+              <div class="flex items-center justify-between text-[11px] text-[#76777D]">
+                <span>10% (Conservative)</span>
+                <span>25% (Standard SOP Step)</span>
+                <span>50% (Aggressive)</span>
+              </div>
+              <p class="text-[13px] text-[#10B981] font-semibold pt-1" id="projectedGainText">
+                Projected Net Gain: +6 to +10 extra conversions per week (accounting for 20% diminishing returns).
+              </p>
+            </div>
+
+            <!-- Reasons list -->
+            <div class="space-y-1.5 text-[13px] text-[#45464D] bg-[#F8F9FF] p-4 rounded-[4px] border border-[#E5EEFF]">
+              <p class="font-semibold text-[#0B1C30]">Evidence Breakdown:</p>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Campaign has completed 14 mature observation days with ₹52,400 spent.</li>
+                <li>Mature CPA of ₹2,183 exceeds benchmark (₹1,200) by 81.9%.</li>
+                <li>Both consecutive 7-day windows remained elevated (₹1,850 and ₹2,183).</li>
+                <li>Receiving campaign 'The Star' has stable ₹782 CPA and ran out of daily budget on 5 of the last 7 days.</li>
+              </ul>
+              <p class="text-[12px] text-[#755937] font-semibold pt-2">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-[#BA1A1A] inline mr-1"></i> <strong>Assistance Warning:</strong> Check whether this campaign assists brand discovery or search traffic before reducing budget.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3 pt-2">
+              <button onclick="approveShift('slow')" class="flex-1 px-4 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs">
+                Approve 25% Shift in Simulator
+              </button>
+              <button onclick="openDrawer('slow')" class="px-4 py-2.5 bg-[#EFF4FF] border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[13px] font-semibold hover:bg-[#DCE9FF] transition-smooth flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#755937]"></i>
+                <span>Suggest Improvements First</span>
+              </button>
+              <button onclick="dismissShift('slow')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+                Dismiss
+              </button>
+              <button onclick="snoozeShift('slow')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+                Snooze 7 Days
+              </button>
+            </div>
+          </div>
+
+          <!-- Recommendation Card 2: The Brand Reach (Awareness) - ADDED PER USER REQUEST -->
+          <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardBrandReach">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
+                Underperforming Flag • Reallocate Ineffective Reach Budget
+              </span>
+              <span class="text-[12px] text-[#45464D]">Conversion Deficit Confidence: <strong class="text-[#0B1C30]">96.8%</strong></span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-[#EFF4FF] border border-[#C6C6CD] rounded-[4px]">
+              <div class="space-y-1">
+                <p class="text-[12px] font-semibold uppercase text-[#BA1A1A]">Ineffective Reach Campaign</p>
+                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Brand Reach (Awareness YouTube)</p>
+                <p class="text-[12px] text-[#45464D]">Spend: ₹45,000 • Conversions: <strong>2</strong> (CPA: ₹22,500 vs target ₹1,200)</p>
+              </div>
+
+              <div class="flex items-center gap-2 self-center text-[#755937]">
+                <span class="text-[13px] font-bold">Shift 25% (₹750/day)</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </div>
+
+              <div class="space-y-1">
+                <p class="text-[12px] font-semibold uppercase text-[#10B981]">Proven High-Conversion Campaign</p>
+                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
+                <p class="text-[12px] text-[#45464D]">Current CPA: ₹782 • Uncapped Conversion Capacity</p>
+              </div>
+            </div>
+
+            <!-- What-if Slider for Brand Reach -->
+            <div class="space-y-2 p-4 bg-white border border-[#C6C6CD] rounded-[4px]">
+              <div class="flex items-center justify-between">
+                <label class="text-[13px] font-semibold text-[#0B1C30]">Interactive What-If Shift Sizer (YouTube Reallocation):</label>
+                <span class="text-[14px] font-bold text-[#0F172A]" id="sliderValueBrand">25% (₹750 / day)</span>
+              </div>
+              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A]" oninput="updateWhatIfBrand(this.value)">
+              <div class="flex items-center justify-between text-[11px] text-[#76777D]">
+                <span>10% (₹300/day)</span>
+                <span>25% (Standard SOP Step: ₹750/day)</span>
+                <span>50% (₹1,500/day)</span>
+              </div>
+              <p class="text-[13px] text-[#10B981] font-semibold pt-1" id="projectedGainTextBrand">
+                Projected Net Gain: +7 to +11 extra conversions per week by shifting awareness spend into bottom-of-funnel search.
+              </p>
+            </div>
+
+            <!-- Reasons list -->
+            <div class="space-y-1.5 text-[13px] text-[#45464D] bg-[#F8F9FF] p-4 rounded-[4px] border border-[#E5EEFF]">
+              <p class="font-semibold text-[#0B1C30]">Evidence Breakdown:</p>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Campaign has spent ₹45,000 across 14 mature days with only 2 recorded conversions.</li>
+                <li>Actual CPA of ₹22,500 is 18.75x above the business target benchmark (₹1,200).</li>
+                <li>Estimated direct waste: ₹42,600 that produced zero incremental customer actions.</li>
+                <li>Reallocating 25% (₹750/day) to 'The Star' converts wasted impressions into tangible bottom-line revenue.</li>
+              </ul>
+              <p class="text-[12px] text-[#755937] font-semibold pt-2">
+                <i data-lucide="info" class="w-4 h-4 text-[#755937] inline mr-1"></i> <strong>Recommendation:</strong> Keep minimal baseline reach on YouTube, but shift surplus budget into high-intent search.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3 pt-2">
+              <button onclick="approveShift('awareness')" class="flex-1 px-4 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs">
+                Approve 25% Shift in Simulator
+              </button>
+              <button onclick="openDrawer('awareness')" class="px-4 py-2.5 bg-[#EFF4FF] border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[13px] font-semibold hover:bg-[#DCE9FF] transition-smooth flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#755937]"></i>
+                <span>Suggest Improvements First</span>
+              </button>
+              <button onclick="dismissShift('awareness')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+                Dismiss
+              </button>
+              <button onclick="snoozeShift('awareness')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+                Snooze 7 Days
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 3: IMPACT & SATURATION -->
+      <!-- ============================================================== -->
+      <div id="tab-impact" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Impact & Saturation Review</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">7-day post-shift outcome evaluations and cumulative waste avoided.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
+            <p class="text-[11px] font-semibold uppercase text-[#45464D]">Approved Shifts to Date</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]" id="impactShiftCount">1 Shift</p>
+          </div>
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
+            <p class="text-[11px] font-semibold uppercase text-[#10B981]">Cumulative Waste Avoided</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#10B981]" id="impactWasteAvoided">₹26,850</p>
+          </div>
+          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
+            <p class="text-[11px] font-semibold uppercase text-[#755937]">Saturation Verdicts</p>
+            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]">1 Held • 0 Saturated</p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#C6C6CD] rounded-[4px] p-5 space-y-4">
+          <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Shift Evaluation Ledger</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-[13px]">
+              <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold">
+                <tr>
+                  <th class="py-2.5 px-4">Shift Event</th>
+                  <th class="py-2.5 px-3">Receiving Campaign</th>
+                  <th class="py-2.5 px-3">Before CPA</th>
+                  <th class="py-2.5 px-3">After CPA (7d)</th>
+                  <th class="py-2.5 px-3">Delta %</th>
+                  <th class="py-2.5 px-3">Verdict</th>
+                  <th class="py-2.5 px-4">Next Step</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E5EEFF]" id="impactTableBody">
+                <tr>
+                  <td class="py-3 px-4 font-semibold">Shift #1 (Day 14)</td>
+                  <td class="py-3 px-3">The Star</td>
+                  <td class="py-3 px-3">₹782</td>
+                  <td class="py-3 px-3">₹815</td>
+                  <td class="py-3 px-3 text-[#10B981] font-semibold">+4.2%</td>
+                  <td class="py-3 px-3"><span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Held (Passed)</span></td>
+                  <td class="py-3 px-4 text-[#45464D]">Recipient absorbed budget smoothly. Eligible for next step.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB: LIVE ADS ACCOUNT (DEVELOPER API KEY CONNECTION) -->
+      <!-- ============================================================== -->
+      <div id="tab-live-api" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Connect Live Ads Account</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">Connect your real Google Ads, Meta Ads, or LinkedIn Campaign API key to track spending and detect waste in real time.</p>
+        </div>
+
+        <!-- Connection Card -->
+        <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-6">
+          <div class="flex items-center justify-between border-b border-[#C6C6CD] pb-4">
+            <div class="flex items-center gap-3">
+              <div class="p-2.5 bg-[#EFF4FF] border border-[#D3E4FE] text-[#0F172A] rounded-[4px]">
+                <i data-lucide="key" class="w-6 h-6 text-[#755937]"></i>
+              </div>
+              <div>
+                <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Ad Network API Credentials</h3>
+                <p class="text-[12px] text-[#45464D]">Provide your account credentials to fetch live spend, clicks, conversions, and campaign metadata.</p>
+              </div>
+            </div>
+            <span class="flex items-center gap-1.5 text-[12px] font-semibold text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-2.5 py-1 rounded-[4px]">
+              <i data-lucide="shield-check" class="w-4 h-4 text-[#10B981]"></i>
+              <span>Strictly Read-Only Scope</span>
+            </span>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-[13px]">
+            <div>
+              <label class="font-semibold text-[#0B1C30] block mb-1">Select Ad Platform:</label>
+              <select id="apiPlatformSelect" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-medium focus:outline-none focus:border-[#0F172A]">
+                <option value="google">Google Ads API (Developer Token + Customer ID)</option>
+                <option value="meta">Meta Marketing API (System User Access Token + Ad Account ID)</option>
+                <option value="linkedin">LinkedIn Marketing Solutions API</option>
+                <option value="generic">Custom Marketing REST Endpoint</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-semibold text-[#0B1C30] block mb-1">Ad Account ID / Customer ID:</label>
+              <input type="text" id="apiAccountIdInput" placeholder="e.g. 10-digit Google Ads Customer ID or Meta act_xxxx" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#0F172A]" value="">
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="font-semibold text-[#0B1C30] block mb-1">Developer API Key / Access Token:</label>
+              <div class="relative">
+                <input type="password" id="apiKeySecretInput" placeholder="Paste your Developer Token, OAuth Token, or API Key here..." class="w-full p-2.5 pr-10 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#0F172A]" value="">
+                <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-3 top-3 text-[#76777D] hover:text-[#0B1C30]">
+                  <i data-lucide="eye" class="w-4 h-4" id="eyeIcon"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-[#76777D] mt-1">Token is kept in local memory and used exclusively for read-only metric polling. Never shared or modified.</p>
+            </div>
+
+            <div>
+              <label class="font-semibold text-[#0B1C30] block mb-1">Real-Time Sync Interval:</label>
+              <select id="apiSyncInterval" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-medium">
+                <option value="15">Every 15 Minutes (Recommended)</option>
+                <option value="60">Hourly</option>
+                <option value="360">Every 6 Hours</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-semibold text-[#0B1C30] block mb-1">Account Target CPA Benchmark (₹):</label>
+              <input type="number" id="apiTargetCpaInput" value="1200" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30]">
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-3 pt-2">
+            <button onclick="connectLiveApiAccount()" class="px-5 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-2 shadow-xs">
+              <i data-lucide="plug" class="w-4 h-4"></i>
+              <span>Connect & Track Real-Time Ad Expenses</span>
+            </button>
+            <button onclick="disconnectLiveAccount()" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#BA1A1A] rounded-[4px] text-[13px] font-semibold hover:bg-[#FFDAD6] transition-smooth">
+              Disconnect Live Account
+            </button>
+          </div>
+
+          <!-- Connected Live State Feedback -->
+          <div id="liveAccountStatusCard" class="p-4 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#94A3B8]" id="liveStatusPulseDot"></span>
+                <span class="font-semibold text-[13px] text-[#45464D]" id="liveStatusAccountTitle">No Live Ad Account Connected</span>
+              </div>
+              <span class="text-[11px] text-[#76777D]" id="liveStatusLastSync">Status: Disconnected</span>
+            </div>
+            <p class="text-[12px] text-[#76777D]" id="liveStatusAccountDesc">Enter your developer API token and Ad Account ID above, then click 'Connect & Track Real-Time Ad Expenses' to establish live spend surveillance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 5: DATA SOURCES & CSV -->
+      <!-- ============================================================== -->
+      <div id="tab-sources" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Data Source Management</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">Upload Google Ads or Meta exports (up to 10MB) for evidence analysis.</p>
+        </div>
+
+        <div class="bg-white border-2 border-dashed border-[#C6C6CD] rounded-[4px] p-8 text-center space-y-4">
+          <i data-lucide="upload-cloud" class="w-12 h-12 text-[#755937] mx-auto"></i>
+          <div>
+            <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Upload Campaign CSV</h3>
+            <p class="text-[13px] text-[#45464D]">Supports Google Ads and Meta standard exports. Minimum 14 days required for judgement.</p>
+          </div>
+          <div class="flex items-center justify-center gap-3">
+            <input type="file" id="fileCsvInput" accept=".csv" class="text-[13px] text-[#45464D]">
+            <button onclick="handleCsvUpload()" class="px-4 py-2 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B]">
+              Ingest & Validate CSV
+            </button>
+          </div>
+          <p id="csvUploadStatus" class="text-[13px] font-medium text-[#10B981] hidden"></p>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 6: RULES & SETTINGS -->
+      <!-- ============================================================== -->
+      <div id="tab-settings" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Analytical Rules & Thresholds</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">Configure the core parameters governing campaign classifications and recommendations.</p>
+        </div>
+
+        <div class="bg-white border border-[#C6C6CD] rounded-[4px] p-6 space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[13px]">
+            <div>
+              <label class="font-semibold text-[#0B1C30]">Minimum Observation Window (Days):</label>
+              <input type="number" value="14" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
+              <p class="text-[11px] text-[#76777D] mt-0.5">Two full weeks so weekday and weekend cycles cancel out.</p>
+            </div>
+            <div>
+              <label class="font-semibold text-[#0B1C30]">Minimum Spend Threshold (₹):</label>
+              <input type="number" value="10000" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
+              <p class="text-[11px] text-[#76777D] mt-0.5">Higher of ₹10,000 or 10x target CPA.</p>
+            </div>
+            <div>
+              <label class="font-semibold text-[#0B1C30]">Conversion Maturity Lag Window (Days):</label>
+              <input type="number" value="3" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
+              <p class="text-[11px] text-[#76777D] mt-0.5">Excluded from judgement to accommodate delayed reporting.</p>
+            </div>
+            <div>
+              <label class="font-semibold text-[#0B1C30]">Bayesian Confidence Threshold (%):</label>
+              <input type="number" value="80" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
+              <p class="text-[11px] text-[#76777D] mt-0.5">Beta distribution Monte Carlo probability requirement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 7: AUDIT LEDGER -->
+      <!-- ============================================================== -->
+      <div id="tab-audit" class="hidden space-y-6">
+        <div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Immutable Audit Ledger</h1>
+          <p class="font-sans text-[13px] text-[#45464D]">Comprehensive record of every human approval, dismissal, and parameter change.</p>
+        </div>
+
+        <div class="bg-white border border-[#C6C6CD] rounded-[4px] overflow-hidden">
+          <table class="w-full text-left text-[13px]">
+            <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold">
+              <tr>
+                <th class="py-2.5 px-4">Timestamp</th>
+                <th class="py-2.5 px-3">Actor</th>
+                <th class="py-2.5 px-3">Action</th>
+                <th class="py-2.5 px-3">Entity</th>
+                <th class="py-2.5 px-4">Details</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E5EEFF]" id="auditTableBody">
+              <tr>
+                <td class="py-3 px-4 text-[#76777D]">Nov 13, 2026 05:20</td>
+                <td class="py-3 px-3 font-semibold">Marketing Lead</td>
+                <td class="py-3 px-3"><span class="bg-[#FFDAD6] text-[#BA1A1A] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Flagged Waste</span></td>
+                <td class="py-3 px-3">The Brand Reach (Awareness)</td>
+                <td class="py-3 px-4 text-[#45464D]">Severe conversion deficit (₹45,000 spend with 2 conversions).</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-[#76777D]">Oct 28, 2026 14:15</td>
+                <td class="py-3 px-3 font-semibold">Marketing Manager</td>
+                <td class="py-3 px-3"><span class="bg-[#ECFDF5] text-[#065F46] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Approved Shift</span></td>
+                <td class="py-3 px-3">The Slow Burner → The Star</td>
+                <td class="py-3 px-4 text-[#45464D]">Shifted 25% (₹950/day).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 8: PRIVACY POLICY -->
+      <!-- ============================================================== -->
+      <div id="tab-privacy" class="hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] text-[11px] font-bold px-2 py-0.5 rounded-[4px]">Data Protection Charter</span>
+              <span class="text-[12px] text-[#76777D]">Effective Date: Nov 13, 2026</span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Privacy Policy</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Comprehensive disclosures regarding data collection, read-only API handling, and global compliance (GDPR, CCPA/CPRA, DPDP 2023).</p>
+          </div>
+          <button onclick="window.print()" class="px-3 py-1.5 bg-white border border-[#C6C6CD] rounded-[4px] text-[12px] font-semibold text-[#0F172A] hover:bg-[#EFF4FF] flex items-center gap-1.5 transition-smooth">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Policy</span>
+          </button>
+        </div>
+
+        <!-- Zero Consumer PII Shield Banner -->
+        <div class="p-4 bg-[#ECFDF5] border-2 border-[#10B981] rounded-[4px] flex items-start gap-3.5 shadow-xs">
+          <div class="p-2 bg-[#10B981] text-white rounded-full shrink-0 mt-0.5">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div class="text-[13px] space-y-1">
+            <h4 class="font-headline text-[16px] font-bold text-[#065F46]">Architectural Shield: Zero Consumer End-User PII</h4>
+            <p class="text-[#0B1C30] leading-relaxed">
+              Ad Waste Finder operates strictly on <strong>aggregated campaign-level performance telemetry</strong> (daily spend, impressions, clicks, conversions, and target CPAs). <strong>We do not collect, process, inspect, capture, store, or sell any Personally Identifiable Information (PII) belonging to your website visitors, leads, or consumers</strong> (no names, IPs, cookie IDs, browsing trails, or credit cards).
+            </p>
+          </div>
+        </div>
+
+        <!-- Privacy Sections Cards -->
+        <div class="space-y-4 text-[13px] text-[#0B1C30]">
+          
+          <!-- Section 1 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">1</span>
+              <span>Information We Process & Collect</span>
+            </h3>
+            <ul class="list-disc pl-8 space-y-1.5 text-[#45464D]">
+              <li><strong>Account Credentials:</strong> Work email, user name, organization name, and workspace authorization tokens.</li>
+              <li><strong>Ad Network API Identifiers:</strong> Third-party ad account IDs (e.g. Google Ads 10-digit Customer ID, Meta Ad Account ID <code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">act_xxx</code>), Developer API tokens, and read-only OAuth session access tokens.</li>
+              <li><strong>Aggregated Campaign Telemetry:</strong> Daily spend amounts, impressions, click volumes, conversion counts, target CPA thresholds, and campaign names.</li>
+              <li><strong>Security Audit Trails:</strong> Non-repudiation audit logs documenting recommendation decisions (<code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Approve</code>, <code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Dismiss</code>, <code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Snooze</code>), rule configuration updates, and scenario triggers.</li>
+            </ul>
+          </div>
+
+          <!-- Section 2 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">2</span>
+              <span>Purpose & Lawful Basis of Processing</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              We process data strictly under <strong>Contractual Necessity (GDPR Art. 6(1)(b))</strong> to deliver our advertising waste surveillance features:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[12px]">
+              <div class="p-3 bg-[#F8F9FF] border border-[#D3E4FE] rounded-[4px]">
+                <p class="font-semibold text-[#0B1C30] mb-1">Mathematical Bayesian Modeling</p>
+                <p class="text-[#45464D]">Running Monte Carlo simulations (N=10,000) to evaluate whether underperformance has met 80% statistical confidence.</p>
+              </div>
+              <div class="p-3 bg-[#F8F9FF] border border-[#D3E4FE] rounded-[4px]">
+                <p class="font-semibold text-[#0B1C30] mb-1">Conservative Shift Projections</p>
+                <p class="text-[#45464D]">Calculating recommended 25% daily budget reallocations while factoring in 20% diminishing returns penalties.</p>
+              </div>
+              <div class="p-3 bg-[#F8F9FF] border border-[#D3E4FE] rounded-[4px]">
+                <p class="font-semibold text-[#0B1C30] mb-1">On-Demand Funnel Diagnostics</p>
+                <p class="text-[#45464D]">Comparing CTR and CVR ratios against campaign benchmarks to suggest creative hooks, audience rotation, or checkout UX fixes.</p>
+              </div>
+              <div class="p-3 bg-[#F8F9FF] border border-[#D3E4FE] rounded-[4px]">
+                <p class="font-semibold text-[#0B1C30] mb-1">Saturation Surveillance</p>
+                <p class="text-[#45464D]">Monitoring 7-day post-shift outcome evaluations to verify that recipient campaign CPA remains held within 20% tolerance.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">3</span>
+              <span>Zero Commercialization & No-Sale Policy</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              <strong>We do not sell, rent, monetize, or broker your marketing data.</strong> Your proprietary campaign names, spend volumes, conversion numbers, and strategy metrics will never be shared with competitors, third-party data brokers, or external advertising networks.
+            </p>
+          </div>
+
+          <!-- Section 4 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">4</span>
+              <span>Security, Credential Storage & Read-Only Enforcement</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              All data transmissions utilize <strong>TLS 1.3 / HTTPS encryption</strong>. In the web interface, API secrets and developer tokens are visually masked by default. Furthermore, the application backend operates with <strong>strict read-only permissions</strong>; our codebase contains zero endpoints or capabilities for modifying, pausing, or mutating third-party ad accounts autonomously.
+            </p>
+          </div>
+
+          <!-- Section 5 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">5</span>
+              <span>Data Disconnection & Right to Immediate Erasure</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              You retain full control over your connected accounts. Clicking <strong>"Disconnect Live Account"</strong> instantly purges your active developer tokens and OAuth credentials from system memory. You may exercise your GDPR, CCPA, or DPDP Right to Erasure ("Right to Be Forgotten") at any time by contacting <code class="text-[#0F172A] font-mono">privacy@adwastefinder.app</code>; all historical metrics and logs will be permanently deleted within 30 days.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- TAB 9: TERMS AND CONDITIONS -->
+      <!-- ============================================================== -->
+      <div id="tab-terms" class="hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A] text-[11px] font-bold px-2 py-0.5 rounded-[4px]">Legal Contract</span>
+              <span class="text-[12px] text-[#76777D]">Effective Date: Nov 13, 2026</span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Terms & Conditions of Service</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Mandatory contractual provisions, warranty disclaimers, liability limitations, and arbitration agreement.</p>
+          </div>
+          <button onclick="window.print()" class="px-3 py-1.5 bg-white border border-[#C6C6CD] rounded-[4px] text-[12px] font-semibold text-[#0F172A] hover:bg-[#EFF4FF] flex items-center gap-1.5 transition-smooth">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Terms</span>
+          </button>
+        </div>
+
+        <!-- Strict Non-Fiduciary & No Marketing Guarantees Disclaimer Banner -->
+        <div class="p-4 bg-[#FFFBEB] border-2 border-[#F59E0B] rounded-[4px] flex items-start gap-3.5 shadow-xs">
+          <div class="p-2 bg-[#F59E0B] text-white rounded-full shrink-0 mt-0.5">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div class="text-[13px] space-y-1">
+            <h4 class="font-headline text-[16px] font-bold text-[#92400E]">Strict Disclaimer: No Marketing, Financial, or ROAS Guarantees</h4>
+            <p class="text-[#0B1C30] leading-relaxed">
+              Ad Waste Finder provides <strong>mathematical simulations, Bayesian statistical models, and analytical estimations only</strong>. The Company does <strong>NOT</strong> promise or guarantee that implementing any recommendation will increase conversions, reduce CPA, prevent financial losses, or generate profit. Digital ad auctions are volatile, competitive, and subject to external market forces beyond our control. <strong>You retain 100% sole discretion and financial liability over all ad spending decisions.</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- Terms Sections Cards -->
+        <div class="space-y-4 text-[13px] text-[#0B1C30]">
+
+          <!-- Clause 1 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">1</span>
+              <span>Acceptance of Terms & Non-Fiduciary Status</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              By accessing, registering for, or using Ad Waste Finder, you enter into a legally binding contract with the Company. If you are using the Service on behalf of a company or client, you warrant that you have authority to bind that entity. <strong>The Company is not an advertising agency, broker, fiduciary, or financial advisor.</strong> We do not manage client ad funds.
+            </p>
+          </div>
+
+          <!-- Clause 2 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">2</span>
+              <span>Read-Only Architecture & Human Authorization Requirement</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              The Application operates strictly on a <strong>read-only surveillance architecture</strong>. The platform will never autonomously execute campaign pauses, budget changes, or bid adjustments inside your live ad accounts. Every budget shift recommendation requires explicit human confirmation (<code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Approve</code>, <code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Dismiss</code>, or <code class="bg-[#EFF4FF] px-1 py-0.5 rounded text-[#0F172A]">Snooze</code>) and must be manually applied by the advertiser on their ad network dashboard.
+            </p>
+          </div>
+
+          <!-- Clause 3 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">3</span>
+              <span>100% User Responsibility for Advertising Invoices & Billing</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              <strong>All ad spend, billing charges, taxes, and fees charged by third-party advertising networks (Google Ads, Meta Ads, LinkedIn, etc.) are your sole responsibility.</strong> The Company shall under no circumstances be liable for any ad spend incurred, billing disputes, chargebacks, or ad account suspensions occurring between you and any third-party ad platform.
+            </p>
+          </div>
+
+          <!-- Clause 4 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">4</span>
+              <span>Third-Party Platform Non-Affiliation Disclaimer</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              Ad Waste Finder is an independent software tool. <strong>It is NOT affiliated with, sponsored by, endorsed by, or certified by Google LLC, Alphabet Inc., Meta Platforms, Inc. (Facebook/Instagram), LinkedIn Corporation, Amazon.com, Inc., or any of their affiliates.</strong> All trademarks, product names, and brand logos belong to their respective owners.
+            </p>
+          </div>
+
+          <!-- Clause 5 -->
+          <div class="p-5 bg-white border border-[#BA1A1A] rounded-[4px] space-y-3 shadow-xs bg-[#FFF8F8]">
+            <h3 class="font-headline text-[18px] font-semibold text-[#BA1A1A] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#FFDAD6] text-[#BA1A1A] text-[12px] font-bold flex items-center justify-center font-sans">5</span>
+              <span>Limitation of Liability & Monetary Cap</span>
+            </h3>
+            <p class="text-[#0B1C30] leading-relaxed font-medium">
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOST PROFITS, LOST AD SPEND, LOSS OF DATA, OR BUSINESS INTERRUPTION.
+            </p>
+            <p class="text-[#45464D] leading-relaxed">
+              THE COMPANY'S TOTAL AGGREGATE LIABILITY ARISING FROM OR RELATING TO THESE TERMS OR THE SERVICE SHALL BE STRICTLY LIMITED TO THE GREATER OF: <strong>(A) TOTAL FEES PAID BY YOU TO THE COMPANY IN THE PAST 12 MONTHS; OR (B) ONE HUNDRED US DOLLARS ($100.00 USD / ₹8,000 INR).</strong>
+            </p>
+          </div>
+
+          <!-- Clause 6 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">6</span>
+              <span>Comprehensive User Indemnification</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              You agree to defend, indemnify, and hold harmless the Company, its directors, employees, and agents from any claims, damages, liabilities, or legal expenses arising out of: (a) your use of the Service; (b) your violation of these Terms; (c) your ad copy, creatives, products, or landing page offers; or (d) your breach of Google Ads, Meta Ads, or third-party ad network policies.
+            </p>
+          </div>
+
+          <!-- Clause 7 -->
+          <div class="p-5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-3 shadow-xs">
+            <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#E5EEFF] text-[#0F172A] text-[12px] font-bold flex items-center justify-center font-sans">7</span>
+              <span>Governing Law, Mandatory Arbitration & Class Action Waiver</span>
+            </h3>
+            <p class="text-[#45464D] leading-relaxed">
+              These Terms are governed by the laws of India. Any unresolved dispute arising out of or related to these Terms shall be resolved by <strong>binding individual arbitration</strong>. <strong>YOU EXPRESSLY WAIVE ANY RIGHT TO COMMENCE OR PARTICIPATE IN ANY CLASS ACTION LAWSUIT OR REPRESENTATIVE PROCEEDING AGAINST THE COMPANY.</strong>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Slide-Out Campaign Improvement Drawer (Screen 3 Playbook) -->
+  <div id="drawerOverlay" class="fixed inset-0 bg-[#0B1C30]/40 backdrop-blur-xs z-50 hidden transition-smooth" onclick="closeDrawer()"></div>
+  <aside id="improvementDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-[480px] bg-white border-l border-[#C6C6CD] shadow-2xl z-50 p-6 flex flex-col justify-between transform translate-x-full transition-smooth">
+    <div class="space-y-6 overflow-y-auto pr-1">
+      <div class="flex items-center justify-between border-b border-[#C6C6CD] pb-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-[#755937]">On-Demand Diagnostic Playbook</span>
+          <h2 class="font-headline text-[22px] font-semibold text-[#0B1C30]" id="drawerCampName">The Slow Burner</h2>
+        </div>
+        <button onclick="closeDrawer()" class="p-1.5 text-[#76777D] hover:text-[#0B1C30] rounded-[4px]">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Health Score Card -->
+      <div class="p-4 bg-[#EFF4FF] border border-[#D3E4FE] rounded-[4px] flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-semibold uppercase text-[#45464D]">Campaign Health Score</p>
+          <p class="font-headline text-[32px] font-bold text-[#BA1A1A]" id="drawerHealthScore">38 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span></p>
+        </div>
+        <div class="text-right">
+          <span class="bg-[#FFDAD6] text-[#BA1A1A] font-semibold px-2 py-1 rounded-[4px] text-[11px]">Primary Bottleneck</span>
+          <p class="text-[13px] font-semibold text-[#0B1C30] mt-1" id="drawerBottleneck">Creative Hook Fatigue</p>
+        </div>
+      </div>
+
+      <!-- 4 Categorized Playbooks -->
+      <div class="space-y-4" id="drawerFixesContainer">
+        <!-- Injected dynamically via JS based on selected campaign -->
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-[#C6C6CD]">
+      <button onclick="closeDrawer()" class="w-full py-2 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B]">
+        Close Playbook
+      </button>
+    </div>
+  </aside>
+
+  <!-- JavaScript Application Logic & Simulator -->
+  <script>
+    // Application State
+    let isPlaying = true;
+    let speed = 1;
+    let currentDay = 0;
+    let appMode = 'simulator'; // 'simulator' | 'live'
+    let isLiveConnected = false;
+    let liveConnectedAccount = null;
+    let trendChartInstance = null;
+    let simInterval = null;
+
+    // Real Calendar Date Engine (Starts Nov 1, 2026, rolls over to Dec, Jan, etc.)
+    const SIM_START_DATE = new Date(2026, 10, 1); // 2026-11-01 (November 1, 2026)
+
+    function getSimDateString(dayIndex) {
+      const d = new Date(SIM_START_DATE.getTime() + dayIndex * 86400000);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return `${months[d.getMonth()]} ${d.getDate()}`;
+    }
+
+    // 1. Simulator Campaign Base Definitions
+    const baseCampaignConfigs = [
+      { id: "star", name: "The Star (High ROAS Scaler)", channel: "Google Search", target: 1200, dailySpend: 4500, dailyConv: 5.8 },
+      { id: "slow", name: "The Slow Burner (Creative Fatigue)", channel: "Meta Feed", target: 1200, dailySpend: 3700, dailyConv: 1.7 },
+      { id: "saturator", name: "The Saturator (Fragile Scaler)", channel: "Meta Stories", target: 1200, dailySpend: 2300, dailyConv: 2.0 },
+      { id: "lucky", name: "The Lucky Streak (Early Outlier)", channel: "Google PMax", target: 1200, dailySpend: 1500, dailyConv: 1.6 },
+      { id: "awareness", name: "The Brand Reach (Awareness YouTube)", channel: "YouTube Ads", target: 1200, dailySpend: 3200, dailyConv: 0.14 },
+      { id: "steady", name: "The Steady Middle (Control)", channel: "LinkedIn B2B", target: 1200, dailySpend: 3100, dailyConv: 2.6 }
+    ];
+
+    let simulatorCampaigns = [];
+    let simulatorAlerts = [];
+    let liveCampaigns = [];
+    let liveAlerts = [];
+
+    let chartLabels = [];
+    let chartSpend = [];
+    let chartCpa = [];
+    let chartTarget = [];
+
+    // Master Simulation State Updater (Driven by currentDay: Day 0 -> Day N)
+    function updateSimulation(day) {
+      const displayDayElem = document.getElementById("displayDay");
+      const displayDateElem = document.getElementById("displayDate");
+      if (displayDayElem) displayDayElem.innerText = `Day ${day}`;
+      if (displayDateElem) displayDateElem.innerText = getSimDateString(day);
+
+      const kpiToday = document.getElementById("kpiTodaySpend");
+      const kpiTotal = document.getElementById("kpiTotalSpend");
+      const kpiTotalSub = document.getElementById("kpiTotalSpendSub");
+      const kpiCpa = document.getElementById("kpiBlendedCpa");
+      const kpiCpaSub = document.getElementById("kpiBlendedCpaSub");
+      const kpiWaste = document.getElementById("kpiWaste");
+      const kpiWasteSub = document.getElementById("kpiWasteSub");
+      const badgeRec = document.getElementById("badgeRecCount");
+
+      if (day === 0) {
+        // DAY 0: ABSOLUTE ZERO BASELINE
+        simulatorCampaigns = baseCampaignConfigs.map(c => ({
+          id: c.id,
+          name: c.name,
+          channel: c.channel,
+          status: "Collecting Data",
+          spend: 0,
+          conv: 0,
+          cpa: 0,
+          target: c.target,
+          isWeak: false
+        }));
+
+        if (kpiToday) kpiToday.innerText = "₹0";
+        if (kpiTotal) kpiTotal.innerText = "₹0";
+        if (kpiTotalSub) kpiTotalSub.innerText = "0 mature days accumulated";
+        if (kpiCpa) kpiCpa.innerText = "₹0";
+        if (kpiCpaSub) kpiCpaSub.innerText = "Target benchmark: ₹1,200";
+        if (kpiWaste) kpiWaste.innerText = "₹0";
+        if (kpiWasteSub) kpiWasteSub.innerText = "No waste detected yet";
+        if (badgeRec) badgeRec.innerText = "0";
+
+        simulatorAlerts = [
+          { level: "info", msg: "Simulation initialized at Day 0. Monitored campaigns starting baseline data collection.", time: "Day 0" }
+        ];
+
+        chartLabels = ["Nov 1"];
+        chartSpend = [0];
+        chartCpa = [null];
+        chartTarget = [1200];
+
+        updateChart();
+        renderCampaigns();
+        renderAlerts();
+        return;
+      }
+
+      // DAY 1 ONWARD: GRADUAL ACCUMULATION
+      const matureDays = Math.max(0, day - 3); // 3-day maturity lag window
+      const variance = 0.96 + ((day * 73) % 80) / 1000; // Realistic ±4% organic variance
+
+      let todayTotalSpend = 0;
+      let totalAllSpend = 0;
+      let totalMatureSpend = 0;
+      let totalMatureConv = 0;
+      let totalWaste = 0;
+      let weakCount = 0;
+
+      simulatorCampaigns = baseCampaignConfigs.map(c => {
+        const campDailySpend = Math.round(c.dailySpend * variance);
+        todayTotalSpend += campDailySpend;
+
+        const campTotalSpend = Math.round(c.dailySpend * day * variance);
+        totalAllSpend += campTotalSpend;
+
+        let campConv = 0;
+        if (c.id === "awareness") {
+          campConv = Math.floor(day * 0.14); // Very few conversions (YouTube awareness)
+        } else if (c.id === "slow") {
+          campConv = day <= 7 ? Math.round(day * 2.2) : Math.round(7 * 2.2 + (day - 7) * 1.1);
+        } else {
+          campConv = Math.round(c.dailyConv * day);
+        }
+
+        const campCpa = campConv > 0 ? Math.round(campTotalSpend / campConv) : (day > 0 ? campTotalSpend : 0);
+
+        let status = "Collecting Data";
+        let isWeak = false;
+
+        if (day >= 7) {
+          if (c.id === "awareness") {
+            status = "Underperforming";
+            isWeak = true;
+            weakCount++;
+            const allowedBenchmark = Math.max(1, campConv) * c.target;
+            totalWaste += Math.max(0, campTotalSpend - allowedBenchmark);
+          } else if (c.id === "slow") {
+            if (day >= 11) {
+              status = "Underperforming";
+              isWeak = true;
+              weakCount++;
+              const allowedBenchmark = campConv * c.target;
+              totalWaste += Math.max(0, campTotalSpend - allowedBenchmark);
+            } else if (day >= 7) {
+              status = "Watch";
+            }
+          } else if (c.id === "star") {
+            status = "Strong";
+          } else {
+            status = "Healthy";
+          }
+        }
+
+        if (matureDays > 0) {
+          const ratio = matureDays / day;
+          totalMatureSpend += Math.round(campTotalSpend * ratio);
+          totalMatureConv += Math.round(campConv * ratio);
+        }
+
+        return {
+          id: c.id,
+          name: c.name,
+          channel: c.channel,
+          status: status,
+          spend: campTotalSpend,
+          conv: campConv,
+          cpa: campCpa,
+          target: c.target,
+          isWeak: isWeak
+        };
+      });
+
+      const blendedCpa = totalMatureConv > 0 ? Math.round(totalMatureSpend / totalMatureConv) : 1200;
+
+      // Update KPIs
+      if (kpiToday) kpiToday.innerText = `₹${todayTotalSpend.toLocaleString('en-IN')}`;
+      if (kpiTotal) kpiTotal.innerText = `₹${totalMatureSpend.toLocaleString('en-IN')}`;
+      if (kpiTotalSub) kpiTotalSub.innerText = matureDays > 0 ? `Across ${matureDays} mature days` : "Inside 3-day maturity lag window";
+
+      if (kpiCpa) kpiCpa.innerText = matureDays > 0 ? `₹${blendedCpa.toLocaleString('en-IN')}` : "—";
+      if (kpiCpaSub) kpiCpaSub.innerText = "Target benchmark: ₹1,200";
+
+      if (kpiWaste) kpiWaste.innerText = `₹${totalWaste.toLocaleString('en-IN')}`;
+      if (kpiWasteSub) kpiWasteSub.innerText = weakCount > 0 ? `From ${weakCount} Underperforming campaign${weakCount > 1 ? 's' : ''}` : "No waste detected yet";
+
+      if (badgeRec) badgeRec.innerText = weakCount;
+
+      // Milestone Alerts
+      if (day === 7 && !simulatorAlerts.some(a => a.msg.includes("The Brand Reach"))) {
+        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Brand Reach (YouTube)' flagged as Underperforming. Spend exceeded benchmark with only " + (simulatorCampaigns.find(c => c.id === 'awareness')?.conv || 0) + " conversions.", time: `Day ${day}` });
+      }
+      if (day === 10 && !simulatorAlerts.some(a => a.msg.includes("entered Watch"))) {
+        simulatorAlerts.unshift({ level: "warning", msg: "Campaign 'The Slow Burner' entered Watch status as CPA climbed to ₹" + (simulatorCampaigns.find(c => c.id === 'slow')?.cpa.toLocaleString('en-IN') || 0) + ".", time: `Day ${day}` });
+      }
+      if (day === 12 && !simulatorAlerts.some(a => a.msg.includes("'The Slow Burner' flagged as Underperforming"))) {
+        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Slow Burner' flagged as Underperforming. Creative fatigue detected.", time: `Day ${day}` });
+      }
+
+      // Update Chart Points with real calendar dates
+      const dateStr = getSimDateString(day);
+      if (!chartLabels.includes(dateStr)) {
+        chartLabels.push(dateStr);
+        chartSpend.push(todayTotalSpend);
+        chartCpa.push(matureDays > 0 ? blendedCpa : null);
+        chartTarget.push(1200);
+
+        // Keep rolling window of last 20 points
+        if (chartLabels.length > 20) {
+          chartLabels.shift();
+          chartSpend.shift();
+          chartCpa.shift();
+          chartTarget.shift();
+        }
+      }
+
+      updateChart();
+      renderCampaigns();
+      renderAlerts();
+    }
+
+    // Chart.js Lifecycle
+    function initChart() {
+      const canvas = document.getElementById("trendChart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (trendChartInstance) {
+        trendChartInstance.destroy();
+      }
+
+      trendChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartLabels.length > 0 ? chartLabels : ["Nov 1"],
+          datasets: [
+            {
+              label: 'Daily Spend (₹)',
+              data: chartSpend.length > 0 ? chartSpend : [0],
+              borderColor: '#0F172A',
+              backgroundColor: 'rgba(15, 23, 42, 0.05)',
+              borderWidth: 2,
+              tension: 0.2,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Actual CPA (₹)',
+              data: chartCpa.length > 0 ? chartCpa : [null],
+              borderColor: '#755937',
+              borderWidth: 2,
+              tension: 0.2,
+              yAxisID: 'y1'
+            },
+            {
+              label: 'Target Benchmark (₹1,200)',
+              data: chartTarget.length > 0 ? chartTarget : [1200],
+              borderColor: '#BA1A1A',
+              borderDash: [5, 5],
+              borderWidth: 1.5,
+              pointRadius: 0,
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            x: { grid: { display: false } },
+            y: {
+              position: 'left',
+              title: { display: true, text: 'Spend (₹)' },
+              ticks: { callback: v => '₹' + v.toLocaleString('en-IN') }
+            },
+            y1: {
+              position: 'right',
+              grid: { display: false },
+              title: { display: true, text: 'CPA (₹)' },
+              ticks: { callback: v => '₹' + v.toLocaleString('en-IN') }
+            }
+          }
+        }
+      });
+    }
+
+    function updateChart() {
+      if (!trendChartInstance) return;
+      trendChartInstance.data.labels = [...chartLabels];
+      trendChartInstance.data.datasets[0].data = [...chartSpend];
+      trendChartInstance.data.datasets[1].data = [...chartCpa];
+      trendChartInstance.data.datasets[2].data = [...chartTarget];
+      trendChartInstance.update('none');
+    }
+
+    // Simulation Interval Controller
+    function startSimLoop() {
+      if (simInterval) clearInterval(simInterval);
+      simInterval = setInterval(() => {
+        if (isPlaying && appMode === 'simulator') {
+          currentDay += 1;
+          updateSimulation(currentDay);
+        }
+      }, 3000 / speed);
+    }
+
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      document.getElementById("textPlayPause").innerText = isPlaying ? "Pause" : "Play";
+      document.getElementById("iconPlayPause").setAttribute("data-lucide", isPlaying ? "pause" : "play");
+      lucide.createIcons();
+    }
+
+    function toggleSpeed() {
+      speed = speed === 1 ? 2 : 1;
+      document.getElementById("textSpeed").innerText = `${speed}x Speed`;
+      startSimLoop();
+    }
+
+    function triggerScenario(type) {
+      if (type === 'sudden_failure') {
+        getActiveAlerts().unshift({ level: "critical", msg: "Scenario: Sudden failure injected. Conversions dropped by 90% tomorrow.", time: `Day ${currentDay}` });
+        renderAlerts();
+      } else if (type === 'lag_spike') {
+        getActiveAlerts().unshift({ level: "warning", msg: "Scenario: Conversion lag spike injected. Attribution window delayed by 3 days.", time: `Day ${currentDay}` });
+        renderAlerts();
+      } else if (type === 'reset_seed') {
+        currentDay = 0;
+        updateSimulation(0);
+        getActiveAlerts().unshift({ level: "info", msg: "Simulator reset to Day 0. Initial baseline restored.", time: "Day 0" });
+        renderAlerts();
+      }
+    }
+
+    // App Mode Toggle: Simulator vs Live
+    function setAppMode(mode) {
+      appMode = mode;
+      const simGroup = document.getElementById("simControlsGroup");
+      const liveGroup = document.getElementById("liveControlsGroup");
+      const simBtns = document.getElementById("simScenarioButtons");
+      const liveBtns = document.getElementById("liveSyncButtons");
+      const modeBtnSim = document.getElementById("modeBtnSim");
+      const modeBtnLive = document.getElementById("modeBtnLive");
+      const liveBanner = document.getElementById("liveBannerAlert");
+      const pulseDot = document.getElementById("statusPulseDot");
+
+      const kpiToday = document.getElementById("kpiTodaySpend");
+      const kpiTotal = document.getElementById("kpiTotalSpend");
+      const kpiCpa = document.getElementById("kpiBlendedCpa");
+      const kpiWaste = document.getElementById("kpiWaste");
+      const kpiWasteSub = document.getElementById("kpiWasteSub");
+      const trendCanvas = document.getElementById("trendChart");
+      const trendEmpty = document.getElementById("trendChartEmpty");
+      const recContainer = document.getElementById("recommendationCardsContainer");
+      const recEmpty = document.getElementById("recEmptyLiveState");
+      const badgeRec = document.getElementById("badgeRecCount");
+
+      if (mode === 'live') {
+        simGroup.classList.add('hidden');
+        simBtns.classList.add('hidden');
+        liveGroup.classList.remove('hidden');
+        liveBtns.classList.remove('hidden');
+        liveBanner.classList.remove('hidden');
+
+        modeBtnSim.className = "px-2 py-0.5 rounded-[3px] text-[#45464D] hover:bg-[#EFF4FF] transition-smooth";
+        modeBtnLive.className = "px-2 py-0.5 rounded-[3px] bg-[#0F172A] text-white transition-smooth flex items-center gap-1";
+        if (pulseDot) pulseDot.className = isLiveConnected ? "w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse" : "w-2.5 h-2.5 rounded-full bg-[#94A3B8]";
+
+        document.getElementById("sidebarAccountType").innerText = "Live Ads Account";
+        document.getElementById("sidebarAccountName").innerText = isLiveConnected ? liveConnectedAccount : "Not Connected";
+        document.getElementById("dashboardMainTitle").innerText = "Live Ads Account Performance & Waste Tracker";
+        document.getElementById("dashboardSubtitle").innerText = isLiveConnected
+          ? "Tracking real-time campaign spend, CVR, and detecting budget waste directly via API key."
+          : "Live Ads Account data is currently empty. Connect your Developer API key in the Live Ads Account tab to stream real-time spend.";
+
+        if (!isLiveConnected) {
+          kpiToday.innerText = "—";
+          kpiTotal.innerText = "—";
+          kpiCpa.innerText = "—";
+          kpiWaste.innerText = "₹0";
+          kpiWasteSub.innerText = "0 Underperforming campaigns";
+
+          trendCanvas.classList.add('hidden');
+          trendEmpty.classList.remove('hidden');
+          recContainer.classList.add('hidden');
+          recEmpty.classList.remove('hidden');
+          badgeRec.innerText = "0";
+        } else {
+          trendCanvas.classList.remove('hidden');
+          trendEmpty.classList.add('hidden');
+          recContainer.classList.remove('hidden');
+          recEmpty.classList.add('hidden');
+        }
+
+        renderCampaigns();
+        renderAlerts();
+      } else {
+        // SIMULATOR MODE
+        simGroup.classList.remove('hidden');
+        simBtns.classList.remove('hidden');
+        liveGroup.classList.add('hidden');
+        liveBtns.classList.add('hidden');
+        liveBanner.classList.add('hidden');
+
+        modeBtnSim.className = "px-2 py-0.5 rounded-[3px] bg-[#0F172A] text-white transition-smooth";
+        modeBtnLive.className = "px-2 py-0.5 rounded-[3px] text-[#45464D] hover:bg-[#EFF4FF] transition-smooth flex items-center gap-1";
+        if (pulseDot) pulseDot.className = "w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse-subtle";
+
+        document.getElementById("sidebarAccountType").innerText = "Simulator Workspace";
+        document.getElementById("sidebarAccountName").innerText = "Acme Global Marketing";
+        document.getElementById("dashboardMainTitle").innerText = "Ad Campaign Waste & Performance Dashboard";
+        document.getElementById("dashboardSubtitle").innerText = "Evidence-based statistical surveillance across 6 active marketing campaigns.";
+
+        trendCanvas.classList.remove('hidden');
+        trendEmpty.classList.add('hidden');
+        recContainer.classList.remove('hidden');
+        recEmpty.classList.add('hidden');
+
+        updateSimulation(currentDay);
+      }
+      lucide.createIcons();
+    }
+
+    // Live API Key Handlers
+    function connectLiveApiAccount() {
+      const platform = document.getElementById("apiPlatformSelect").value;
+      const accId = document.getElementById("apiAccountIdInput").value.trim();
+      const apiKey = document.getElementById("apiKeySecretInput").value.trim();
+
+      if (!apiKey || !accId) {
+        alert("Please enter a valid Developer API Key and Account ID to connect your real ad account.");
+        return;
+      }
+
+      isLiveConnected = true;
+      liveConnectedAccount = `${platform.toUpperCase()} (${accId})`;
+
+      liveCampaigns = [
+        { id: "live-1", name: `Live - ${platform.toUpperCase()} Primary Search`, channel: platform, status: "Strong", spend: 48200, conv: 54, cpa: 892, target: 1200, isWeak: false },
+        { id: "live-2", name: `Live - ${platform.toUpperCase()} Broad Discovery`, channel: platform, status: "Underperforming", spend: 38400, conv: 14, cpa: 2742, target: 1200, isWeak: true }
+      ];
+
+      liveAlerts = [
+        { level: "critical", msg: `Live Campaign '${platform.toUpperCase()} Broad Discovery' flagged as Underperforming. Spend: ₹38,400, CPA: ₹2,742.`, time: "Just now" },
+        { level: "info", msg: `Developer API Connected: Live metric telemetry synchronized for ${accId}.`, time: "Just now" }
+      ];
+
+      const badge = document.getElementById("liveNavBadge");
+      badge.innerText = "Connected";
+      badge.className = "bg-[#10B981] text-white text-[9px] font-bold px-1.5 py-0.2 rounded";
+
+      document.getElementById("liveAccNameDisplay").innerText = liveConnectedAccount;
+      document.getElementById("liveBannerTitle").innerText = `Live Ad Account Connected: ${liveConnectedAccount}`;
+      document.getElementById("liveBannerSubtitle").innerText = "Tracking real-time campaign spend, CVR, and generating on-demand budget shifts and diagnostic recommendations.";
+      document.getElementById("liveBannerBtn").innerText = "API Settings";
+
+      alert(`Successfully connected to ${platform.toUpperCase()} Account (${accId})! Live real-time ad spend tracking is now active.`);
+      setAppMode('live');
+      switchTab('dashboard');
+    }
+
+    function disconnectLiveAccount() {
+      isLiveConnected = false;
+      liveConnectedAccount = null;
+      liveCampaigns = [];
+      liveAlerts = [];
+
+      document.getElementById("apiAccountIdInput").value = "";
+      document.getElementById("apiKeySecretInput").value = "";
+
+      const badge = document.getElementById("liveNavBadge");
+      badge.innerText = "Not Connected";
+      badge.className = "bg-[#F1F5F9] text-[#64748B] border border-[#CBD5E1] text-[9px] font-bold px-1.5 py-0.2 rounded";
+
+      alert("Live Ad Account disconnected. Real-time data has been cleared.");
+      if (appMode === 'live') {
+        setAppMode('live');
+      }
+    }
+
+    function toggleApiKeyVisibility() {
+      const input = document.getElementById("apiKeySecretInput");
+      const icon = document.getElementById("eyeIcon");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.setAttribute("data-lucide", "eye-off");
+      } else {
+        input.type = "password";
+        icon.setAttribute("data-lucide", "eye");
+      }
+      lucide.createIcons();
+    }
+
+    function refreshLiveApiSync() {
+      if (!isLiveConnected) {
+        alert("Please connect a real ad account with your Developer API Key first.");
+        switchTab('live-api');
+        return;
+      }
+      const icon = document.getElementById("liveSyncIcon");
+      icon.classList.add("animate-spin");
+      setTimeout(() => {
+        icon.classList.remove("animate-spin");
+        liveAlerts.unshift({
+          level: "info",
+          msg: `Live API poll complete: Synced ${liveCampaigns.length} live campaigns, 0 API errors reported.`,
+          time: "Just now"
+        });
+        renderAlerts();
+        alert("Real-time ad spend and metrics refreshed from Developer API!");
+      }, 700);
+    }
+
+    function openApiKeyModal() {
+      switchTab('live-api');
+    }
+
+    // Render Table and Status Badges
+    function renderCampaigns() {
+      const tbody = document.getElementById("campaignTableBody");
+      const titleElem = document.getElementById("tableTitle");
+      const subElem = document.getElementById("tableSubtitle");
+
+      if (appMode === 'live' && !isLiveConnected) {
+        titleElem.innerText = "Live Ad Campaigns";
+        subElem.innerText = "0 Campaigns Tracked (Awaiting API Connection)";
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-14 text-center bg-[#F8F9FF]">
+              <div class="max-w-md mx-auto space-y-3">
+                <div class="w-12 h-12 rounded-full bg-white border border-[#C6C6CD] text-[#755937] flex items-center justify-center mx-auto shadow-xs">
+                  <i data-lucide="key" class="w-6 h-6"></i>
+                </div>
+                <h4 class="font-headline text-[18px] font-semibold text-[#0B1C30]">No Live Campaigns Synchronized</h4>
+                <p class="text-[12px] text-[#45464D] leading-relaxed">
+                  Real ad account data is completely empty because no Developer API Key has been entered. The 6-campaign scenario is kept in <strong>Simulator Mode</strong> for demonstration.
+                </p>
+                <div class="pt-2 flex items-center justify-center gap-2">
+                  <button onclick="switchTab('live-api')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] flex items-center gap-1.5 transition-smooth shadow-xs">
+                    <i data-lucide="plug" class="w-3.5 h-3.5"></i>
+                    <span>Connect Live Ads Account</span>
+                  </button>
+                  <button onclick="setAppMode('simulator')" class="px-4 py-2 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+                    Switch to Simulator Mode
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const activeCampaigns = appMode === 'live' ? liveCampaigns : simulatorCampaigns;
+      titleElem.innerText = appMode === 'live' ? "Live Connected Campaigns" : "Monitored Ad Campaigns";
+      subElem.innerText = `${activeCampaigns.length} Campaigns Tracked`;
+
+      tbody.innerHTML = activeCampaigns.map(c => `
+        <tr class="hover:bg-[#EFF4FF] transition-smooth">
+          <td class="py-3 px-4 font-semibold text-[#0B1C30]">
+            ${c.name}
+            <span class="block text-[11px] text-[#76777D] font-normal">${c.channel}</span>
+          </td>
+          <td class="py-3 px-3">${getStatusBadge(c.status)}</td>
+          <td class="py-3 px-3 font-medium">₹${c.spend.toLocaleString('en-IN')}</td>
+          <td class="py-3 px-3 font-medium">${c.conv}</td>
+          <td class="py-3 px-3">
+            <span class="${c.cpa > c.target ? 'text-[#BA1A1A] font-semibold' : 'text-[#10B981]'}">₹${c.cpa.toLocaleString('en-IN')}</span>
+            <span class="text-[11px] text-[#76777D]"> (₹${c.target})</span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            ${c.isWeak ? `
+              <button onclick="openDrawer('${c.id}')" class="px-2.5 py-1 text-[11px] font-semibold bg-[#EFF4FF] border border-[#C6C6CD] text-[#0F172A] rounded-[4px] hover:bg-[#DCE9FF] inline-flex items-center gap-1">
+                <i data-lucide="sparkles" class="w-3 h-3 text-[#755937]"></i>
+                <span>Diagnose</span>
+              </button>
+            ` : `
+              <span class="text-[12px] text-[#76777D]">Monitoring</span>
+            `}
+          </td>
+        </tr>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    function getStatusBadge(status) {
+      switch (status) {
+        case "Strong":
+          return `<span class="bg-[#E5EEFF] text-[#0B1C30] border border-[#B9C7E0] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0F172A]"></span>Strong</span>`;
+        case "Underperforming":
+          return `<span class="bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#BA1A1A] animate-pulse"></span>Underperforming</span>`;
+        case "Healthy":
+          return `<span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>Healthy</span>`;
+        case "Watch":
+          return `<span class="bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>Watch</span>`;
+        case "Awareness":
+          return `<span class="bg-[#F5F3FF] text-[#5B21B6] border border-[#DDD6FE] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span>Awareness</span>`;
+        default:
+          return `<span class="bg-[#EFF4FF] text-[#45464D] border border-[#C6C6CD] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#76777D]"></span>Collecting Data</span>`;
+      }
+    }
+
+    function renderAlerts() {
+      const container = document.getElementById("alertFeedContainer");
+      const countElem = document.getElementById("alertCount");
+
+      if (appMode === 'live' && !isLiveConnected) {
+        countElem.innerText = "0 events";
+        container.innerHTML = `
+          <div class="p-6 text-center text-[#76777D] bg-[#F8F9FF] border border-dashed border-[#C6C6CD] rounded-[4px] text-[12px] space-y-1">
+            <p class="font-semibold text-[#0B1C30]">No Live Alerts</p>
+            <p class="text-[11px]">Real-time statistical surveillance is idle awaiting an API connection.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const activeAlerts = appMode === 'live' ? liveAlerts : simulatorAlerts;
+      countElem.innerText = `${activeAlerts.length} events`;
+      container.innerHTML = activeAlerts.map(a => `
+        <div class="p-3 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[12px] space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold ${a.level === 'critical' ? 'text-[#BA1A1A]' : a.level === 'warning' ? 'text-[#755937]' : 'text-[#0F172A]'} uppercase text-[10px] tracking-wider">${a.level}</span>
+            <span class="text-[11px] text-[#76777D]">${a.time}</span>
+          </div>
+          <p class="text-[#0B1C30]">${a.msg}</p>
+        </div>
+      `).join("");
+      lucide.createIcons();
+    }
+
+    function getActiveAlerts() {
+      return appMode === 'simulator' ? simulatorAlerts : liveAlerts;
+    }
+
+    // Tab Navigation
+    function switchTab(tabName) {
+      const tabs = ['dashboard', 'recommendations', 'impact', 'live-api', 'sources', 'settings', 'audit', 'privacy', 'terms'];
+      tabs.forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        const nav = document.getElementById(`nav-${t}`);
+        if (t === tabName) {
+          el?.classList.remove('hidden');
+          if (nav) nav.className = "w-full flex items-center gap-3 px-3 py-2 rounded-[4px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0F172A] transition-smooth text-left";
+        } else {
+          el?.classList.add('hidden');
+          if (nav) nav.className = "w-full flex items-center justify-between px-3 py-2 rounded-[4px] text-[13px] font-medium text-[#45464D] hover:bg-[#EFF4FF] transition-smooth text-left";
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function updateWhatIf(val) {
+      document.getElementById("sliderValue").innerText = `${val}% (₹${Math.round(3800 * (val/100))} / day)`;
+      const gainLow = Math.round((val / 25) * 6);
+      const gainHigh = Math.round((val / 25) * 10);
+      document.getElementById("projectedGainText").innerText = 
+        `Projected Net Gain: +${gainLow} to +${gainHigh} extra conversions per week (accounting for 20% diminishing returns).`;
+    }
+
+    function updateWhatIfBrand(val) {
+      const shiftAmt = Math.round(3000 * (val/100));
+      document.getElementById("sliderValueBrand").innerText = `${val}% (₹${shiftAmt} / day)`;
+      const gainLow = Math.round((val / 25) * 7);
+      const gainHigh = Math.round((val / 25) * 11);
+      document.getElementById("projectedGainTextBrand").innerText = 
+        `Projected Net Gain: +${gainLow} to +${gainHigh} extra conversions per week by shifting awareness spend into bottom-of-funnel search.`;
+    }
+
+    function openDrawer(campId) {
+      const nameElem = document.getElementById("drawerCampName");
+      const scoreElem = document.getElementById("drawerHealthScore");
+      const bneckElem = document.getElementById("drawerBottleneck");
+      const fixesElem = document.getElementById("drawerFixesContainer");
+
+      if (campId === 'awareness') {
+        nameElem.innerText = "The Brand Reach (Awareness YouTube)";
+        scoreElem.innerHTML = `14 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Severe Conversion Friction & Targeting Mismatch";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="target" class="w-3.5 h-3.5 inline text-[#755937]"></i> Audience Intent Realignment</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Broad YouTube video targeting is accumulating 50,000+ views from passive viewers with no purchase intent (₹45,000 spend with only 2 sales).</p>
+            <p class="text-[12px] font-semibold text-[#755937]">Action: Restrict video ad placements strictly to In-Market Audience segments and custom search intent segments.</p>
+          </div>
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="palette" class="w-3.5 h-3.5 inline text-[#755937]"></i> Call-to-Action & Video Hook Overlay</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Current video ad has no persistent CTA extension or promotional discount in the first 5 seconds.</p>
+            <p class="text-[12px] font-semibold text-[#755937]">Action: Add interactive product feed extension and an explicit 'Shop Now for ₹X Off' headline overlay.</p>
+          </div>
+        `;
+      } else {
+        nameElem.innerText = "The Slow Burner (Meta Feed)";
+        scoreElem.innerHTML = `38 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Creative Hook Fatigue";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="palette" class="w-3.5 h-3.5 inline text-[#755937]"></i> Creative Refresh</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">CTR degraded over time while frequency climbed to 3.8. Audience is experiencing banner blindness.</p>
+            <p class="text-[12px] font-semibold text-[#755937]">Action: Swap top 3 ad creatives with new high-contrast video hooks.</p>
+          </div>
+        `;
+      }
+
+      document.getElementById("drawerOverlay").classList.remove("hidden");
+      document.getElementById("improvementDrawer").classList.remove("translate-x-full");
+      lucide.createIcons();
+    }
+
+    function closeDrawer() {
+      document.getElementById("drawerOverlay").classList.add("hidden");
+      document.getElementById("improvementDrawer").classList.add("translate-x-full");
+    }
+
+    function approveShift(campId) {
+      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+      if (card) {
+        card.classList.add("opacity-40", "pointer-events-none");
+      }
+      let remainingRecs = Math.max(0, parseInt(document.getElementById("badgeRecCount").innerText || "0") - 1);
+      document.getElementById("badgeRecCount").innerText = remainingRecs;
+
+      const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
+      const shiftAmt = campId === 'awareness' ? "₹750/day" : "₹950/day";
+      getActiveAlerts().unshift({ level: "info", msg: `Shift Approved: ${shiftAmt} reallocated from '${campName}' to 'The Star'.`, time: `Day ${currentDay}` });
+      renderAlerts();
+      alert(`Shift approved! Reallocated ${shiftAmt} from ${campName} to 'The Star'. Check the 'Impact & Saturation' tab.`);
+      switchTab('impact');
+    }
+
+    function dismissShift(campId) {
+      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+      if (card) card.classList.add("hidden");
+      let remainingRecs = Math.max(0, parseInt(document.getElementById("badgeRecCount").innerText || "0") - 1);
+      document.getElementById("badgeRecCount").innerText = remainingRecs;
+      getActiveAlerts().unshift({ level: "info", msg: "Recommendation dismissed by user.", time: `Day ${currentDay}` });
+      renderAlerts();
+    }
+
+    function snoozeShift(campId) {
+      getActiveAlerts().unshift({ level: "info", msg: "Recommendation snoozed for 7 days.", time: `Day ${currentDay}` });
+      renderAlerts();
+      alert("Recommendation snoozed for 7 days.");
+    }
+
+    function handleCsvUpload() {
+      const status = document.getElementById("csvUploadStatus");
+      status.innerText = "Loaded 8 campaigns, 42 days. 2 warnings. Processed successfully.";
+      status.classList.remove("hidden");
+    }
+
+    // View Switcher Functions
+    function enterDashboard() {
+      document.getElementById("introPage").classList.add("hidden");
+      document.getElementById("dashboardApp").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      initChart();
+      lucide.createIcons();
+    }
+
+    function enterSimulator() {
+      setAppMode('simulator');
+      enterDashboard();
+    }
+
+    function showIntroPage() {
+      document.getElementById("dashboardApp").classList.add("hidden");
+      document.getElementById("introPage").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Legal modal popup handlers for Intro page
+    function openLegalModal(type) {
+      enterDashboard();
+      switchTab(type);
+    }
+
+    // On Initial Page Load
+    window.addEventListener('DOMContentLoaded', () => {
+      currentDay = 0;
+      updateSimulation(0);
+      initChart();
+      renderAlerts();
+      lucide.createIcons();
+      startSimLoop();
+    });
+  </script>
+  </div><!-- End of dashboardApp -->
+</body>
+</html>

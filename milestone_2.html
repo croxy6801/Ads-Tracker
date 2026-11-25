@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Milestone 2: Core Module Implementation & Prototyping</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 8pt;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #64748b;
+    }
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+    padding-top: 40px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 32pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #09090b;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.03em;
+  }
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #475569;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .cover-meta {
+    border-top: 2px solid #0f172a;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    font-size: 9pt;
+  }
+  .cover-meta strong {
+    display: block;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .cover-meta span {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+  
+  h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 26px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #e2e8f0;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+    color: #334155;
+  }
+
+  ul, ol {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+    color: #334155;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .callout {
+    background: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 8.5pt;
+  }
+
+  th {
+    background: #f1f5f9;
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1.5px solid #cbd5e1;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    color: #334155;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .diagram-container {
+    background: #090d16;
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+  }
+
+  pre {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.4;
+    overflow-x: hidden;
+    margin: 10px 0;
+    color: #0f172a;
+  }
+
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background: #f1f5f9;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #0f172a;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .pill-green { background: #dcfce7; color: #166534; }
+  .pill-blue { background: #dbeafe; color: #1e40af; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+
+  .footer-note {
+    font-size: 7.5pt;
+    color: #94a3b8;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div>
+    <div class="cover-badge">Implementation &amp; Prototyping Deliverable</div>
+    <h1>Milestone 2:<br>Core Module Implementation &amp; Prototyping</h1>
+    <div class="cover-subtitle">
+      Comprehensive technical implementation report detailing the multi-provider API integration layer (Google Ads &amp; Meta), automated ingestion pipeline, interactive frontend visualization dashboard, and statistical metric calculation engines for <strong>Ads Tracker</strong>.
+    </div>
+  </div>
+
+  <div>
+    <div class="callout">
+      <div class="callout-title">Milestone Scope &amp; Target Invariants</div>
+      Deliver fully operational modules for live provider API extraction, unified data normalization, sub-second dashboard rendering with two-tone maturity lag charts, and Bayesian underperformance metric calculation with zero write-risk.
+    </div>
+
+    <div class="cover-meta">
+      <div>
+        <strong>Project Name</strong>
+        <span>Ads Tracker (Ad Waste Finder)</span>
+      </div>
+      <div>
+        <strong>Milestone Release</strong>
+        <span>2.0.0 (Core Engine Implementation)</span>
+      </div>
+      <div>
+        <strong>Implemented Providers</strong>
+        <span>Google Ads API (v16) &amp; Meta Graph API (v19.0)</span>
+      </div>
+      <div>
+        <strong>Core Deliverables</strong>
+        <span>API Layer, Ingestion Engine, Frontend UI, Statistical Core</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: PROVIDER API INTEGRATION LAYER -->
+<h2>1. Multi-Provider API Integration Layer</h2>
+<p>
+  The API integration layer connects to major ad networks via isolated, read-only adapter clients. Each adapter implements a standardized interface (<code>BaseAdProviderAdapter</code>) that abstracts vendor-specific pagination, token refresh, and rate-limiting protocols.
+</p>
+
+<h3>1.1 Google Ads API Integration (v16)</h3>
+<p>
+  Connects using OAuth 2.0 with the read-only scope (<code>https://www.googleapis.com/auth/adwords</code>). Queries metrics via the Google Ads Query Language (GAQL) streaming endpoint.
+</p>
+<pre>
+# GAQL Query for Daily Campaign Metrics
+SELECT
+  campaign.id,
+  campaign.name,
+  campaign.status,
+  segments.date,
+  metrics.cost_micros,
+  metrics.impressions,
+  metrics.clicks,
+  metrics.conversions,
+  metrics.conversions_value
+FROM campaign
+WHERE segments.date DURING LAST_30_DAYS
+  AND campaign.status = 'ENABLED'
+</pre>
+<ul>
+  <li><strong>Currency Normalization:</strong> Google reports cost in micro-units (1/1,000,000 of account currency). The adapter converts <code>cost_micros</code> directly into integer cents: <code>spend_cents = cost_micros // 10000</code>.</li>
+  <li><strong>Attribution Window:</strong> Google Ads default 30-day click-through attribution is captured with daily snapshot revisions.</li>
+</ul>
+
+<h3>1.2 Meta Marketing API Integration (Graph API v19.0)</h3>
+<p>
+  Queries Meta’s <code>/act_{ad_account_id}/insights</code> endpoint with read-only access token permissions (<code>ads_read</code>).
+</p>
+<pre>
+GET /v19.0/act_{account_id}/insights?
+  level=campaign&
+  fields=campaign_id,campaign_name,spend,impressions,clicks,actions,action_values&
+  time_increment=1&
+  date_preset=last_30d
+</pre>
+<ul>
+  <li><strong>Action Parsing:</strong> Meta represents conversions in an array of action dicts. The adapter extracts actions matching <code>action_type == 'purchase'</code> or configured lead event IDs.</li>
+  <li><strong>Currency Normalization:</strong> Meta returns spend as a float string (e.g. <code>"142.50"</code>). Normalized via <code>int(round(float(spend) * 100))</code> to guarantee integer precision.</li>
+</ul>
+
+<!-- SECTION 2: DATA INGESTION PIPELINE -->
+<div class="page-break"></div>
+<h2>2. Data Ingestion &amp; Normalization Pipeline</h2>
+<p>
+  The ingestion pipeline harmonizes raw API payloads into strongly-typed Pydantic records and stages them for downstream statistical calculation.
+</p>
+
+<div class="diagram-container">
+========================================================================================================
+                                      DATA INGESTION PIPELINE
+========================================================================================================
+
+  +-------------------+       +-------------------+       +-----------------------+
+  |  Google Ads API   |       |   Meta Graph API  |       |  Virtual Simulator /  |
+  |  (GAQL Stream)    |       |  (/insights REST) |       |  CSV Upload Source    |
+  +-------------------+       +-------------------+       +-----------------------+
+            |                           |                             |
+            +---------------------------+-----------------------------+
+                                        |
+                                        v
+                    +---------------------------------------+
+                    |       Ingestion Dispatcher           |
+                    |  - Token Refresh & Rate Throttling    |
+                    |  - Idempotency & Signature Hash Check |
+                    +---------------------------------------+
+                                        |
+                                        v
+                    +---------------------------------------+
+                    |       Normalization & Validator       |
+                    |  - Pydantic v2 Unified Schema Parsing |
+                    |  - Currency Conversion (to cents)     |
+                    |  - Date & Timezone Alignment (UTC)    |
+                    +---------------------------------------+
+                                        |
+                                        v
+                    +---------------------------------------+
+                    |    Attribution Lag Filter (72h)       |
+                    |  - Tag is_mature = FALSE for t-2..t0  |
+                    |  - Tag is_mature = TRUE for <= t-3    |
+                    +---------------------------------------+
+                                        |
+                                        v
+                    +---------------------------------------+
+                    |        PostgreSQL Persistence         |
+                    |   UPSERT into daily_metrics table     |
+                    +---------------------------------------+
+</div>
+
+<h3>2.1 Idempotency &amp; Upsert Strategy</h3>
+<p>
+  Ad platforms continuously revise metrics for recent days as delayed conversions arrive. The pipeline executes atomic PostgreSQL <code>UPSERT</code> queries anchored by the composite primary key <code>(campaign_id, date)</code>:
+</p>
+<pre>
+INSERT INTO daily_metrics (campaign_id, date, spend_cents, impressions, clicks, conversions, is_mature)
+VALUES (:campaign_id, :date, :spend, :impressions, :clicks, :conversions, :is_mature)
+ON CONFLICT (campaign_id, date) DO UPDATE SET
+  spend_cents = EXCLUDED.spend_cents,
+  impressions = EXCLUDED.impressions,
+  clicks = EXCLUDED.clicks,
+  conversions = EXCLUDED.conversions,
+  is_mature = EXCLUDED.is_mature;
+</pre>
+
+<!-- SECTION 3: FRONTEND DASHBOARD -->
+<div class="page-break"></div>
+<h2>3. Frontend Dashboard Implementation</h2>
+<p>
+  The frontend user interface is built as a high-performance, real-time control room providing instant clarity into campaign health, waste accrual, and maturity windows.
+</p>
+
+<h3>3.1 Key Dashboard Components</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Component</th>
+      <th style="width: 35%;">Implementation Details</th>
+      <th style="width: 40%;">User Value &amp; Behavioral Guardrails</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>KPI Metric Cards</strong></td>
+      <td>Four top-level gauges: Today's Spend, Total Mature Spend, Blended Mature CPA, and Estimated Waste So Far.</td>
+      <td>Starts at Day 0 baseline (₹0). Progressively reveals true performance only as data matures.</td>
+    </tr>
+    <tr>
+      <td><strong>Performance Trajectory Canvas</strong></td>
+      <td>Two-tone custom SVG area/line chart separating historical mature days (solid fill) from the 3-day holdout lag window (striped pattern).</td>
+      <td>Prevents knee-jerk human reactions by visually indicating that recent dips may be attribution lag rather than performance decay.</td>
+    </tr>
+    <tr>
+      <td><strong>Campaign Health Table</strong></td>
+      <td>High-density tabular view with real-time status badges: <span class="pill pill-green">Healthy</span>, <span class="pill pill-blue">Collecting Data</span>, <span class="pill pill-amber">Watch</span>, <span class="pill pill-red">Underperforming</span>.</td>
+      <td>Displays mature CPA vs benchmark target with statistical confidence indicators (&ge; 80%).</td>
+    </tr>
+    <tr>
+      <td><strong>Simulation Speed Bar</strong></td>
+      <td>Playback controls: Play, Pause, Speed toggles (1x, 2x), and Day tracker with authentic calendar rollovers.</td>
+      <td>Allows growth teams and founders to stress-test their ad portfolio across 30, 60, or 90 days in seconds.</td>
+    </tr>
+    <tr>
+      <td><strong>25% Shift Action Drawer</strong></td>
+      <td>Actionable recommendation cards displaying suggested budget redeployment and expected CAC improvements.</td>
+      <td>Human-in-the-loop controls: Explicit "Approve Shift", "Dismiss", or "Snooze 7 Days" buttons.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- SECTION 4: CORE METRIC CALCULATION LOGIC -->
+<h2>4. Core Logic for Performance Metric Calculation</h2>
+
+<h3>4.1 3-Day Rolling Maturity Filter</h3>
+<p>
+  Any metric record where $\text{Record Date} &gt; \text{Current Date} - 3\text{ days}$ is marked <code>is_mature = False</code>. All analytical aggregations strictly filter on <code>WHERE is_mature = TRUE</code>.
+</p>
+
+<h3>4.2 Bayesian Beta-Binomial Evaluation</h3>
+<p>
+  Conversion rates ($CVR = \text{Conversions} / \text{Clicks}$) are modeled using a conjugate Beta distribution:
+</p>
+<pre>
+  Prior: Beta(α_0, β_0)  [Informed by historical target benchmark]
+  Posterior: Beta(α_0 + conversions, β_0 + (clicks - conversions))
+  Confidence = P(Posterior CVR &lt; Benchmark CVR | Data)
+</pre>
+<p>
+  A campaign is only classified as <strong>Underperforming</strong> when:
+  $$P(\text{Mature CPA} &gt; 1.25 \times \text{Target CPA}) \ge 0.80 \quad \text{AND} \quad \text{Mature Days} \ge 7$$
+</p>
+
+<h3>4.3 Capital Waste Quantifier Formula</h3>
+<p>
+  Capital waste represents spend that yielded conversions at costs exceeding the allowable target CPA:
+  $$\text{Realized Waste} = \sum_{t \in \text{Mature}} \max\Big(0,\; \text{Spend}_t - (\text{Conversions}_t \times \text{Target CPA})\Big)$$
+</p>
+
+<div class="footer-note">
+  Ads Tracker &bull; Milestone 2: Core Module Implementation & Prototyping &bull; November 2026
+</div>
+
+</body>
+</html>

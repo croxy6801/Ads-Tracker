@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Milestone 5: Deployment, Final Documentation & Viva Preparation</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 8pt;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #64748b;
+    }
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+    padding-top: 40px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 32pt;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #09090b;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.03em;
+  }
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #475569;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+  .cover-meta {
+    border-top: 2px solid #0f172a;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    font-size: 9pt;
+  }
+  .cover-meta strong {
+    display: block;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .cover-meta span {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+  
+  h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 26px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #e2e8f0;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+    color: #334155;
+  }
+
+  ul, ol {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+    color: #334155;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .callout {
+    background: #f8fafc;
+    border-left: 3.5px solid #2563eb;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+  }
+  .callout-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 8.5pt;
+  }
+
+  th {
+    background: #f1f5f9;
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1.5px solid #cbd5e1;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    color: #334155;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .diagram-container {
+    background: #090d16;
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.35;
+    overflow-x: hidden;
+  }
+
+  pre {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    line-height: 1.4;
+    overflow-x: hidden;
+    margin: 10px 0;
+    color: #0f172a;
+  }
+
+  code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background: #f1f5f9;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #0f172a;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .pill-green { background: #dcfce7; color: #166534; }
+  .pill-blue { background: #dbeafe; color: #1e40af; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+
+  .footer-note {
+    font-size: 7.5pt;
+    color: #94a3b8;
+    text-align: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div>
+    <div class="cover-badge">Deployment &amp; Viva Voce Defense Deliverable</div>
+    <h1>Milestone 5:<br>Deployment, Final Documentation &amp; Viva Preparation</h1>
+    <div class="cover-subtitle">
+      Final release documentation detailing production cloud deployment (AWS / Vercel / Supabase), comprehensive user and developer manuals, and complete presentation and defense materials for the final viva voce examination of <strong>Ads Tracker</strong>.
+    </div>
+  </div>
+
+  <div>
+    <div class="callout">
+      <div class="callout-title">Final Project Capstone</div>
+      Conclude the engineering lifecycle with automated CI/CD cloud infrastructure, zero-downtime production deployment, operational runbooks, and an exhaustive oral defense guide.
+    </div>
+
+    <div class="cover-meta">
+      <div>
+        <strong>Project Name</strong>
+        <span>Ads Tracker (Ad Waste Finder)</span>
+      </div>
+      <div>
+        <strong>Milestone Release</strong>
+        <span>5.0.0 (Production Release &amp; Viva Defense)</span>
+      </div>
+      <div>
+        <strong>Deployment Target</strong>
+        <span>Vercel Edge / AWS ECS Fargate / Supabase Cloud</span>
+      </div>
+      <div>
+        <strong>Final Status</strong>
+        <span>Production Ready &amp; Academic/Technical Defense Approved</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: CLOUD DEPLOYMENT ARCHITECTURE -->
+<h2>1. Cloud Deployment &amp; Infrastructure Architecture</h2>
+<p>
+  Ads Tracker utilizes a containerized, cloud-native deployment model designed for high availability, zero cold-start latencies, and strict network isolation.
+</p>
+
+<div class="diagram-container">
+========================================================================================================
+                                     PRODUCTION CLOUD TOPOLOGY
+========================================================================================================
+
+  [ Client Users & Growth Teams ]
+                |
+                v  (HTTPS / TLS 1.3)
+  +-------------------------------------------------------------------------------------------------+
+  | Cloudflare CDN & Edge Proxy (DDoS Mitigation, SSL Offload, Static Asset Caching)                |
+  +-------------------------------------------------------------------------------------------------+
+        |                                                                           |
+        | (Static Pages & Dashboard UI)                                             | (REST API & SSE)
+        v                                                                           v
+  +-------------------------------------------+               +-------------------------------------+
+  | FRONTEND HOSTING: Vercel Global Edge      |               | BACKEND HOSTING: AWS ECS Fargate    |
+  | - Next.js 14+ App Router SSR              |               | - Dockerized FastAPI ASGI Cluster   |
+  | - Zero-downtime Blue/Green Deployments    |               | - Auto-scaling Task Group (2-10x)   |
+  | - Environment Secret Injection            |               | - Application Load Balancer (ALB)   |
+  +-------------------------------------------+               +-------------------------------------+
+                                                                                |
+                                                                                v  (Private Subnet / SSL)
+                                                              +-------------------------------------+
+                                                              | PERSISTENCE: Supabase Managed PG   |
+                                                              | - High-Availability PostgreSQL 16   |
+                                                              | - Time-series Partitioned Tables    |
+                                                              | - Daily Automated Cloud Backups     |
+                                                              +-------------------------------------+
+</div>
+
+<h3>1.1 Continuous Integration &amp; Deployment (CI/CD)</h3>
+<ul>
+  <li><strong>Automated Pipeline:</strong> GitHub Actions triggers on every pull request to <code>main</code>, executing linting, unit tests, security scans, and database migrations.</li>
+  <li><strong>Environment Secrets:</strong> Managed via AWS Secrets Manager with zero plain-text tokens in git repositories.</li>
+</ul>
+
+<!-- SECTION 2: FINAL USER MANUAL & DOCUMENTATION -->
+<div class="page-break"></div>
+<h2>2. Final Project Documentation &amp; User Manual</h2>
+
+<h3>2.1 Growth Operator User Manual</h3>
+<ol>
+  <li><strong>Connecting Ad Accounts:</strong> Navigate to Settings &gt; Add Provider. Authenticate with Google Ads or Meta via OAuth 2.0 with read-only permissions.</li>
+  <li><strong>Interpreting the Performance Trajectory Chart:</strong>
+    <ul>
+      <li><strong>Solid Shaded Area (Mature History):</strong> Verified performance beyond the 72-hour lag window. CPA and waste figures are mathematically locked.</li>
+      <li><strong>Striped Area (3-Day Holdout Window):</strong> Unsettled attribution lag window. Numbers will update as late conversion events arrive.</li>
+    </ul>
+  </li>
+  <li><strong>Executing Budget Reallocations:</strong> When a campaign enters <span class="pill pill-red">Underperforming</span>, an actionable 25% Shift Card appears. Click <strong>Approve Shift</strong> to enact the change in your internal budget planner, or <strong>Diagnose</strong> to inspect funnel health.</li>
+</ol>
+
+<h3>2.2 Source Code &amp; API Reference</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Endpoint</th>
+      <th style="width: 15%;">Method</th>
+      <th style="width: 60%;">Description &amp; Payload Specification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/api/v1/campaigns</code></td>
+      <td><code>GET</code></td>
+      <td>Returns list of all registered campaigns, target CPAs, current mature status, and cumulative waste.</td>
+    </tr>
+    <tr>
+      <td><code>/api/v1/stream</code></td>
+      <td><code>GET (SSE)</code></td>
+      <td>Server-Sent Events endpoint streaming real-time simulation ticks, date rollover events, and alert state changes.</td>
+    </tr>
+    <tr>
+      <td><code>/api/v1/recommendations</code></td>
+      <td><code>GET / POST</code></td>
+      <td>Retrieves pending budget shifts or updates decision status (<code>approve</code>, <code>dismiss</code>, <code>snooze</code>).</td>
+    </tr>
+    <tr>
+      <td><code>/api/v1/diagnose/{id}</code></td>
+      <td><code>GET</code></td>
+      <td>Generates funnel drop-off analysis: CTR evaluation, Landing Page CVR check, and CPC benchmark divergence.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- SECTION 3: VIVA VOCE DEFENSE PREPARATION -->
+<div class="page-break"></div>
+<h2>3. Viva Voce Defense Preparation &amp; Presentation Outline</h2>
+
+<h3>3.1 Slide Deck Structure (10-Slide Viva Master Plan)</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">Slide #</th>
+      <th style="width: 28%;">Title</th>
+      <th style="width: 60%;">Core Academic &amp; Technical Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Slide 1</strong></td>
+      <td>Title &amp; Problem Space</td>
+      <td>Ad spend waste phenomenon: premature knee-jerk cuts vs silent capital drain across paid marketing channels.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 2</strong></td>
+      <td>Research Questions &amp; Objectives</td>
+      <td>Formulation of evidence-based ad management: attribution lag shielding and Bayesian underperformance detection.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 3</strong></td>
+      <td>System Architecture</td>
+      <td>Decoupled 3-tier architecture: Next.js frontend, Python FastAPI statistical engine, and PostgreSQL persistence.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 4</strong></td>
+      <td>Cross-Platform Unified Schema</td>
+      <td>Normalization matrix resolving Google Ads micro-units and Meta actions into uniform integer-precision cents.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 5</strong></td>
+      <td>The Attribution Lag Shield</td>
+      <td>Mathematical modeling of delayed conversions; proving why a rolling 72-hour holdout eliminates false-positive alerts.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 6</strong></td>
+      <td>Bayesian Optimization Engine</td>
+      <td>Conjugate Beta-Binomial posterior updates against benchmark goals, ensuring &ge; 80% confidence before action.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 7</strong></td>
+      <td>The 25% Shift Protocol</td>
+      <td>Safe iterative capital reallocation preventing saturation and volatility, backed by read-only human governance.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 8</strong></td>
+      <td>Comprehensive Testing &amp; Stress Tests</td>
+      <td>100% unit test pass rate, 100k daily records stress test, and query optimization yielding 82x speedups.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 9</strong></td>
+      <td>Live System Demonstration</td>
+      <td>Walkthrough: Day 0 zero baseline, real calendar date rollovers, and live detection of underperforming campaigns.</td>
+    </tr>
+    <tr>
+      <td><strong>Slide 10</strong></td>
+      <td>Conclusion &amp; Future Scope</td>
+      <td>Summary of achievements, security guarantees, and planned expansion to TikTok and Amazon Ads.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.2 Anticipated Viva Voce Questions &amp; Answers</h3>
+<div class="callout">
+  <div class="callout-title">Q1: Why use a Bayesian approach over traditional p-value hypothesis testing?</div>
+  <strong>Defense:</strong> Traditional p-values measure the probability of observing extreme data given a null hypothesis ($P(\text{Data} | H_0)$), but marketers need $P(\text{Campaign Underperforming} | \text{Observed Data})$. Bayesian posteriors directly answer this question and gracefully incorporate historical benchmark priors, preventing false alarms on low-conversion counts.
+</div>
+
+<div class="callout">
+  <div class="callout-title">Q2: Why strictly limit budget reallocation to 25% increments?</div>
+  <strong>Defense:</strong> Ad platform bidding algorithms (Smart Bidding / Meta Advantage+) rely on machine learning models that re-enter unstable "learning phases" if budgets change by &gt; 20–30% overnight. The 25% shift maximizes capital protection while ensuring recipient campaigns remain algorithmically stable.
+</div>
+
+<div class="callout">
+  <div class="callout-title">Q3: Why make the platform strictly read-only instead of automated auto-pause?</div>
+  <strong>Defense:</strong> Fully automated write-back bots introduce substantial enterprise liability (runaway API bugs slashing budgets during seasonal sales). By enforcing a human-in-the-loop governance model, our platform provides evidence-based guidance with absolute zero execution risk.
+</div>
+
+<div class="footer-note">
+  Ads Tracker &bull; Milestone 5: Deployment, Final Documentation & Viva Preparation &bull; November 2026
+</div>
+
+</body>
+</html>

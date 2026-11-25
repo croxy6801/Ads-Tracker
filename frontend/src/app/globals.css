@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #F8F9FF;
+  --card: #FFFFFF;
+  --surface-low: #EFF4FF;
+  --surface-mid: #E5EEFF;
+  --surface-high: #DCE9FF;
+  --surface-highest: #D3E4FE;
+  --ink-primary: #0B1C30;
+  --ink-secondary: #45464D;
+  --ink-muted: #64748B;
+  --outline: #76777D;
+  --outline-subtle: #C6C6CD;
+  --brand: #0F172A;
+  --brand-dark: #131B2E;
+  --accent: #755937;
+  --accent-container: #FDD6AB;
+  --tertiary: #334155;
+  --error: #BA1A1A;
+  --error-container: #FFDAD6;
+}
+
+html {
+  font-family: var(--font-inter), sans-serif;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* Number input spin buttons */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
