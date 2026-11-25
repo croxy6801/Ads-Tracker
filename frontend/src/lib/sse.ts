@@ -3,7 +3,10 @@ import type { SSEEvent } from "./types";
 type SSECallback = (event: SSEEvent) => void;
 
 export function connectSSE(onEvent: SSECallback): () => void {
-  const url = "http://localhost:8000/api/v1/stream";
+  const url =
+    typeof window !== "undefined"
+      ? "/api/v1/stream"
+      : "http://localhost:8000/api/v1/stream";
   let eventSource: EventSource | null = null;
   let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 
