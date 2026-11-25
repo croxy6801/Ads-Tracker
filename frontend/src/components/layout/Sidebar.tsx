@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
+  { label: "Overview", href: "/", icon: Layers },
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Recommendations", href: "/recommendations", icon: Sparkles },
   { label: "Impact & Saturation", href: "/impact", icon: TrendingUp },
@@ -30,19 +31,19 @@ export const Sidebar: React.FC = () => {
     <aside className="w-64 border-r border-[#C6C6CD] bg-white flex flex-col justify-between h-screen sticky top-0 shrink-0">
       <div>
         {/* Brand Header */}
-        <div className="h-16 flex items-center px-6 border-b border-[#C6C6CD]/60 gap-3">
+        <Link href="/" className="h-16 flex items-center px-6 border-b border-[#C6C6CD]/60 gap-3 hover:bg-[#F8F9FF] transition-colors">
           <div className="w-8 h-8 rounded-[4px] bg-[#0F172A] flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm">
-            W
+            A
           </div>
           <div>
             <h1 className="font-headline text-[17px] font-semibold tracking-tight text-[#0B1C30] leading-none">
-              Ad Waste Finder
+              Ads Tracker
             </h1>
             <span className="font-sans text-[11px] text-[#64748B] tracking-wider uppercase font-semibold">
               Evidence Engine
             </span>
           </div>
-        </div>
+        </Link>
 
         {/* Navigation Items */}
         <nav className="p-3 space-y-1">
