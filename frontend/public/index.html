@@ -387,81 +387,81 @@
     <aside class="w-64 bg-white/95 backdrop-blur-md border-r border-[#C6C6CD] p-4 flex flex-col justify-between shrink-0 shadow-xs">
       <div class="space-y-5">
         <!-- Workspace Card -->
-        <div class="group p-3.5 bg-gradient-to-br from-[#F8F9FF] to-[#EFF4FF] border border-[#BFDBFE] hover:border-[#755937]/50 rounded-[8px] shadow-xs hover:shadow-md transition-all duration-300">
-          <div class="flex items-center justify-between mb-1.5">
+        <div class="p-3.5 bg-gradient-to-br from-[#F8F9FF] to-[#EFF4FF] border border-[#BFDBFE] rounded-[8px] shadow-xs">
+          <div class="flex items-center justify-between mb-1">
             <span class="text-[10px] font-bold text-[#755937] uppercase tracking-wider" id="sidebarAccountType">Simulator Workspace</span>
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
-            </span>
           </div>
-          <p class="text-[13px] font-bold text-[#0B1C30] truncate group-hover:text-[#755937] transition-colors" id="sidebarAccountName">Acme Global Marketing</p>
-          <div class="flex items-center gap-1.5 text-[11px] text-[#64748B] mt-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#94A3B8]"></span>
+          <p class="text-[13px] font-bold text-[#0B1C30] truncate" id="sidebarAccountName">Acme Global Marketing</p>
+          <div class="text-[11px] text-[#64748B] mt-0.5">
             <span>Currency: INR (₹)</span>
           </div>
         </div>
 
-        <!-- Features Nav (Legal & Compliance completely removed) -->
+        <!-- Features Nav (Strict Left-Aligned, No Shifts, No Artificial Dots) -->
         <nav class="space-y-1.5">
-          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="group w-full flex items-center justify-between px-3 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs transition-all duration-200 text-left cursor-pointer">
+          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs text-left cursor-pointer">
             <div class="flex items-center gap-2.5">
-              <div class="w-6 h-6 rounded-md bg-[#DCE9FF] flex items-center justify-center text-[#0B1C30] group-hover:scale-110 transition-transform">
+              <div class="w-6 h-6 rounded-md bg-[#DCE9FF] flex items-center justify-center text-[#0B1C30] shrink-0">
                 <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
               </div>
-              <span>Live Operations</span>
+              <span class="whitespace-nowrap">Live Operations</span>
             </div>
-            <span class="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
           </button>
 
-          <button onclick="switchTab('recommendations')" id="nav-recommendations" class="group w-full flex items-center justify-between px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
+          <button onclick="switchTab('recommendations')" id="nav-recommendations" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
             <div class="flex items-center gap-2.5">
-              <div class="w-6 h-6 rounded-md bg-[#FFFBEB] flex items-center justify-center text-[#755937] group-hover:scale-110 transition-transform">
+              <div class="w-6 h-6 rounded-md bg-[#FFFBEB] flex items-center justify-center text-[#755937] shrink-0">
                 <i data-lucide="arrow-right-left" class="w-3.5 h-3.5"></i>
               </div>
-              <span>Recommendations</span>
+              <span class="whitespace-nowrap">Recommendations</span>
             </div>
-            <span class="relative flex h-4.5 items-center">
-              <span class="bg-[#BA1A1A] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full shadow-xs" id="badgeRecCount">2</span>
-            </span>
+            <span class="ml-auto bg-[#BA1A1A] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full shadow-xs" id="badgeRecCount">0</span>
           </button>
 
-          <button onclick="switchTab('impact')" id="nav-impact" class="group w-full flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
-            <div class="w-6 h-6 rounded-md bg-[#ECFDF5] flex items-center justify-center text-[#10B981] group-hover:scale-110 transition-transform">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-            </div>
-            <span>Impact & Saturation</span>
-          </button>
-
-          <button onclick="switchTab('live-api')" id="nav-live-api" class="group w-full flex items-center justify-between px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
+          <button onclick="switchTab('impact')" id="nav-impact" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
             <div class="flex items-center gap-2.5">
-              <div class="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center text-[#D97706] group-hover:scale-110 transition-transform">
+              <div class="w-6 h-6 rounded-md bg-[#ECFDF5] flex items-center justify-center text-[#10B981] shrink-0">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="whitespace-nowrap">Impact & Saturation</span>
+            </div>
+          </button>
+
+          <button onclick="switchTab('live-api')" id="nav-live-api" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <div class="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center text-[#D97706] shrink-0">
                 <i data-lucide="key" class="w-3.5 h-3.5"></i>
               </div>
-              <span>Live Ads Account</span>
+              <span class="whitespace-nowrap">Live Ads Account</span>
             </div>
-            <span class="bg-[#F1F5F9] text-[#64748B] border border-[#CBD5E1] text-[9px] font-bold px-1.5 py-0.5 rounded shadow-2xs" id="liveNavBadge">Not Connected</span>
+            <span class="ml-auto bg-[#F1F5F9] text-[#64748B] border border-[#CBD5E1] text-[9px] font-bold px-1.5 py-0.5 rounded shadow-2xs" id="liveNavBadge">Not Connected</span>
           </button>
 
-          <button onclick="switchTab('sources')" id="nav-sources" class="group w-full flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
-            <div class="w-6 h-6 rounded-md bg-[#EEF2FF] flex items-center justify-center text-[#6366F1] group-hover:scale-110 transition-transform">
-              <i data-lucide="database" class="w-3.5 h-3.5"></i>
+          <button onclick="switchTab('sources')" id="nav-sources" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <div class="w-6 h-6 rounded-md bg-[#EEF2FF] flex items-center justify-center text-[#6366F1] shrink-0">
+                <i data-lucide="database" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="whitespace-nowrap">Data Sources & CSV</span>
             </div>
-            <span>Data Sources & CSV</span>
           </button>
 
-          <button onclick="switchTab('settings')" id="nav-settings" class="group w-full flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
-            <div class="w-6 h-6 rounded-md bg-[#E0F2FE] flex items-center justify-center text-[#0284C7] group-hover:scale-110 transition-transform">
-              <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+          <button onclick="switchTab('settings')" id="nav-settings" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <div class="w-6 h-6 rounded-md bg-[#E0F2FE] flex items-center justify-center text-[#0284C7] shrink-0">
+                <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="whitespace-nowrap">Rules & Thresholds</span>
             </div>
-            <span>Rules & Thresholds</span>
           </button>
 
-          <button onclick="switchTab('audit')" id="nav-audit" class="group w-full flex items-center gap-2.5 px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer">
-            <div class="w-6 h-6 rounded-md bg-[#F1F5F9] flex items-center justify-center text-[#475569] group-hover:scale-110 transition-transform">
-              <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <button onclick="switchTab('audit')" id="nav-audit" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <div class="w-6 h-6 rounded-md bg-[#F1F5F9] flex items-center justify-center text-[#475569] shrink-0">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="whitespace-nowrap">Audit Ledger</span>
             </div>
-            <span>Audit Ledger</span>
           </button>
         </nav>
       </div>
@@ -527,13 +527,8 @@
             </div>
             <p class="text-[28px] font-bold font-sans text-[#0B1C30] tracking-tight group-hover:scale-[1.02] transition-transform origin-left" id="kpiTodaySpend">₹0</p>
             <div class="flex items-center gap-1.5 mt-2 text-[12px] font-medium text-[#059669]">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
-              </span>
-              <span class="flex items-center gap-1">
-                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Pace on track
-              </span>
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+              <span>Pace on track</span>
             </div>
           </div>
 
@@ -574,14 +569,8 @@
             <div class="absolute top-0 left-0 right-0 h-1 bg-[#BA1A1A]"></div>
             <div class="flex items-center justify-between mb-2">
               <p class="text-[11px] font-bold uppercase tracking-wider text-[#BA1A1A]">Estimated Waste So Far</p>
-              <div class="flex items-center gap-1.5">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BA1A1A] opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#BA1A1A]"></span>
-                </span>
-                <div class="w-7 h-7 rounded-full bg-[#BA1A1A]/10 flex items-center justify-center text-[#BA1A1A] group-hover:bg-[#BA1A1A] group-hover:text-white group-hover:scale-110 transition-all shadow-2xs">
-                  <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
-                </div>
+              <div class="w-7 h-7 rounded-full bg-[#BA1A1A]/10 flex items-center justify-center text-[#BA1A1A] group-hover:bg-[#BA1A1A] group-hover:text-white group-hover:scale-110 transition-all shadow-2xs">
+                <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
               </div>
             </div>
             <p class="text-[28px] font-bold font-sans text-[#BA1A1A] tracking-tight group-hover:scale-[1.02] transition-transform origin-left" id="kpiWaste">₹0</p>
@@ -592,36 +581,29 @@
           </div>
         </div>
 
-        <!-- Trend Chart with 3-Day Shading (Interactive & Fun) -->
+        <!-- Performance Graph -->
         <div class="group/chart bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#755937]/50 p-6 rounded-[10px] shadow-xs hover:shadow-xl transition-all duration-300 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-md bg-[#FFFBEB] flex items-center justify-center text-[#755937]">
-                  <i data-lucide="line-chart" class="w-3.5 h-3.5"></i>
-                </div>
-                <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Performance Trajectory & Maturity Window</h2>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-md bg-[#FFFBEB] border border-[#FDE68A] flex items-center justify-center text-[#755937] shadow-2xs">
+                <i data-lucide="line-chart" class="w-4 h-4"></i>
               </div>
-              <p class="text-[13px] text-[#64748B] mt-0.5">Interactive daily spend curve vs actual CPA telemetry with 3-day maturity shading</p>
+              <h2 class="font-headline text-[19px] font-semibold text-[#0B1C30]">Performance Graph</h2>
             </div>
-            <!-- Interactive Legend Filter Pills -->
-            <div class="flex flex-wrap items-center gap-2 text-[12px] font-medium text-[#45464D]">
-              <button onclick="toggleChartDataset(0)" id="legendBtn-0" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F1F5F9] hover:bg-[#E2E8F0] border border-[#CBD5E1] transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Click to toggle Spend">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#0F172A]"></span>
-                <span class="font-semibold text-[#0B1C30]">Daily Spend</span>
+            <!-- Interactive Legend Keys -->
+            <div class="flex items-center gap-2.5 text-[12px] font-medium">
+              <button onclick="toggleChartDataset(0)" id="legendBtn-0" class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-[#0B1C30] font-semibold transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Toggle Daily Spend">
+                <span class="text-[13px] text-[#0F172A] leading-none">★</span>
+                <span>Daily Spend</span>
               </button>
-              <button onclick="toggleChartDataset(1)" id="legendBtn-1" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFFBEB] hover:bg-[#FEF3C7] border border-[#FDE68A] transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Click to toggle CPA">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#755937]"></span>
-                <span class="font-semibold text-[#755937]">Actual CPA</span>
+              <button onclick="toggleChartDataset(1)" id="legendBtn-1" class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFFBEB] hover:bg-[#FEF3C7] border border-[#FDE68A] text-[#755937] font-semibold transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Toggle Actual CPA">
+                <span class="text-[13px] text-[#755937] leading-none">★</span>
+                <span>Actual CPA</span>
               </button>
-              <button onclick="toggleChartDataset(2)" id="legendBtn-2" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFDAD6]/40 hover:bg-[#FFDAD6] border border-[#FFB4AB] transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Click to toggle Target CPA">
+              <button onclick="toggleChartDataset(2)" id="legendBtn-2" class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF1F0] hover:bg-[#FFDAD6] border border-[#FFB4AB] text-[#BA1A1A] font-semibold transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95" title="Toggle Target CPA">
                 <span class="w-3 h-0.5 bg-[#BA1A1A] border-dashed"></span>
-                <span class="font-semibold text-[#BA1A1A]">Target CPA (₹1,200)</span>
+                <span>Target CPA (₹1,200)</span>
               </button>
-              <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#EFF4FF] border border-[#BFDBFE] text-[#1E3A8A]">
-                <span class="w-2.5 h-2.5 rounded bg-[#DCE9FF] border border-[#93C5FD]"></span>
-                <span>Immature Lag (Last 3d)</span>
-              </span>
             </div>
           </div>
           <div class="h-64 w-full relative">
@@ -654,8 +636,7 @@
                 </div>
               </div>
               <div class="flex items-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[11px] font-semibold text-[#065F46] shadow-2xs">
-                  <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[11px] font-semibold text-[#065F46] shadow-2xs">
                   <span id="tableSubtitle">6 Campaigns Active</span>
                 </span>
               </div>
@@ -704,8 +685,7 @@
                   <p class="text-[11px] text-[#64748B]">Real-time algorithmic risk detection</p>
                 </div>
               </div>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E5EEFF] border border-[#BFDBFE] text-[11px] font-bold text-[#1E3A8A] shadow-2xs">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-ping"></span>
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#E5EEFF] border border-[#BFDBFE] text-[11px] font-bold text-[#1E3A8A] shadow-2xs">
                 <span id="alertCount">4 events</span>
               </span>
             </div>
@@ -746,10 +726,21 @@
           </div>
         </div>
 
+        <!-- Empty state when no simulator waste is detected yet -->
+        <div id="recEmptySimState" class="p-12 bg-white border border-[#C6C6CD] rounded-[8px] text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[#10B981] flex items-center justify-center mx-auto shadow-xs">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Budget Waste Detected</h3>
+          <p class="text-[13px] text-[#45464D] max-w-md mx-auto leading-relaxed">
+            All monitored campaigns are currently pacing within healthy maturity and CPA targets. The recommendation engine will automatically surface surgical 25% shift opportunities as soon as statistical waste is confirmed.
+          </p>
+        </div>
+
         <div class="space-y-6" id="recommendationCardsContainer">
           
-          <!-- Recommendation Card 1: The Slow Burner -->
-          <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardSlowBurner">
+          <!-- Recommendation Card 1: The Slow Burner (Only shown when waste is detected) -->
+          <div class="hidden bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardSlowBurner">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
                 Underperforming Flag • 25% Shift Recommended
@@ -826,7 +817,7 @@
           </div>
 
           <!-- Recommendation Card 2: The Brand Reach (Awareness) - ADDED PER USER REQUEST -->
-          <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardBrandReach">
+          <div class="hidden bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardBrandReach">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
                 Underperforming Flag • Reallocate Ineffective Reach Budget
@@ -1487,7 +1478,11 @@
       const badgeRec = document.getElementById("badgeRecCount");
 
       if (day === 0) {
-        // DAY 0: ABSOLUTE ZERO BASELINE
+          // DAY 0: ABSOLUTE ZERO BASELINE
+          const cSlow = document.getElementById("recCardSlowBurner");
+          const cBrand = document.getElementById("recCardBrandReach");
+          if (cSlow) { delete cSlow.dataset.dismissed; delete cSlow.dataset.approved; }
+          if (cBrand) { delete cBrand.dataset.dismissed; delete cBrand.dataset.approved; }
         simulatorCampaigns = baseCampaignConfigs.map(c => ({
           id: c.id,
           name: c.name,
@@ -1557,21 +1552,23 @@
         let isWeak = false;
 
         if (day >= 7) {
-          if (c.id === "awareness") {
+          if (c.id === "slow") {
+            // The Slow Burner flags waste first after maturity lag window
             status = "Underperforming";
             isWeak = true;
             weakCount++;
-            const allowedBenchmark = Math.max(1, campConv) * c.target;
+            const allowedBenchmark = campConv * c.target;
             totalWaste += Math.max(0, campTotalSpend - allowedBenchmark);
-          } else if (c.id === "slow") {
-            if (day >= 11) {
+          } else if (c.id === "awareness") {
+            // Brand Reach (YouTube) only flags waste when cumulative spend severely exceeds benchmark (Day 10+)
+            if (day >= 10) {
               status = "Underperforming";
               isWeak = true;
               weakCount++;
-              const allowedBenchmark = campConv * c.target;
+              const allowedBenchmark = Math.max(1, campConv) * c.target;
               totalWaste += Math.max(0, campTotalSpend - allowedBenchmark);
-            } else if (day >= 7) {
-              status = "Watch";
+            } else {
+              status = "Awareness";
             }
           } else if (c.id === "star") {
             status = "Strong";
@@ -1614,15 +1611,12 @@
 
       if (badgeRec) badgeRec.innerText = weakCount;
 
-      // Milestone Alerts
-      if (day === 7 && !simulatorAlerts.some(a => a.msg.includes("The Brand Reach"))) {
-        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Brand Reach (YouTube)' flagged as Underperforming. Spend exceeded benchmark with only " + (simulatorCampaigns.find(c => c.id === 'awareness')?.conv || 0) + " conversions.", time: `Day ${day}` });
+      // Milestone Alerts (Realistic progression per user feedback)
+      if (day === 7 && !simulatorAlerts.some(a => a.msg.includes("'The Slow Burner' flagged as Underperforming"))) {
+        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Slow Burner' flagged as Underperforming. Spend exceeded benchmark due to creative fatigue.", time: `Day ${day}` });
       }
-      if (day === 10 && !simulatorAlerts.some(a => a.msg.includes("entered Watch"))) {
-        simulatorAlerts.unshift({ level: "warning", msg: "Campaign 'The Slow Burner' entered Watch status as CPA climbed to ₹" + (simulatorCampaigns.find(c => c.id === 'slow')?.cpa.toLocaleString('en-IN') || 0) + ".", time: `Day ${day}` });
-      }
-      if (day === 12 && !simulatorAlerts.some(a => a.msg.includes("'The Slow Burner' flagged as Underperforming"))) {
-        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Slow Burner' flagged as Underperforming. Creative fatigue detected.", time: `Day ${day}` });
+      if (day === 10 && !simulatorAlerts.some(a => a.msg.includes("The Brand Reach"))) {
+        simulatorAlerts.unshift({ level: "critical", msg: "Campaign 'The Brand Reach (YouTube)' flagged as Underperforming. Cumulative spend exceeded benchmark with only " + (simulatorCampaigns.find(c => c.id === 'awareness')?.conv || 0) + " conversions.", time: `Day ${day}` });
       }
 
       // Update Chart Points with real calendar dates
@@ -1645,6 +1639,47 @@
       updateChart();
       renderCampaigns();
       renderAlerts();
+      updateRecCardVisibility();
+    }
+
+    // Dynamic Recommendation Cards sync with simulation waste detection
+    function updateRecCardVisibility() {
+      const cardSlow = document.getElementById("recCardSlowBurner");
+      const cardBrand = document.getElementById("recCardBrandReach");
+      const recEmptySim = document.getElementById("recEmptySimState");
+      const badgeRec = document.getElementById("badgeRecCount");
+
+      let visibleCount = 0;
+
+      if (cardSlow) {
+        const isSlowWaste = simulatorCampaigns.some(c => c.id === 'slow' && c.isWeak);
+        if (isSlowWaste && !cardSlow.dataset.dismissed && !cardSlow.dataset.approved) {
+          cardSlow.classList.remove("hidden");
+          visibleCount++;
+        } else {
+          cardSlow.classList.add("hidden");
+        }
+      }
+
+      if (cardBrand) {
+        const isBrandWaste = simulatorCampaigns.some(c => c.id === 'awareness' && c.isWeak);
+        if (isBrandWaste && !cardBrand.dataset.dismissed && !cardBrand.dataset.approved) {
+          cardBrand.classList.remove("hidden");
+          visibleCount++;
+        } else {
+          cardBrand.classList.add("hidden");
+        }
+      }
+
+      if (recEmptySim) {
+        if (visibleCount === 0) {
+          recEmptySim.classList.remove("hidden");
+        } else {
+          recEmptySim.classList.add("hidden");
+        }
+      }
+
+      if (badgeRec) badgeRec.innerText = visibleCount;
     }
 
     // Chart.js Lifecycle & Interactive Toggles
@@ -1739,6 +1774,9 @@
           maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
           plugins: {
+            legend: {
+              display: false
+            },
             tooltip: {
               backgroundColor: 'rgba(11, 28, 48, 0.95)',
               titleFont: { size: 13, weight: 'bold' },
@@ -2134,17 +2172,17 @@
     function getStatusBadge(status) {
       switch (status) {
         case "Strong":
-          return `<span class="bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#0284C7] animate-pulse"></span>Strong</span>`;
+          return `<span class="bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Strong</span>`;
         case "Underperforming":
-          return `<span class="bg-gradient-to-r from-[#FFF1F0] to-[#FFDAD6] text-[#B91C1C] border border-[#FCA5A5] px-2.5 py-0.5 rounded-full text-[11px] font-bold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping"></span>Underperforming</span>`;
+          return `<span class="bg-gradient-to-r from-[#FFF1F0] to-[#FFDAD6] text-[#B91C1C] border border-[#FCA5A5] px-2.5 py-0.5 rounded-full text-[11px] font-bold shadow-2xs">Underperforming</span>`;
         case "Healthy":
-          return `<span class="bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>Healthy</span>`;
+          return `<span class="bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Healthy</span>`;
         case "Watch":
-          return `<span class="bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse"></span>Watch</span>`;
+          return `<span class="bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Watch</span>`;
         case "Awareness":
-          return `<span class="bg-[#F5F3FF] text-[#6D28D9] border border-[#DDD6FE] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span>Awareness</span>`;
+          return `<span class="bg-[#F5F3FF] text-[#6D28D9] border border-[#DDD6FE] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Awareness</span>`;
         default:
-          return `<span class="bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#94A3B8]"></span>Collecting Data</span>`;
+          return `<span class="bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Collecting Data</span>`;
       }
     }
 
@@ -2213,20 +2251,20 @@
 
     // Tab Navigation
     function switchTab(tabName) {
-      const tabs = ['dashboard', 'recommendations', 'impact', 'live-api', 'sources', 'settings', 'audit', 'privacy', 'terms'];
-      tabs.forEach(t => {
-        const el = document.getElementById(`tab-${t}`);
-        const nav = document.getElementById(`nav-${t}`);
-        if (t === tabName) {
-          el?.classList.remove('hidden');
-          if (nav) nav.className = "group w-full flex items-center justify-between px-3 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs transition-all duration-200 text-left cursor-pointer";
-        } else {
-          el?.classList.add('hidden');
-          if (nav) nav.className = "group w-full flex items-center justify-between px-3 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] hover:translate-x-1 transition-all duration-200 text-left cursor-pointer";
-        }
-      });
-      lucide.createIcons();
-    }
+        const tabs = ['dashboard', 'recommendations', 'impact', 'live-api', 'sources', 'settings', 'audit', 'privacy', 'terms'];
+        tabs.forEach(t => {
+          const el = document.getElementById(`tab-${t}`);
+          const nav = document.getElementById(`nav-${t}`);
+          if (t === tabName) {
+            el?.classList.remove('hidden');
+            if (nav) nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs text-left cursor-pointer";
+          } else {
+            el?.classList.add('hidden');
+            if (nav) nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer";
+          }
+        });
+        lucide.createIcons();
+      }
 
     function updateWhatIf(val) {
       document.getElementById("sliderValue").innerText = `${val}% (₹${Math.round(3800 * (val/100))} / day)`;
@@ -2357,31 +2395,33 @@
     }
 
     function approveShift(campId) {
-      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
-      if (card) {
-        card.classList.add("opacity-40", "pointer-events-none");
+        const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+        if (card) {
+          card.dataset.approved = "true";
+          card.classList.add("hidden");
+        }
+        updateRecCardVisibility();
+
+        const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
+        const shiftAmt = campId === 'awareness' ? "₹750/day" : "₹950/day";
+        getActiveAlerts().unshift({ level: "info", msg: `Shift Approved: ${shiftAmt} reallocated from '${campName}' to 'The Star'.`, time: `Day ${currentDay}` });
+        renderAlerts();
+        alert(`Shift approved! Reallocated ${shiftAmt} from ${campName} to 'The Star'. Check the 'Impact & Saturation' tab.`);
+        switchTab('impact');
       }
-      let remainingRecs = Math.max(0, parseInt(document.getElementById("badgeRecCount").innerText || "0") - 1);
-      document.getElementById("badgeRecCount").innerText = remainingRecs;
 
-      const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
-      const shiftAmt = campId === 'awareness' ? "₹750/day" : "₹950/day";
-      getActiveAlerts().unshift({ level: "info", msg: `Shift Approved: ${shiftAmt} reallocated from '${campName}' to 'The Star'.`, time: `Day ${currentDay}` });
-      renderAlerts();
-      alert(`Shift approved! Reallocated ${shiftAmt} from ${campName} to 'The Star'. Check the 'Impact & Saturation' tab.`);
-      switchTab('impact');
-    }
+      function dismissShift(campId) {
+        const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+        if (card) {
+          card.dataset.dismissed = "true";
+          card.classList.add("hidden");
+        }
+        updateRecCardVisibility();
+        getActiveAlerts().unshift({ level: "info", msg: "Recommendation dismissed by user.", time: `Day ${currentDay}` });
+        renderAlerts();
+      }
 
-    function dismissShift(campId) {
-      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
-      if (card) card.classList.add("hidden");
-      let remainingRecs = Math.max(0, parseInt(document.getElementById("badgeRecCount").innerText || "0") - 1);
-      document.getElementById("badgeRecCount").innerText = remainingRecs;
-      getActiveAlerts().unshift({ level: "info", msg: "Recommendation dismissed by user.", time: `Day ${currentDay}` });
-      renderAlerts();
-    }
-
-    function snoozeShift(campId) {
+      function snoozeShift(campId) {
       getActiveAlerts().unshift({ level: "info", msg: "Recommendation snoozed for 7 days.", time: `Day ${currentDay}` });
       renderAlerts();
       alert("Recommendation snoozed for 7 days.");
