@@ -638,28 +638,54 @@
           </div>
         </div>
 
-        <!-- Campaign Table & Alert Feed Grid -->
+        <!-- Campaign Table & Alert Feed Grid (Interactive & Modernized) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           <!-- Campaign Table (2 Cols) -->
-          <div class="lg:col-span-2 bg-white border border-[#C6C6CD] rounded-[4px] shadow-xs overflow-hidden">
-            <div class="p-4 border-b border-[#C6C6CD] flex items-center justify-between bg-[#F8F9FF]">
-              <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]" id="tableTitle">Monitored Ad Campaigns</h3>
-              <span class="text-[12px] text-[#45464D]" id="tableSubtitle">Active Surveillance Matrix</span>
+          <div class="lg:col-span-2 bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#755937]/50 rounded-[10px] shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-[#C6C6CD] flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-[#F8F9FF] to-white">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#EFF4FF] border border-[#BFDBFE] text-[#0284C7] flex items-center justify-center shadow-2xs">
+                  <i data-lucide="layers" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]" id="tableTitle">Monitored Ad Campaigns</h3>
+                  <p class="text-[11px] text-[#64748B]">Click any campaign row to launch interactive diagnostic playbook</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[11px] font-semibold text-[#065F46] shadow-2xs">
+                  <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                  <span id="tableSubtitle">6 Campaigns Active</span>
+                </span>
+              </div>
             </div>
-            <div class="overflow-x-auto">
+
+            <!-- Interactive Quick Filter Tabs -->
+            <div class="px-4 py-2 border-b border-[#E5EEFF] bg-[#F8FAFC] flex items-center gap-1.5 overflow-x-auto text-[11px]">
+              <span class="text-[#64748B] font-medium mr-1 flex items-center gap-1">
+                <i data-lucide="filter" class="w-3 h-3"></i> Channel:
+              </span>
+              <button onclick="filterCampaignTable('all')" id="filterBtn-all" class="px-2.5 py-0.5 rounded-full bg-[#0B1C30] text-white font-semibold shadow-2xs transition-all cursor-pointer">All (6)</button>
+              <button onclick="filterCampaignTable('Google')" id="filterBtn-Google" class="px-2.5 py-0.5 rounded-full bg-white hover:bg-[#EFF4FF] border border-[#CBD5E1] text-[#475569] font-medium transition-all cursor-pointer">Google</button>
+              <button onclick="filterCampaignTable('Meta')" id="filterBtn-Meta" class="px-2.5 py-0.5 rounded-full bg-white hover:bg-[#EFF4FF] border border-[#CBD5E1] text-[#475569] font-medium transition-all cursor-pointer">Meta</button>
+              <button onclick="filterCampaignTable('YouTube')" id="filterBtn-YouTube" class="px-2.5 py-0.5 rounded-full bg-white hover:bg-[#EFF4FF] border border-[#CBD5E1] text-[#475569] font-medium transition-all cursor-pointer">YouTube</button>
+              <button onclick="filterCampaignTable('LinkedIn')" id="filterBtn-LinkedIn" class="px-2.5 py-0.5 rounded-full bg-white hover:bg-[#EFF4FF] border border-[#CBD5E1] text-[#475569] font-medium transition-all cursor-pointer">LinkedIn</button>
+            </div>
+
+            <div class="overflow-x-auto flex-1">
               <table class="w-full text-left text-[13px]">
-                <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold border-b border-[#C6C6CD]">
+                <thead class="bg-[#EFF4FF] text-[#0B1C30] font-semibold border-b border-[#CBD5E1]">
                   <tr>
-                    <th class="py-2.5 px-4">Campaign Name</th>
-                    <th class="py-2.5 px-3">Status</th>
-                    <th class="py-2.5 px-3">Spend</th>
-                    <th class="py-2.5 px-3">Conversions</th>
-                    <th class="py-2.5 px-3">CPA (Target)</th>
-                    <th class="py-2.5 px-4 text-right">Action</th>
+                    <th class="py-3 px-4">Campaign Name & Channel</th>
+                    <th class="py-3 px-3">Telemetry Status</th>
+                    <th class="py-3 px-3">Spend (INR)</th>
+                    <th class="py-3 px-3">Conversions</th>
+                    <th class="py-3 px-3">CPA (Target)</th>
+                    <th class="py-3 px-4 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-[#E5EEFF]" id="campaignTableBody">
+                <tbody class="divide-y divide-[#E2E8F0]" id="campaignTableBody">
                   <!-- Populated dynamically via JS -->
                 </tbody>
               </table>
@@ -667,15 +693,23 @@
           </div>
 
           <!-- Alert Feed (1 Col) -->
-          <div class="bg-white border border-[#C6C6CD] rounded-[4px] shadow-xs flex flex-col">
-            <div class="p-4 border-b border-[#C6C6CD] flex items-center justify-between bg-[#F8F9FF]">
-              <div class="flex items-center gap-2">
-                <i data-lucide="bell" class="w-4 h-4 text-[#755937]"></i>
-                <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]">Live Surveillance Feed</h3>
+          <div class="bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#755937]/50 rounded-[10px] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="p-4 border-b border-[#C6C6CD] flex items-center justify-between bg-gradient-to-r from-[#F8F9FF] to-white">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#FFFBEB] border border-[#FDE68A] text-[#755937] flex items-center justify-center shadow-2xs">
+                  <i data-lucide="radio" class="w-4 h-4 text-[#755937] animate-pulse"></i>
+                </div>
+                <div>
+                  <h3 class="font-headline text-[18px] font-semibold text-[#0B1C30]">Live Surveillance Feed</h3>
+                  <p class="text-[11px] text-[#64748B]">Real-time algorithmic risk detection</p>
+                </div>
               </div>
-              <span class="text-[11px] bg-[#E5EEFF] text-[#0F172A] px-2 py-0.5 rounded-[4px] font-medium" id="alertCount">4 events</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E5EEFF] border border-[#BFDBFE] text-[11px] font-bold text-[#1E3A8A] shadow-2xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-ping"></span>
+                <span id="alertCount">4 events</span>
+              </span>
             </div>
-            <div class="p-4 space-y-3 flex-1 overflow-y-auto" id="alertFeedContainer">
+            <div class="p-3.5 space-y-2.5 flex-1 overflow-y-auto max-h-[460px]" id="alertFeedContainer">
               <!-- Alerts populated dynamically -->
             </div>
           </div>
@@ -1972,7 +2006,25 @@
       switchTab('live-api');
     }
 
-    // Render Table and Status Badges
+    // Channel Filter State
+    let currentChannelFilter = 'all';
+
+    function filterCampaignTable(channel) {
+      currentChannelFilter = channel;
+      ['all', 'Google', 'Meta', 'YouTube', 'LinkedIn'].forEach(ch => {
+        const btn = document.getElementById(`filterBtn-${ch}`);
+        if (btn) {
+          if (ch === channel) {
+            btn.className = "px-2.5 py-0.5 rounded-full bg-[#0B1C30] text-white font-semibold shadow-2xs transition-all cursor-pointer";
+          } else {
+            btn.className = "px-2.5 py-0.5 rounded-full bg-white hover:bg-[#EFF4FF] border border-[#CBD5E1] text-[#475569] font-medium transition-all cursor-pointer";
+          }
+        }
+      });
+      renderCampaigns();
+    }
+
+    // Render Table and Status Badges (Interactive & Attractive)
     function renderCampaigns() {
       const tbody = document.getElementById("campaignTableBody");
       const titleElem = document.getElementById("tableTitle");
@@ -2009,55 +2061,94 @@
         return;
       }
 
-      const activeCampaigns = appMode === 'live' ? liveCampaigns : simulatorCampaigns;
+      let activeCampaigns = appMode === 'live' ? liveCampaigns : simulatorCampaigns;
       titleElem.innerText = appMode === 'live' ? "Live Connected Campaigns" : "Monitored Ad Campaigns";
-      subElem.innerText = `${activeCampaigns.length} Campaigns Tracked`;
+      subElem.innerText = `${activeCampaigns.length} Campaigns Active`;
 
-      tbody.innerHTML = activeCampaigns.map(c => `
-        <tr class="hover:bg-[#EFF4FF] transition-smooth">
-          <td class="py-3 px-4 font-semibold text-[#0B1C30]">
-            ${c.name}
-            <span class="block text-[11px] text-[#76777D] font-normal">${c.channel}</span>
-          </td>
-          <td class="py-3 px-3">${getStatusBadge(c.status)}</td>
-          <td class="py-3 px-3 font-medium">₹${c.spend.toLocaleString('en-IN')}</td>
-          <td class="py-3 px-3 font-medium">${c.conv}</td>
-          <td class="py-3 px-3">
-            <span class="${c.cpa > c.target ? 'text-[#BA1A1A] font-semibold' : 'text-[#10B981]'}">₹${c.cpa.toLocaleString('en-IN')}</span>
-            <span class="text-[11px] text-[#76777D]"> (₹${c.target})</span>
-          </td>
-          <td class="py-3 px-4 text-right">
-            ${c.isWeak ? `
-              <button onclick="openDrawer('${c.id}')" class="px-2.5 py-1 text-[11px] font-semibold bg-[#EFF4FF] border border-[#C6C6CD] text-[#0F172A] rounded-[4px] hover:bg-[#DCE9FF] inline-flex items-center gap-1">
-                <i data-lucide="sparkles" class="w-3 h-3 text-[#755937]"></i>
-                <span>Diagnose</span>
-              </button>
-            ` : `
-              <span class="text-[12px] text-[#76777D]">Monitoring</span>
-            `}
-          </td>
-        </tr>
-      `).join("");
+      if (currentChannelFilter !== 'all') {
+        activeCampaigns = activeCampaigns.filter(c => c.channel.toLowerCase().includes(currentChannelFilter.toLowerCase()));
+      }
+
+      tbody.innerHTML = activeCampaigns.map(c => {
+        let channelBadge = '';
+        if (c.channel.includes('Google')) {
+          channelBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#E8F0FE] text-[#1A73E8] border border-[#D2E3FC]"><i data-lucide="search" class="w-2.5 h-2.5"></i>${c.channel}</span>`;
+        } else if (c.channel.includes('Meta')) {
+          channelBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#F0F2FE] text-[#1877F2] border border-[#D5DCFB]"><i data-lucide="share-2" class="w-2.5 h-2.5"></i>${c.channel}</span>`;
+        } else if (c.channel.includes('YouTube')) {
+          channelBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#FEECEC] text-[#DC2626] border border-[#FDC5C5]"><i data-lucide="video" class="w-2.5 h-2.5"></i>${c.channel}</span>`;
+        } else {
+          channelBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#E8F4F8] text-[#0A66C2] border border-[#C6E2EE]"><i data-lucide="briefcase" class="w-2.5 h-2.5"></i>${c.channel}</span>`;
+        }
+
+        const isWeak = c.isWeak || c.status === 'Underperforming' || c.status === 'Watch';
+
+        return `
+          <tr onclick="openDrawer('${c.id}')" class="hover:bg-[#F8FAFF] hover:shadow-2xs transition-all duration-200 cursor-pointer group/row">
+            <td class="py-3 px-4">
+              <div class="font-bold text-[#0B1C30] group-hover/row:text-[#0284C7] transition-colors flex items-center gap-2">
+                <span>${c.name}</span>
+              </div>
+              <div class="mt-1">${channelBadge}</div>
+            </td>
+            <td class="py-3 px-3">${getStatusBadge(c.status)}</td>
+            <td class="py-3 px-3">
+              <div class="font-bold text-[#0B1C30]">₹${c.spend.toLocaleString('en-IN')}</div>
+              <div class="text-[10px] text-[#64748B]">Cumulative</div>
+            </td>
+            <td class="py-3 px-3">
+              <div class="font-bold text-[#0B1C30] flex items-center gap-1">
+                <span>${c.conv}</span>
+                ${c.conv > 10 ? '<span class="text-[10px] text-[#059669] font-medium bg-[#ECFDF5] px-1 rounded">High</span>' : ''}
+              </div>
+              <div class="text-[10px] text-[#64748B]">Matured</div>
+            </td>
+            <td class="py-3 px-3">
+              ${c.cpa > c.target ? `
+                <div class="text-[#DC2626] font-bold text-[14px]">₹${c.cpa.toLocaleString('en-IN')}</div>
+                <div class="text-[10px] text-[#EF4444] font-medium">+₹${(c.cpa - c.target).toLocaleString('en-IN')} (Target: ₹${c.target})</div>
+              ` : `
+                <div class="text-[#059669] font-bold text-[14px]">₹${c.cpa.toLocaleString('en-IN')}</div>
+                <div class="text-[10px] text-[#10B981] font-medium">Target: ₹${c.target}</div>
+              `}
+            </td>
+            <td class="py-3 px-4 text-right">
+              ${isWeak ? `
+                <button onclick="event.stopPropagation(); openDrawer('${c.id}')" class="px-3 py-1 text-[11px] font-semibold bg-[#BA1A1A] hover:bg-[#991B1B] text-white rounded-[6px] shadow-xs hover:shadow-md hover:scale-105 active:scale-95 inline-flex items-center gap-1.5 transition-all cursor-pointer">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  <span>Diagnose</span>
+                </button>
+              ` : `
+                <button onclick="event.stopPropagation(); openDrawer('${c.id}')" class="px-2.5 py-1 text-[11px] font-medium bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#334155] rounded-[6px] hover:scale-105 active:scale-95 inline-flex items-center gap-1 transition-all cursor-pointer shadow-2xs">
+                  <i data-lucide="eye" class="w-3 h-3 text-[#64748B]"></i>
+                  <span>Inspect</span>
+                </button>
+              `}
+            </td>
+          </tr>
+        `;
+      }).join("");
       lucide.createIcons();
     }
 
     function getStatusBadge(status) {
       switch (status) {
         case "Strong":
-          return `<span class="bg-[#E5EEFF] text-[#0B1C30] border border-[#B9C7E0] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#0F172A]"></span>Strong</span>`;
+          return `<span class="bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#0284C7] animate-pulse"></span>Strong</span>`;
         case "Underperforming":
-          return `<span class="bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#BA1A1A] animate-pulse"></span>Underperforming</span>`;
+          return `<span class="bg-gradient-to-r from-[#FFF1F0] to-[#FFDAD6] text-[#B91C1C] border border-[#FCA5A5] px-2.5 py-0.5 rounded-full text-[11px] font-bold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping"></span>Underperforming</span>`;
         case "Healthy":
-          return `<span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>Healthy</span>`;
+          return `<span class="bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>Healthy</span>`;
         case "Watch":
-          return `<span class="bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>Watch</span>`;
+          return `<span class="bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse"></span>Watch</span>`;
         case "Awareness":
-          return `<span class="bg-[#F5F3FF] text-[#5B21B6] border border-[#DDD6FE] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span>Awareness</span>`;
+          return `<span class="bg-[#F5F3FF] text-[#6D28D9] border border-[#DDD6FE] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span>Awareness</span>`;
         default:
-          return `<span class="bg-[#EFF4FF] text-[#45464D] border border-[#C6C6CD] px-2 py-0.5 rounded-[4px] text-[11px] font-semibold inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#76777D]"></span>Collecting Data</span>`;
+          return `<span class="bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 shadow-2xs"><span class="w-1.5 h-1.5 rounded-full bg-[#94A3B8]"></span>Collecting Data</span>`;
       }
     }
 
+    // Render Live Surveillance Feed (Interactive & Engaging)
     function renderAlerts() {
       const container = document.getElementById("alertFeedContainer");
       const countElem = document.getElementById("alertCount");
@@ -2065,7 +2156,7 @@
       if (appMode === 'live' && !isLiveConnected) {
         countElem.innerText = "0 events";
         container.innerHTML = `
-          <div class="p-6 text-center text-[#76777D] bg-[#F8F9FF] border border-dashed border-[#C6C6CD] rounded-[4px] text-[12px] space-y-1">
+          <div class="p-6 text-center text-[#76777D] bg-[#F8F9FF] border border-dashed border-[#C6C6CD] rounded-[8px] text-[12px] space-y-1">
             <p class="font-semibold text-[#0B1C30]">No Live Alerts</p>
             <p class="text-[11px]">Real-time statistical surveillance is idle awaiting an API connection.</p>
           </div>
@@ -2076,15 +2167,43 @@
 
       const activeAlerts = appMode === 'live' ? liveAlerts : simulatorAlerts;
       countElem.innerText = `${activeAlerts.length} events`;
-      container.innerHTML = activeAlerts.map(a => `
-        <div class="p-3 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[12px] space-y-1">
-          <div class="flex items-center justify-between">
-            <span class="font-semibold ${a.level === 'critical' ? 'text-[#BA1A1A]' : a.level === 'warning' ? 'text-[#755937]' : 'text-[#0F172A]'} uppercase text-[10px] tracking-wider">${a.level}</span>
-            <span class="text-[11px] text-[#76777D]">${a.time}</span>
+      container.innerHTML = activeAlerts.map(a => {
+        let borderClass = 'border-l-4 border-l-[#0284C7] bg-gradient-to-r from-[#F0F9FF] via-white to-white border-[#BAE6FD]';
+        let badgeClass = 'bg-[#E0F2FE] text-[#0369A1]';
+        let iconName = 'info';
+        let targetCamp = 'slow';
+
+        if (a.level === 'critical') {
+          borderClass = 'border-l-4 border-l-[#DC2626] bg-gradient-to-r from-[#FEF2F2] via-white to-white border-[#FECACA]';
+          badgeClass = 'bg-[#FEE2E2] text-[#B91C1C]';
+          iconName = 'alert-octagon';
+          targetCamp = (a.msg && (a.msg.includes('Brand Reach') || a.msg.includes('YouTube'))) ? 'awareness' : 'slow';
+        } else if (a.level === 'warning') {
+          borderClass = 'border-l-4 border-l-[#D97706] bg-gradient-to-r from-[#FFFBEB] via-white to-white border-[#FDE68A]';
+          badgeClass = 'bg-[#FEF3C7] text-[#B45309]';
+          iconName = 'alert-triangle';
+          targetCamp = 'slow';
+        }
+
+        return `
+          <div onclick="openDrawer('${targetCamp}')" class="p-3 border rounded-[8px] text-[12px] shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group/alert ${borderClass}">
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full ${badgeClass} flex items-center justify-center shrink-0">
+                  <i data-lucide="${iconName}" class="w-3 h-3"></i>
+                </span>
+                <span class="font-bold uppercase text-[10px] tracking-wider ${a.level === 'critical' ? 'text-[#B91C1C]' : a.level === 'warning' ? 'text-[#B45309]' : 'text-[#0369A1]'}">${a.level}</span>
+              </div>
+              <span class="text-[10px] font-semibold bg-white/90 border border-slate-200 text-[#64748B] px-2 py-0.5 rounded-full shadow-2xs">${a.time}</span>
+            </div>
+            <p class="text-[#0B1C30] font-medium leading-relaxed">${a.msg}</p>
+            <div class="flex items-center justify-end gap-1 text-[11px] font-semibold text-[#0284C7] opacity-0 group-hover/alert:opacity-100 transition-opacity mt-1">
+              <span>Inspect Campaign</span>
+              <i data-lucide="arrow-right" class="w-3 h-3 group-hover/alert:translate-x-0.5 transition-transform"></i>
+            </div>
           </div>
-          <p class="text-[#0B1C30]">${a.msg}</p>
-        </div>
-      `).join("");
+        `;
+      }).join("");
       lucide.createIcons();
     }
 
@@ -2126,6 +2245,7 @@
         `Projected Net Gain: +${gainLow} to +${gainHigh} extra conversions per week by shifting awareness spend into bottom-of-funnel search.`;
     }
 
+    // Dynamic Multi-Campaign Diagnostic Playbook Drawer
     function openDrawer(campId) {
       const nameElem = document.getElementById("drawerCampName");
       const scoreElem = document.getElementById("drawerHealthScore");
@@ -2137,21 +2257,77 @@
         scoreElem.innerHTML = `14 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
         bneckElem.innerText = "Severe Conversion Friction & Targeting Mismatch";
         fixesElem.innerHTML = `
-          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="target" class="w-3.5 h-3.5 inline text-[#755937]"></i> Audience Intent Realignment</span>
-              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-2 py-0.5 rounded-full">HIGH IMPACT</span>
             </div>
             <p class="text-[12px] text-[#45464D]">Broad YouTube video targeting is accumulating 50,000+ views from passive viewers with no purchase intent (₹45,000 spend with only 2 sales).</p>
             <p class="text-[12px] font-semibold text-[#755937]">Action: Restrict video ad placements strictly to In-Market Audience segments and custom search intent segments.</p>
           </div>
-          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="palette" class="w-3.5 h-3.5 inline text-[#755937]"></i> Call-to-Action & Video Hook Overlay</span>
-              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-2 py-0.5 rounded-full">HIGH IMPACT</span>
             </div>
             <p class="text-[12px] text-[#45464D]">Current video ad has no persistent CTA extension or promotional discount in the first 5 seconds.</p>
             <p class="text-[12px] font-semibold text-[#755937]">Action: Add interactive product feed extension and an explicit 'Shop Now for ₹X Off' headline overlay.</p>
+          </div>
+        `;
+      } else if (campId === 'star') {
+        nameElem.innerText = "The Star (High ROAS Scaler)";
+        scoreElem.innerHTML = `94 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Impression Share Budget Cap";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="trending-up" class="w-3.5 h-3.5 inline text-[#059669]"></i> Budget Expansion Priority</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-2 py-0.5 rounded-full">SCALING TARGET</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Consistently outperforming benchmark with CPA of ₹782 against ₹1,200 target. Losing 18% impression share due to daily budget limits.</p>
+            <p class="text-[12px] font-semibold text-[#059669]">Action: Reallocate 25% surplus capital from underperforming campaigns to scale top-line conversions.</p>
+          </div>
+        `;
+      } else if (campId === 'saturator') {
+        nameElem.innerText = "The Saturator (Meta Stories)";
+        scoreElem.innerHTML = `78 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Audience Frequency Saturation";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="users" class="w-3.5 h-3.5 inline text-[#755937]"></i> Audience Expansion</span>
+              <span class="bg-[#FFFBEB] text-[#92400E] text-[10px] font-bold px-2 py-0.5 rounded-full">MONITORING</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Frequency has reached 2.4 in the 1% lookalike audience. Marginal CPA is beginning to tick upward.</p>
+            <p class="text-[12px] font-semibold text-[#755937]">Action: Broaden lookalike seed from 1% to 3% to prevent saturation dip.</p>
+          </div>
+        `;
+      } else if (campId === 'lucky') {
+        nameElem.innerText = "The Lucky Streak (Google PMax)";
+        scoreElem.innerHTML = `72 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Attribution Maturity Lag Shield Active";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="shield" class="w-3.5 h-3.5 inline text-[#0284C7]"></i> Lag Shield Protection</span>
+              <span class="bg-[#EFF4FF] text-[#1E3A8A] text-[10px] font-bold px-2 py-0.5 rounded-full">PROTECTED</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Day 8 of 14. Conversions are ripening with typical 3-day PMax pixel reporting delay. Refusing automated cuts until full maturity.</p>
+            <p class="text-[12px] font-semibold text-[#0284C7]">Action: Maintain current pacing and allow Bayesian smoothing to finalize actual CPA.</p>
+          </div>
+        `;
+      } else if (campId === 'steady') {
+        nameElem.innerText = "The Steady Middle (LinkedIn B2B)";
+        scoreElem.innerHTML = `86 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
+        bneckElem.innerText = "Stable Baseline Operations";
+        fixesElem.innerHTML = `
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="check-circle" class="w-3.5 h-3.5 inline text-[#059669]"></i> Consistent Control</span>
+              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-2 py-0.5 rounded-full">HEALTHY</span>
+            </div>
+            <p class="text-[12px] text-[#45464D]">Performing reliably within ±3% of target benchmark across all mature observation cycles.</p>
+            <p class="text-[12px] font-semibold text-[#059669]">Action: Maintain standard pacing as reference control baseline.</p>
           </div>
         `;
       } else {
@@ -2159,13 +2335,13 @@
         scoreElem.innerHTML = `38 <span class="text-[16px] text-[#76777D] font-normal">/ 100</span>`;
         bneckElem.innerText = "Creative Hook Fatigue";
         fixesElem.innerHTML = `
-          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[4px] space-y-1.5">
+          <div class="p-3.5 bg-white border border-[#C6C6CD] rounded-[6px] shadow-2xs space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="text-[12px] font-semibold text-[#0F172A]"><i data-lucide="palette" class="w-3.5 h-3.5 inline text-[#755937]"></i> Creative Refresh</span>
-              <span class="bg-[#ECFDF5] text-[#065F46] text-[10px] font-bold px-1.5 py-0.5 rounded-[4px]">HIGH IMPACT</span>
+              <span class="bg-[#FFDAD6] text-[#B91C1C] text-[10px] font-bold px-2 py-0.5 rounded-full">ACTION REQUIRED</span>
             </div>
             <p class="text-[12px] text-[#45464D]">CTR degraded over time while frequency climbed to 3.8. Audience is experiencing banner blindness.</p>
-            <p class="text-[12px] font-semibold text-[#755937]">Action: Swap top 3 ad creatives with new high-contrast video hooks.</p>
+            <p class="text-[12px] font-semibold text-[#755937]">Action: Swap top 3 ad creatives with new high-contrast video hooks, or approve conservative 25% budget shift.</p>
           </div>
         `;
       }
