@@ -67,6 +67,22 @@
     .animate-pulse-subtle {
       animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
+    @keyframes ambientFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    .floating-card {
+      animation: ambientFloat 4.2s ease-in-out infinite;
+    }
+    .floating-card:hover {
+      animation-play-state: paused;
+    }
+    .floating-card-delay-1 {
+      animation-delay: 1.4s;
+    }
+    .floating-card-delay-2 {
+      animation-delay: 2.8s;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#D3E4FE]">
@@ -91,52 +107,75 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Telemetry Artwork -->
     <main class="flex-1">
-      <section class="max-w-6xl mx-auto px-6 pt-16 pb-20 text-center">
-        <!-- Editorial Headline -->
-        <h1 class="font-headline text-4xl sm:text-6xl font-medium tracking-tight text-[#0B1C30] leading-[1.15] max-w-4xl mx-auto mb-6">
-          Stop burning capital on <span class="italic text-[#755937]">immature</span> ads.
-        </h1>
-
-        <!-- Subheadline -->
-        <p class="text-base sm:text-xl text-[#45464D] max-w-2xl mx-auto leading-relaxed mb-10">
-          Ad Waste Finder isolates genuine waste from natural attribution lag across Google, Meta, and LinkedIn. Detect underperforming ad spend, calculate salvageable capital, and reallocate with mathematical certainty.
-        </p>
-
-        <!-- CTA Action Buttons -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <button onclick="enterDashboard()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0F172A] text-white rounded-[4px] text-[15px] font-semibold hover:bg-[#1E293B] shadow-md transition-smooth">
-            <span>Get Started — Launch Auditor</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-          <button onclick="enterSimulator()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[15px] font-medium hover:bg-[#EFF4FF] transition-smooth">
-            <i data-lucide="play-circle" class="w-5 h-5 text-[#755937]"></i>
-            <span>Explore Simulator Demo (₹85,250 Waste)</span>
-          </button>
+      <section class="relative overflow-hidden pt-16 pb-20 text-center">
+        <!-- Hero Background Image (Blended seamlessly into brand palette) -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <img src="hero-bg.png" alt="Ads Tracker Performance Telemetry" class="w-full h-full object-cover object-center opacity-70 select-none" />
+          <div class="absolute inset-0 bg-gradient-to-b from-[#F8F9FF]/20 via-transparent to-[#F8F9FF] pointer-events-none"></div>
         </div>
 
-        <!-- 4 Quick Highlight Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
-            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Protection</div>
-            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">7-Day Maturity Lag</div>
-            <div class="text-[12px] text-[#45464D]">Shields unripened conversions from premature cuts.</div>
+        <div class="relative z-10 max-w-6xl mx-auto px-6">
+          <!-- Editorial Headline -->
+          <h1 class="font-headline text-4xl sm:text-6xl font-medium tracking-tight text-[#0B1C30] leading-[1.15] max-w-4xl mx-auto mb-6">
+            Stop burning capital on <span class="italic text-[#755937]">immature</span> ads.
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="text-base sm:text-xl text-[#45464D] max-w-2xl mx-auto leading-relaxed mb-10">
+            Ads Tracker isolates genuine waste from natural attribution lag across Google, Meta, and LinkedIn. Detect underperforming ad spend, calculate salvageable capital, and reallocate with mathematical certainty.
+          </p>
+
+          <!-- CTA Action Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+            <button onclick="enterDashboard()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0F172A] text-white rounded-[4px] text-[15px] font-semibold hover:bg-[#1E293B] shadow-md transition-smooth cursor-pointer">
+              <span>Get Started — Launch Auditor</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button onclick="enterSimulator()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/90 backdrop-blur-sm border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[15px] font-medium hover:bg-[#EFF4FF] transition-smooth cursor-pointer">
+              <i data-lucide="play-circle" class="w-5 h-5 text-[#755937]"></i>
+              <span>Explore Simulator Demo (₹85,250 Waste)</span>
+            </button>
           </div>
-          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
-            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Demo Proof</div>
-            <div class="text-[17px] font-semibold text-[#BA1A1A] mb-0.5">₹85,250 Waste Found</div>
-            <div class="text-[12px] text-[#45464D]">Identified across 2 underperforming campaigns.</div>
-          </div>
-          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
-            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Execution</div>
-            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">25% Shift Protocol</div>
-            <div class="text-[12px] text-[#45464D]">Safe, non-erratic reallocation to top CPA winners.</div>
-          </div>
-          <div class="bg-white border border-[#C6C6CD] p-4 rounded-[4px] shadow-xs">
-            <div class="text-[12px] font-medium text-[#76777D] uppercase tracking-wider mb-1">Security</div>
-            <div class="text-[17px] font-semibold text-[#0B1C30] mb-0.5">100% Client-Side</div>
-            <div class="text-[12px] text-[#45464D]">Zero token persistence and zero server tracking.</div>
+
+          <!-- 3 Interactive Floating Feature Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+            <!-- Card 1: Protection -->
+            <div class="floating-card group bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#0284C7] p-5 rounded-[6px] shadow-sm hover:shadow-xl transition-all duration-300 ease-out cursor-pointer hover:-translate-y-2">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold text-[#0284C7] uppercase tracking-wider bg-[#EFF4FF] border border-[#BFDBFE] px-2.5 py-0.5 rounded-full">Protection</span>
+                <div class="w-7 h-7 rounded-full bg-[#EFF4FF] flex items-center justify-center text-[#0284C7] group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="text-[18px] font-bold text-[#0B1C30] mb-1 group-hover:text-[#0284C7] transition-colors">7-Day Maturity Lag</div>
+              <div class="text-[13px] text-[#45464D] leading-relaxed">Shields unripened conversions from premature cuts.</div>
+            </div>
+
+            <!-- Card 2: Execution -->
+            <div class="floating-card floating-card-delay-1 group bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#755937] p-5 rounded-[6px] shadow-sm hover:shadow-xl transition-all duration-300 ease-out cursor-pointer hover:-translate-y-2">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold text-[#755937] uppercase tracking-wider bg-[#FFFBEB] border border-[#FDE68A] px-2.5 py-0.5 rounded-full">Execution</span>
+                <div class="w-7 h-7 rounded-full bg-[#FFFBEB] flex items-center justify-center text-[#755937] group-hover:bg-[#755937] group-hover:text-white transition-colors">
+                  <i data-lucide="shuffle" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="text-[18px] font-bold text-[#0B1C30] mb-1 group-hover:text-[#755937] transition-colors">25% Shift Protocol</div>
+              <div class="text-[13px] text-[#45464D] leading-relaxed">Safe, non-erratic reallocation to top CPA winners.</div>
+            </div>
+
+            <!-- Card 3: Security -->
+            <div class="floating-card floating-card-delay-2 group bg-white/95 backdrop-blur-md border border-[#C6C6CD] hover:border-[#10B981] p-5 rounded-[6px] shadow-sm hover:shadow-xl transition-all duration-300 ease-out cursor-pointer hover:-translate-y-2">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold text-[#065F46] uppercase tracking-wider bg-[#ECFDF5] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full">Security</span>
+                <div class="w-7 h-7 rounded-full bg-[#ECFDF5] flex items-center justify-center text-[#10B981] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
+                  <i data-lucide="lock" class="w-4 h-4"></i>
+                </div>
+              </div>
+              <div class="text-[18px] font-bold text-[#0B1C30] mb-1 group-hover:text-[#065F46] transition-colors">100% Client-Side</div>
+              <div class="text-[13px] text-[#45464D] leading-relaxed">Zero token persistence and zero server tracking.</div>
+            </div>
           </div>
         </div>
       </section>
