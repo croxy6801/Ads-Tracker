@@ -299,7 +299,9 @@
       <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>&copy; 2026 Ads Tracker. All rights reserved. Precision ad capital surveillance.</div>
         <div class="flex items-center gap-4">
-          <button onclick="openLegalModal('privacy')" class="hover:underline text-[#45464D]">Privacy Policy</button>
+          <button onclick="openLegalModal('settings')" class="hover:underline text-[#45464D]">Rules & Thresholds</button>
+            <span>•</span>
+            <button onclick="openLegalModal('privacy')" class="hover:underline text-[#45464D]">Privacy Policy</button>
           <span>•</span>
           <button onclick="openLegalModal('terms')" class="hover:underline text-[#45464D]">Terms & Conditions</button>
         </div>
@@ -446,15 +448,6 @@
             </div>
           </button>
 
-          <button onclick="switchTab('settings')" id="nav-settings" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
-            <div class="flex items-center gap-2.5">
-              <div class="w-6 h-6 rounded-md bg-[#E0F2FE] flex items-center justify-center text-[#0284C7] shrink-0">
-                <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
-              </div>
-              <span class="whitespace-nowrap">Rules & Thresholds</span>
-            </div>
-          </button>
-
           <button onclick="switchTab('audit')" id="nav-audit" class="group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
             <div class="flex items-center gap-2.5">
               <div class="w-6 h-6 rounded-md bg-[#F1F5F9] flex items-center justify-center text-[#475569] shrink-0">
@@ -475,8 +468,29 @@
           <span>Read-Only by Design</span>
         </div>
         <p class="text-[11px] text-[#64748B] leading-relaxed">Operates in read-only telemetry mode. Zero automated changes to your live ad accounts.</p>
+        <!-- Bottom Governance & Legal Links -->
+      <div class="pt-3 border-t border-[#E2E8F0] space-y-1">
+        <button onclick="switchTab('settings')" id="nav-settings" class="group w-full flex items-center px-3 py-1.5 rounded-[6px] text-[12px] font-medium text-[#64748B] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+          <div class="flex items-center gap-2">
+            <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#64748B]"></i>
+            <span class="whitespace-nowrap">Rules & Thresholds</span>
+          </div>
+        </button>
+        <button onclick="switchTab('privacy')" id="nav-privacy" class="group w-full flex items-center px-3 py-1.5 rounded-[6px] text-[12px] font-medium text-[#64748B] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield" class="w-3.5 h-3.5 text-[#64748B]"></i>
+            <span class="whitespace-nowrap">Privacy Policy</span>
+          </div>
+        </button>
+        <button onclick="switchTab('terms')" id="nav-terms" class="group w-full flex items-center px-3 py-1.5 rounded-[6px] text-[12px] font-medium text-[#64748B] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer">
+          <div class="flex items-center gap-2">
+            <i data-lucide="scale" class="w-3.5 h-3.5 text-[#64748B]"></i>
+            <span class="whitespace-nowrap">Terms & Conditions</span>
+          </div>
+        </button>
       </div>
-    </aside>
+    </div>
+  </aside>
 
     <!-- Main Dynamic Content Container -->
     <main class="flex-1 overflow-y-auto p-8 max-w-7xl mx-auto space-y-6">
@@ -1062,7 +1076,16 @@
                 <i data-lucide="gauge" class="w-4 h-4"></i>
               </div>
             </div>
-            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight" id="impactSaturationVerdicts">0 Held • 0 Saturated</p>
+            <div class="mt-2 space-y-0.5" id="impactSaturationVerdicts">
+              <div class="text-[22px] font-bold font-sans text-[#0B1C30] tracking-tight leading-tight flex items-baseline gap-1.5">
+                <span id="impactHeldNum">0</span>
+                <span class="text-[15px] font-semibold text-[#475569]">Held</span>
+              </div>
+              <div class="text-[22px] font-bold font-sans text-[#0B1C30] tracking-tight leading-tight flex items-baseline gap-1.5">
+                <span id="impactSatNum">0</span>
+                <span class="text-[15px] font-semibold text-[#475569]">Saturated</span>
+              </div>
+            </div>
             <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
               <span class="text-[#64748B] font-medium" id="impactSaturationSubText">Post-shift receiving capacity monitor</span>
             </div>
@@ -1244,20 +1267,13 @@
       <!-- ============================================================== -->
       <div id="tab-sources" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#EEF2FF] text-[#4F46E5] border border-[#C7D2FE]">
-                Offline Data Ingestion
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-[#6366F1]"></i>
-                Google Ads & Meta CSV Format Supported
-              </span>
-            </div>
-            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Data Source Management</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">Upload Google Ads or Meta exports (up to 10MB) for evidence analysis.</p>
+        <div class="pb-3 border-b border-[#E2E8F0]">
+          <div class="flex items-center gap-1.5 mb-1 text-[12px] text-[#64748B]">
+            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-[#6366F1]"></i>
+            <span class="font-medium">Google Ads and Meta CSV Format Supported</span>
           </div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Data Source Management</h1>
+          <p class="font-sans text-[13px] text-[#45464D] mt-0.5">Upload Google Ads or Meta exports (up to 10MB) for evidence analysis.</p>
         </div>
 
         <!-- Modern Upload Dropzone Card -->
@@ -1326,26 +1342,12 @@
       <!-- ============================================================== -->
       <div id="tab-settings" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD]">
-                Governance Engine
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#0284C7]"></i>
-                Standard Operating Procedure (SOP) Defaults
-              </span>
-            </div>
-            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Analytical Rules & Thresholds</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">Configure the core parameters governing campaign classifications and recommendations.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="alert('Rules configuration saved. All simulation criteria re-indexed.')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[6px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-1.5 shadow-xs cursor-pointer">
-              <i data-lucide="check" class="w-3.5 h-3.5"></i>
-              <span>Save & Apply Thresholds</span>
-            </button>
-          </div>
+        <div class="flex flex-row items-center justify-between gap-4 pb-3 border-b border-[#E2E8F0]">
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Analytical Rules & Thresholds</h1>
+          <button onclick="alert('Rules configuration saved. All simulation criteria re-indexed.')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[6px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-1.5 shadow-xs cursor-pointer shrink-0">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span>Save & Apply Thresholds</span>
+          </button>
         </div>
 
         <!-- 4 Core Parameter Cards (2x2 Grid) -->
@@ -1839,7 +1841,7 @@
 
           if (shiftElem) shiftElem.innerText = "0 Shifts";
           if (wasteElem) wasteElem.innerText = "₹0";
-          if (verdElem) verdElem.innerText = "0 Held • 0 Saturated";
+          const heldReset = document.getElementById("impactHeldNum"); const satReset = document.getElementById("impactSatNum"); if (heldReset) heldReset.innerText = "0"; if (satReset) satReset.innerText = "0";
           if (subTextElem) subTextElem.innerText = "Awaiting initial shift approval";
           if (wasteSubElem) wasteSubElem.innerText = "Calculated from approved reallocations";
           if (verdSubElem) verdSubElem.innerText = "Post-shift receiving capacity monitor";
@@ -2645,10 +2647,22 @@
           const nav = document.getElementById(`nav-${t}`);
           if (t === tabName) {
             el?.classList.remove('hidden');
-            if (nav) nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs text-left cursor-pointer";
+            if (nav) {
+              if (['settings', 'privacy', 'terms'].includes(t)) {
+                nav.className = "group w-full flex items-center px-3 py-1.5 rounded-[6px] text-[12px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] text-left cursor-pointer";
+              } else {
+                nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-semibold bg-[#E5EEFF] text-[#0B1C30] border border-[#BFDBFE] shadow-xs text-left cursor-pointer";
+              }
+            }
           } else {
             el?.classList.add('hidden');
-            if (nav) nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer";
+            if (nav) {
+              if (['settings', 'privacy', 'terms'].includes(t)) {
+                nav.className = "group w-full flex items-center px-3 py-1.5 rounded-[6px] text-[12px] font-medium text-[#64748B] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer";
+              } else {
+                nav.className = "group w-full flex items-center px-3.5 py-2 rounded-[6px] text-[13px] font-medium text-[#45464D] hover:text-[#0B1C30] hover:bg-[#EFF4FF] text-left cursor-pointer";
+              }
+            }
           }
         });
         lucide.createIcons();
@@ -2817,7 +2831,7 @@
 
       if (shiftElem) shiftElem.innerText = `${approvedShiftsCount} Shift${approvedShiftsCount === 1 ? '' : 's'}`;
       if (wasteElem) wasteElem.innerText = `₹${cumulativeWasteAvoided.toLocaleString('en-IN')}`;
-      if (verdElem) verdElem.innerText = `${approvedShiftsCount} Held • 0 Saturated`;
+      const heldElem = document.getElementById("impactHeldNum"); const satElem = document.getElementById("impactSatNum"); if (heldElem) heldElem.innerText = approvedShiftsCount; if (satElem) satElem.innerText = "0";
       if (subTextElem) subTextElem.innerHTML = `<span class="text-[#10B981] font-semibold flex items-center gap-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i> 100% Executed</span> • <span>0 Algorithmic Resets</span>`;
       if (wasteSubElem) wasteSubElem.innerHTML = `<span class="text-[#059669] font-semibold flex items-center gap-0.5"><i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Conserved</span> • <span>Redirected to &lt;₹800 CPA inventory</span>`;
       if (verdSubElem) verdSubElem.innerHTML = `<span class="text-[#059669] font-semibold">Healthy Headroom</span> • <span>Recipient absorbed spend smoothly</span>`;
