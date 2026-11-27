@@ -703,26 +703,8 @@
       <!-- ============================================================== -->
       <div id="tab-recommendations" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD]">
-                Human-in-the-Loop Engine
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-[#0284C7]"></i>
-                Attribution Lag Shield Active (3d lag excluded)
-              </span>
-            </div>
-            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Recommendation Center</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">Conservative, evidence-backed budget shifts. Every action requires human approval.</p>
-          </div>
-          <div class="flex items-center gap-2 self-start md:self-center">
-            <span class="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] text-[#475569] font-medium flex items-center gap-1.5 shadow-2xs">
-              <i data-lucide="check-circle-2" class="w-4 h-4 text-[#10B981]"></i>
-              <span>Strict 25% Shift Limit</span>
-            </span>
-          </div>
+        <div class="pb-3 border-b border-[#E2E8F0]">
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Recommendation Center</h1>
         </div>
 
         <!-- Empty state when in Live mode without connection -->
@@ -1039,26 +1021,8 @@
       <!-- ============================================================== -->
       <div id="tab-impact" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0]">
-                Post-Reallocation Surveillance
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-[#10B981]"></i>
-                Real-time Diminishing Returns Monitor
-              </span>
-            </div>
-            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Impact & Saturation Review</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">7-day post-shift outcome evaluations and cumulative waste avoided.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] text-[#475569] font-medium flex items-center gap-1.5 shadow-2xs">
-              <i data-lucide="shield-check" class="w-4 h-4 text-[#10B981]"></i>
-              <span>Saturation Threshold: ±10% CPA</span>
-            </span>
-          </div>
+        <div class="pb-3 border-b border-[#E2E8F0]">
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Impact & Saturation Review</h1>
         </div>
 
         <!-- KPI Summary Cards -->
@@ -1070,13 +1034,11 @@
                 <i data-lucide="git-merge" class="w-4 h-4"></i>
               </div>
             </div>
-            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight" id="impactShiftCount">1 Shift</p>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight" id="impactShiftCount">0 Shifts</p>
             <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
-              <span class="text-[#10B981] font-semibold flex items-center gap-0.5">
-                <i data-lucide="check" class="w-3.5 h-3.5"></i> 100% Executed
+              <span class="text-[#64748B] font-medium flex items-center gap-0.5" id="impactShiftSubText">
+                Awaiting initial shift approval
               </span>
-              <span>•</span>
-              <span>0 Algorithmic Resets</span>
             </div>
           </div>
 
@@ -1087,13 +1049,9 @@
                 <i data-lucide="wallet" class="w-4 h-4"></i>
               </div>
             </div>
-            <p class="text-[32px] font-bold font-sans mt-2 text-[#059669] tracking-tight" id="impactWasteAvoided">₹26,850</p>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#059669] tracking-tight" id="impactWasteAvoided">₹0</p>
             <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
-              <span class="text-[#059669] font-semibold flex items-center gap-0.5">
-                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Conserved
-              </span>
-              <span>•</span>
-              <span>Redirected to &lt;₹800 CPA inventory</span>
+              <span class="text-[#64748B] font-medium" id="impactWasteSubText">Calculated from approved reallocations</span>
             </div>
           </div>
 
@@ -1104,25 +1062,17 @@
                 <i data-lucide="gauge" class="w-4 h-4"></i>
               </div>
             </div>
-            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight">1 Held • 0 Saturated</p>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight" id="impactSaturationVerdicts">0 Held • 0 Saturated</p>
             <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
-              <span class="text-[#059669] font-semibold">Healthy Headroom</span>
-              <span>•</span>
-              <span>Recipient absorbed spend smoothly</span>
+              <span class="text-[#64748B] font-medium" id="impactSaturationSubText">Post-shift receiving capacity monitor</span>
             </div>
           </div>
         </div>
 
         <!-- Shift Evaluation Ledger -->
         <div class="bg-white border border-[#CBD5E1] rounded-[10px] shadow-xs overflow-hidden space-y-0">
-          <div class="p-5 border-b border-[#E2E8F0] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Shift Evaluation Ledger</h2>
-              <p class="text-[12px] text-[#64748B] mt-0.5">7-day post-shift outcome evaluations tracking receiving campaign CPA stability.</p>
-            </div>
-            <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
-              Automated 7-Day Hold Verification
-            </span>
+          <div class="p-5 border-b border-[#E2E8F0]">
+            <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Shift Evaluation Ledger</h2>
           </div>
 
           <div class="overflow-x-auto">
@@ -1139,28 +1089,9 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-[#F1F5F9]" id="impactTableBody">
-                <tr class="hover:bg-[#F8FAFC] transition-colors">
-                  <td class="py-3.5 px-4 font-semibold text-[#0B1C30] flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
-                    <span>Shift #1 (Day 14)</span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="font-medium text-[#0F172A]">The Star</span>
-                    <span class="block text-[11px] text-[#64748B]">Google Search</span>
-                  </td>
-                  <td class="py-3.5 px-3 font-mono font-medium text-[#475569]">₹782</td>
-                  <td class="py-3.5 px-3 font-mono font-medium text-[#0F172A]">₹815</td>
-                  <td class="py-3.5 px-3">
-                    <span class="text-[#059669] font-semibold bg-[#ECFDF5] px-2 py-0.5 rounded text-[11px]">+4.2%</span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
-                      <i data-lucide="check" class="w-3 h-3 text-[#059669]"></i>
-                      <span>Held (Passed)</span>
-                    </span>
-                  </td>
-                  <td class="py-3.5 px-4 text-[#475569]">
-                    Recipient absorbed budget smoothly without CPA inflation. Eligible for Phase 2 shift.
+                <tr id="impactEmptyRow">
+                  <td colspan="7" class="py-8 text-center text-[#64748B] text-[13px]">
+                    No shifts approved yet. Approve a recommended 25% shift in the Recommendation Center to initiate post-reallocation surveillance.
                   </td>
                 </tr>
               </tbody>
@@ -1184,26 +1115,12 @@
       <!-- ============================================================== -->
       <div id="tab-live-api" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]">
-                Developer API Mode
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="lock" class="w-3.5 h-3.5 text-[#059669]"></i>
-                Client-Side In-Memory Only
-              </span>
-            </div>
-            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Connect Live Ads Account</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">Connect your real Google Ads, Meta Ads, or LinkedIn Campaign API key to track spending and detect waste in real time.</p>
+        <div class="pb-3 border-b border-[#E2E8F0]">
+          <div class="flex items-center gap-1.5 mb-1 text-[12px] text-[#64748B]">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-[#059669]"></i>
+            <span class="font-medium">Client-Side In-Memory Only</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-1.5 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] text-[12px] text-[#065F46] font-semibold flex items-center gap-1.5 shadow-2xs">
-              <i data-lucide="shield-check" class="w-4 h-4 text-[#10B981]"></i>
-              <span>Strictly Read-Only Scope</span>
-            </span>
-          </div>
+          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Connect Live Ads Account</h1>
         </div>
 
         <!-- Connection Card -->
@@ -1533,19 +1450,10 @@
       <!-- ============================================================== -->
       <div id="tab-audit" class="hidden space-y-6">
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E2E8F0]">
           <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1]">
-                Compliance & Accountability
-              </span>
-              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
-                <i data-lucide="shield" class="w-3.5 h-3.5 text-[#059669]"></i>
-                WORM Verified (Write Once, Read Many)
-              </span>
-            </div>
             <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Immutable Audit Ledger</h1>
-            <p class="font-sans text-[13px] text-[#45464D]">Comprehensive record of every human approval, dismissal, and parameter change.</p>
+            <p class="font-sans text-[13px] text-[#45464D] mt-0.5">Comprehensive record of every human approval, dismissal, and parameter change.</p>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="alert('Exporting cryptographically signed Audit Ledger CSV...')" class="px-3.5 py-1.5 bg-white border border-[#CBD5E1] text-[#0F172A] rounded-[6px] text-[12px] font-semibold hover:bg-[#F8FAFC] transition-smooth flex items-center gap-1.5 shadow-2xs cursor-pointer">
@@ -1557,17 +1465,6 @@
 
         <!-- Ledger Table Card -->
         <div class="bg-white border border-[#CBD5E1] rounded-[10px] shadow-xs overflow-hidden">
-          <div class="p-4 border-b border-[#E2E8F0] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F8FAFC]">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]"></span>
-              <span class="text-[12px] font-semibold text-[#0B1C30]">SHA-256 Block Chaining: All Records Verified</span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-[#64748B]">
-              <span>Filter:</span>
-              <span class="px-2 py-0.5 rounded bg-white border border-[#CBD5E1] font-medium text-[#0F172A]">All Actions (2)</span>
-            </div>
-          </div>
-
           <div class="overflow-x-auto">
             <table class="w-full text-left text-[13px]">
               <thead class="bg-[#EFF6FF] text-[#1E3A8A] font-semibold border-b border-[#DBEAFE]">
@@ -1581,65 +1478,9 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-[#F1F5F9]" id="auditTableBody">
-                <tr class="hover:bg-[#F8FAFC] transition-colors">
-                  <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
-                    <span>Nov 13, 2026</span>
-                    <span class="block text-[11px] text-[#94A3B8]">05:20 IST</span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <div class="flex items-center gap-2">
-                      <div class="w-6 h-6 rounded-full bg-[#FEE2E2] text-[#B91C1C] text-[10px] font-bold flex items-center justify-center">
-                        ML
-                      </div>
-                      <span class="font-semibold text-[#0F172A]">Marketing Lead</span>
-                    </div>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="bg-[#FEE2E2] text-[#B91C1C] border border-[#FECACA] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
-                      <i data-lucide="flag" class="w-3 h-3 text-[#DC2626]"></i>
-                      <span>Flagged Waste</span>
-                    </span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="font-semibold text-[#0B1C30]">The Brand Reach</span>
-                    <span class="block text-[11px] text-[#64748B]">YouTube Awareness</span>
-                  </td>
-                  <td class="py-3.5 px-4 text-[#475569]">
-                    Severe conversion deficit (₹45,000 spend with only 2 primary conversions).
-                  </td>
-                  <td class="py-3.5 px-3 text-right">
-                    <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">0x8f2c...4a19</span>
-                  </td>
-                </tr>
-
-                <tr class="hover:bg-[#F8FAFC] transition-colors">
-                  <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
-                    <span>Oct 28, 2026</span>
-                    <span class="block text-[11px] text-[#94A3B8]">14:15 IST</span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <div class="flex items-center gap-2">
-                      <div class="w-6 h-6 rounded-full bg-[#ECFDF5] text-[#059669] text-[10px] font-bold flex items-center justify-center">
-                        MM
-                      </div>
-                      <span class="font-semibold text-[#0F172A]">Marketing Manager</span>
-                    </div>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
-                      <i data-lucide="check" class="w-3 h-3 text-[#059669]"></i>
-                      <span>Approved Shift</span>
-                    </span>
-                  </td>
-                  <td class="py-3.5 px-3">
-                    <span class="font-semibold text-[#0B1C30]">The Slow Burner → The Star</span>
-                    <span class="block text-[11px] text-[#64748B]">Meta Feed → Google Search</span>
-                  </td>
-                  <td class="py-3.5 px-4 text-[#475569]">
-                    Surgical 25% reallocation (₹950/day shift to uncapped conversion inventory).
-                  </td>
-                  <td class="py-3.5 px-3 text-right">
-                    <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">0x3d7b...9e02</span>
+                <tr id="auditEmptyRow">
+                  <td colspan="6" class="py-8 text-center text-[#64748B] text-[13px]">
+                    No audit records generated yet. Records will be cryptographically logged here once you approve or dismiss budget recommendations.
                   </td>
                 </tr>
               </tbody>
@@ -1986,11 +1827,51 @@
 
       if (day === 0) {
           // DAY 0: ABSOLUTE ZERO BASELINE
+          approvedShiftsCount = 0;
+          cumulativeWasteAvoided = 0;
+
+          const shiftElem = document.getElementById("impactShiftCount");
+          const wasteElem = document.getElementById("impactWasteAvoided");
+          const verdElem = document.getElementById("impactSaturationVerdicts");
+          const subTextElem = document.getElementById("impactShiftSubText");
+          const wasteSubElem = document.getElementById("impactWasteSubText");
+          const verdSubElem = document.getElementById("impactSaturationSubText");
+
+          if (shiftElem) shiftElem.innerText = "0 Shifts";
+          if (wasteElem) wasteElem.innerText = "₹0";
+          if (verdElem) verdElem.innerText = "0 Held • 0 Saturated";
+          if (subTextElem) subTextElem.innerText = "Awaiting initial shift approval";
+          if (wasteSubElem) wasteSubElem.innerText = "Calculated from approved reallocations";
+          if (verdSubElem) verdSubElem.innerText = "Post-shift receiving capacity monitor";
+
+          const impactTable = document.getElementById("impactTableBody");
+          if (impactTable) {
+            impactTable.innerHTML = `
+              <tr id="impactEmptyRow">
+                <td colspan="7" class="py-8 text-center text-[#64748B] text-[13px]">
+                  No shifts approved yet. Approve a recommended 25% shift in the Recommendation Center to initiate post-reallocation surveillance.
+                </td>
+              </tr>
+            `;
+          }
+
+          const auditTable = document.getElementById("auditTableBody");
+          if (auditTable) {
+            auditTable.innerHTML = `
+              <tr id="auditEmptyRow">
+                <td colspan="6" class="py-8 text-center text-[#64748B] text-[13px]">
+                  No audit records generated yet. Records will be cryptographically logged here once you approve or dismiss budget recommendations.
+                </td>
+              </tr>
+            `;
+          }
+
           const cSlow = document.getElementById("recCardSlowBurner");
           const cBrand = document.getElementById("recCardBrandReach");
           if (cSlow) { delete cSlow.dataset.dismissed; delete cSlow.dataset.approved; }
           if (cBrand) { delete cBrand.dataset.dismissed; delete cBrand.dataset.approved; }
-        simulatorCampaigns = baseCampaignConfigs.map(c => ({
+
+          simulatorCampaigns = baseCampaignConfigs.map(c => ({
           id: c.id,
           name: c.name,
           channel: c.channel,
@@ -2901,34 +2782,213 @@
       document.getElementById("improvementDrawer").classList.add("translate-x-full");
     }
 
+    let approvedShiftsCount = 0;
+    let cumulativeWasteAvoided = 0;
+
+    function generateHash() {
+      const chars = '0123456789abcdef';
+      let h1 = '', h2 = '';
+      for (let i = 0; i < 4; i++) h1 += chars[Math.floor(Math.random() * chars.length)];
+      for (let i = 0; i < 4; i++) h2 += chars[Math.floor(Math.random() * chars.length)];
+      return `0x${h1}...${h2}`;
+    }
+
     function approveShift(campId) {
-        const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
-        if (card) {
-          card.dataset.approved = "true";
-          card.classList.add("hidden");
-        }
-        updateRecCardVisibility();
+      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+      if (card) {
+        card.dataset.approved = "true";
+        card.classList.add("hidden");
+      }
+      updateRecCardVisibility();
 
-        const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
-        const shiftAmt = campId === 'awareness' ? "₹750/day" : "₹950/day";
-        getActiveAlerts().unshift({ level: "info", msg: `Shift Approved: ${shiftAmt} reallocated from '${campName}' to 'The Star'.`, time: `Day ${currentDay}` });
-        renderAlerts();
-        alert(`Shift approved! Reallocated ${shiftAmt} from ${campName} to 'The Star'. Check the 'Impact & Saturation' tab.`);
-        switchTab('impact');
+      approvedShiftsCount++;
+      const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
+      const shiftAmt = campId === 'awareness' ? "₹750/day" : "₹950/day";
+      const wasteAvoidedAddition = campId === 'awareness' ? 18750 : 14250;
+      cumulativeWasteAvoided += wasteAvoidedAddition;
+
+      // Update Impact & Saturation KPIs
+      const shiftElem = document.getElementById("impactShiftCount");
+      const wasteElem = document.getElementById("impactWasteAvoided");
+      const verdElem = document.getElementById("impactSaturationVerdicts");
+      const subTextElem = document.getElementById("impactShiftSubText");
+      const wasteSubElem = document.getElementById("impactWasteSubText");
+      const verdSubElem = document.getElementById("impactSaturationSubText");
+
+      if (shiftElem) shiftElem.innerText = `${approvedShiftsCount} Shift${approvedShiftsCount === 1 ? '' : 's'}`;
+      if (wasteElem) wasteElem.innerText = `₹${cumulativeWasteAvoided.toLocaleString('en-IN')}`;
+      if (verdElem) verdElem.innerText = `${approvedShiftsCount} Held • 0 Saturated`;
+      if (subTextElem) subTextElem.innerHTML = `<span class="text-[#10B981] font-semibold flex items-center gap-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i> 100% Executed</span> • <span>0 Algorithmic Resets</span>`;
+      if (wasteSubElem) wasteSubElem.innerHTML = `<span class="text-[#059669] font-semibold flex items-center gap-0.5"><i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Conserved</span> • <span>Redirected to &lt;₹800 CPA inventory</span>`;
+      if (verdSubElem) verdSubElem.innerHTML = `<span class="text-[#059669] font-semibold">Healthy Headroom</span> • <span>Recipient absorbed spend smoothly</span>`;
+
+      // Prepend to Impact & Saturation Ledger Table
+      const impactTable = document.getElementById("impactTableBody");
+      const emptyRow = document.getElementById("impactEmptyRow");
+      if (emptyRow) emptyRow.remove();
+
+      if (impactTable) {
+        const newRow = document.createElement("tr");
+        newRow.className = "hover:bg-[#F8FAFC] transition-colors";
+        if (campId === 'slow') {
+          newRow.innerHTML = `
+            <td class="py-3.5 px-4 font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+              <span>Shift #${approvedShiftsCount} (Day ${currentDay})</span>
+            </td>
+            <td class="py-3.5 px-3">
+              <span class="font-medium text-[#0F172A]">The Star</span>
+              <span class="block text-[11px] text-[#64748B]">Google Search</span>
+            </td>
+            <td class="py-3.5 px-3 font-mono font-medium text-[#475569]">₹782</td>
+            <td class="py-3.5 px-3 font-mono font-medium text-[#0F172A]">₹815</td>
+            <td class="py-3.5 px-3">
+              <span class="text-[#059669] font-semibold bg-[#ECFDF5] px-2 py-0.5 rounded text-[11px]">+4.2%</span>
+            </td>
+            <td class="py-3.5 px-3">
+              <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-[#059669]"></i>
+                <span>Held (Passed)</span>
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-[#475569]">
+              Reallocated 25% from The Slow Burner. Recipient absorbed budget smoothly.
+            </td>
+          `;
+        } else {
+          newRow.innerHTML = `
+            <td class="py-3.5 px-4 font-semibold text-[#0B1C30] flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+              <span>Shift #${approvedShiftsCount} (Day ${currentDay})</span>
+            </td>
+            <td class="py-3.5 px-3">
+              <span class="font-medium text-[#0F172A]">The Star</span>
+              <span class="block text-[11px] text-[#64748B]">Google Search</span>
+            </td>
+            <td class="py-3.5 px-3 font-mono font-medium text-[#475569]">₹815</td>
+            <td class="py-3.5 px-3 font-mono font-medium text-[#0F172A]">₹832</td>
+            <td class="py-3.5 px-3">
+              <span class="text-[#059669] font-semibold bg-[#ECFDF5] px-2 py-0.5 rounded text-[11px]">+2.1%</span>
+            </td>
+            <td class="py-3.5 px-3">
+              <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-[#059669]"></i>
+                <span>Held (Passed)</span>
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-[#475569]">
+              Reallocated reach budget into high-intent search inventory. Stable CPA confirmed.
+            </td>
+          `;
+        }
+        impactTable.prepend(newRow);
       }
 
-      function dismissShift(campId) {
-        const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
-        if (card) {
-          card.dataset.dismissed = "true";
-          card.classList.add("hidden");
-        }
-        updateRecCardVisibility();
-        getActiveAlerts().unshift({ level: "info", msg: "Recommendation dismissed by user.", time: `Day ${currentDay}` });
-        renderAlerts();
+      // Prepend to Audit Ledger Table
+      const auditTable = document.getElementById("auditTableBody");
+      const auditEmpty = document.getElementById("auditEmptyRow");
+      if (auditEmpty) auditEmpty.remove();
+
+      if (auditTable) {
+        const auditRow = document.createElement("tr");
+        auditRow.className = "hover:bg-[#F8FAFC] transition-colors";
+        auditRow.innerHTML = `
+          <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
+            <span>${getSimDateString(currentDay)}, 2026</span>
+            <span class="block text-[11px] text-[#94A3B8]">Simulation Day ${currentDay}</span>
+          </td>
+          <td class="py-3.5 px-3">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-[#ECFDF5] text-[#059669] text-[10px] font-bold flex items-center justify-center">
+                MM
+              </div>
+              <span class="font-semibold text-[#0F172A]">Marketing Manager</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-3">
+            <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-[#059669]"></i>
+              <span>Approved Shift</span>
+            </span>
+          </td>
+          <td class="py-3.5 px-3">
+            <span class="font-semibold text-[#0B1C30]">${campName} → The Star</span>
+            <span class="block text-[11px] text-[#64748B]">25% Reallocation (${shiftAmt})</span>
+          </td>
+          <td class="py-3.5 px-4 text-[#475569]">
+            Approved surgical 25% shift (${shiftAmt}). Diverted wasteful spend into high-conversion inventory.
+          </td>
+          <td class="py-3.5 px-3 text-right">
+            <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">${generateHash()}</span>
+          </td>
+        `;
+        auditTable.prepend(auditRow);
       }
 
-      function snoozeShift(campId) {
+      getActiveAlerts().unshift({ level: "info", msg: `Shift Approved: ${shiftAmt} reallocated from '${campName}' to 'The Star'.`, time: `Day ${currentDay}` });
+      renderAlerts();
+      lucide.createIcons();
+      alert(`Shift approved! Reallocated ${shiftAmt} from ${campName} to 'The Star'. Check the 'Impact & Saturation' and 'Audit Ledger' tabs.`);
+      switchTab('impact');
+    }
+
+    function dismissShift(campId) {
+      const card = campId === 'awareness' ? document.getElementById("recCardBrandReach") : document.getElementById("recCardSlowBurner");
+      if (card) {
+        card.dataset.dismissed = "true";
+        card.classList.add("hidden");
+      }
+      updateRecCardVisibility();
+
+      const campName = campId === 'awareness' ? "The Brand Reach (YouTube)" : "The Slow Burner";
+
+      // Log dismissal to Audit Ledger
+      const auditTable = document.getElementById("auditTableBody");
+      const auditEmpty = document.getElementById("auditEmptyRow");
+      if (auditEmpty) auditEmpty.remove();
+
+      if (auditTable) {
+        const auditRow = document.createElement("tr");
+        auditRow.className = "hover:bg-[#F8FAFC] transition-colors";
+        auditRow.innerHTML = `
+          <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
+            <span>${getSimDateString(currentDay)}, 2026</span>
+            <span class="block text-[11px] text-[#94A3B8]">Simulation Day ${currentDay}</span>
+          </td>
+          <td class="py-3.5 px-3">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-[#FEE2E2] text-[#B91C1C] text-[10px] font-bold flex items-center justify-center">
+                ML
+              </div>
+              <span class="font-semibold text-[#0F172A]">Marketing Lead</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-3">
+            <span class="bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+              <i data-lucide="x" class="w-3.5 h-3.5 text-[#64748B]"></i>
+              <span>Dismissed Shift</span>
+            </span>
+          </td>
+          <td class="py-3.5 px-3">
+            <span class="font-semibold text-[#0B1C30]">${campName}</span>
+            <span class="block text-[11px] text-[#64748B]">Recommendation Dismissal</span>
+          </td>
+          <td class="py-3.5 px-4 text-[#475569]">
+            Recommendation dismissed by user. Campaign budget preserved at current level.
+          </td>
+          <td class="py-3.5 px-3 text-right">
+            <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">${generateHash()}</span>
+          </td>
+        `;
+        auditTable.prepend(auditRow);
+      }
+
+      getActiveAlerts().unshift({ level: "info", msg: "Recommendation dismissed by user.", time: `Day ${currentDay}` });
+      renderAlerts();
+      lucide.createIcons();
+    }
+
+    function snoozeShift(campId) {
       getActiveAlerts().unshift({ level: "info", msg: "Recommendation snoozed for 7 days.", time: `Day ${currentDay}` });
       renderAlerts();
       alert("Recommendation snoozed for 7 days.");
