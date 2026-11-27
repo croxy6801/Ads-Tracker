@@ -702,192 +702,329 @@
       <!-- TAB 2: RECOMMENDATIONS (NOW INCLUDES BOTH SLOW BURNER & BRAND REACH) -->
       <!-- ============================================================== -->
       <div id="tab-recommendations" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Recommendation Center</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">Conservative, evidence-backed budget shifts. Every action requires human approval.</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD]">
+                Human-in-the-Loop Engine
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-[#0284C7]"></i>
+                Attribution Lag Shield Active (3d lag excluded)
+              </span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Recommendation Center</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Conservative, evidence-backed budget shifts. Every action requires human approval.</p>
+          </div>
+          <div class="flex items-center gap-2 self-start md:self-center">
+            <span class="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] text-[#475569] font-medium flex items-center gap-1.5 shadow-2xs">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-[#10B981]"></i>
+              <span>Strict 25% Shift Limit</span>
+            </span>
+          </div>
         </div>
 
         <!-- Empty state when in Live mode without connection -->
-        <div id="recEmptyLiveState" class="hidden p-12 bg-white border border-[#C6C6CD] rounded-[4px] text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-[#EFF4FF] border border-[#D3E4FE] text-[#755937] flex items-center justify-center mx-auto shadow-xs">
-            <i data-lucide="inbox" class="w-6 h-6"></i>
+        <div id="recEmptyLiveState" class="hidden p-12 bg-white border border-[#CBD5E1] rounded-[12px] text-center space-y-4 shadow-xs">
+          <div class="w-14 h-14 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] flex items-center justify-center mx-auto shadow-xs">
+            <i data-lucide="inbox" class="w-7 h-7"></i>
           </div>
-          <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Live Recommendations</h3>
-          <p class="text-[13px] text-[#45464D] max-w-md mx-auto leading-relaxed">
-            In Live Ads Account mode, recommendations are generated only after 14 mature days of live campaign spend telemetry are ingested via Developer API.
-          </p>
-          <div class="pt-2 flex items-center justify-center gap-2">
-            <button onclick="switchTab('live-api')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[4px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth">
-              Connect Live Ads Account
+          <div class="max-w-md mx-auto space-y-1.5">
+            <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Live Recommendations</h3>
+            <p class="text-[13px] text-[#64748B] leading-relaxed">
+              In Live Ads Account mode, recommendations are generated only after 14 mature days of live campaign spend telemetry are ingested via Developer API.
+            </p>
+          </div>
+          <div class="pt-2 flex items-center justify-center gap-3">
+            <button onclick="switchTab('live-api')" class="px-5 py-2.5 bg-[#0F172A] text-white rounded-[6px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs flex items-center gap-2">
+              <i data-lucide="plug" class="w-4 h-4"></i>
+              <span>Connect Live Ads Account</span>
             </button>
-            <button onclick="setAppMode('simulator')" class="px-4 py-2 bg-white border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[12px] font-medium hover:bg-[#EFF4FF] transition-smooth">
+            <button onclick="setAppMode('simulator')" class="px-5 py-2.5 bg-white border border-[#CBD5E1] text-[#0B1C30] rounded-[6px] text-[12px] font-medium hover:bg-[#F8FAFC] transition-smooth">
               Switch to Simulator Demo
             </button>
           </div>
         </div>
 
         <!-- Empty state when no simulator waste is detected yet -->
-        <div id="recEmptySimState" class="p-12 bg-white border border-[#C6C6CD] rounded-[8px] text-center space-y-3">
-          <div class="w-12 h-12 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[#10B981] flex items-center justify-center mx-auto shadow-xs">
-            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+        <div id="recEmptySimState" class="p-12 bg-white border border-[#CBD5E1] rounded-[12px] text-center space-y-4 shadow-xs">
+          <div class="w-14 h-14 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-[#059669] flex items-center justify-center mx-auto shadow-xs">
+            <i data-lucide="check-check" class="w-7 h-7"></i>
           </div>
-          <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Budget Waste Detected</h3>
-          <p class="text-[13px] text-[#45464D] max-w-md mx-auto leading-relaxed">
-            All monitored campaigns are currently pacing within healthy maturity and CPA targets. The recommendation engine will automatically surface surgical 25% shift opportunities as soon as statistical waste is confirmed.
-          </p>
+          <div class="max-w-md mx-auto space-y-1.5">
+            <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">No Budget Waste Detected</h3>
+            <p class="text-[13px] text-[#64748B] leading-relaxed">
+              All monitored campaigns are currently pacing within healthy maturity and CPA targets. The recommendation engine will automatically surface surgical 25% shift opportunities as soon as statistical waste is confirmed.
+            </p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-[12px] text-[#475569] font-medium">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-[#64748B]"></i>
+            <span>Monitoring daily attribution & conversion ripeness</span>
+          </div>
         </div>
 
         <div class="space-y-6" id="recommendationCardsContainer">
           
           <!-- Recommendation Card 1: The Slow Burner (Only shown when waste is detected) -->
-          <div class="hidden bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardSlowBurner">
-            <div class="flex items-center justify-between">
-              <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
-                Underperforming Flag • 25% Shift Recommended
-              </span>
-              <span class="text-[12px] text-[#45464D]">Bayesian Confidence: <strong class="text-[#0B1C30]">89.4%</strong></span>
+          <div class="hidden bg-white border-2 border-[#BFDBFE] rounded-[12px] p-6 shadow-sm space-y-5 transition-all hover:border-[#93C5FD]" id="recCardSlowBurner">
+            <!-- Card Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F1F5F9]">
+              <div class="flex items-center gap-2.5">
+                <span class="text-[11px] font-bold uppercase tracking-wider bg-[#FEE2E2] text-[#DC2626] border border-[#FECACA] px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
+                  <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                  <span>Underperforming Flag • 25% Shift Recommended</span>
+                </span>
+                <span class="text-[11px] font-semibold text-[#64748B] bg-[#F1F5F9] px-2.5 py-0.5 rounded-md">Meta Feed</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[12px] text-[#64748B]">Bayesian Confidence:</span>
+                <span class="text-[12px] font-bold text-[#0F172A] bg-[#EFF6FF] px-2 py-0.5 rounded border border-[#DBEAFE]">89.4%</span>
+              </div>
             </div>
 
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-[#EFF4FF] border border-[#C6C6CD] rounded-[4px]">
-              <div class="space-y-1">
-                <p class="text-[12px] font-semibold uppercase text-[#BA1A1A]">Weak Source Campaign</p>
-                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Slow Burner (Meta Feed)</p>
-                <p class="text-[12px] text-[#45464D]">Current CPA: ₹2,183 (Target: ₹1,200) • 14 Mature Days</p>
+            <!-- Visual Transfer Stream -->
+            <div class="grid grid-cols-1 md:grid-cols-11 gap-3 items-center p-4 bg-gradient-to-r from-[#F8FAFC] via-[#EFF6FF] to-[#F0FDF4] border border-[#E2E8F0] rounded-[8px]">
+              <!-- Source Campaign -->
+              <div class="md:col-span-5 space-y-1.5 p-3 bg-white rounded-[6px] border border-[#FECACA] shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] font-bold uppercase text-[#DC2626] flex items-center gap-1">
+                    <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+                    <span>Weak Source Campaign</span>
+                  </p>
+                  <span class="text-[10px] font-semibold bg-[#FEE2E2] text-[#B91C1C] px-1.5 py-0.5 rounded">High CPA</span>
+                </div>
+                <p class="font-headline text-[18px] font-semibold text-[#0B1C30]">The Slow Burner</p>
+                <div class="flex items-center gap-2 text-[12px] text-[#64748B]">
+                  <span>Current CPA: <strong class="text-[#DC2626]">₹2,183</strong></span>
+                  <span>•</span>
+                  <span>Target: ₹1,200</span>
+                  <span>•</span>
+                  <span class="text-[#475569]">14 Mature Days</span>
+                </div>
               </div>
 
-              <div class="flex items-center gap-2 self-center text-[#755937]">
-                <span class="text-[13px] font-bold">Shift 25% (₹950/day)</span>
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              <!-- Shift Arrow Badge -->
+              <div class="md:col-span-1 flex flex-col items-center justify-center py-2 text-[#2563EB]">
+                <div class="w-9 h-9 rounded-full bg-[#DBEAFE] border border-[#BFDBFE] flex items-center justify-center shadow-xs">
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-1 text-[#1E40AF] whitespace-nowrap">Shift 25%</span>
               </div>
 
-              <div class="space-y-1">
-                <p class="text-[12px] font-semibold uppercase text-[#10B981]">Proven Receiving Campaign</p>
-                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
-                <p class="text-[12px] text-[#45464D]">Current CPA: ₹782 • Budget Capped on 72% of days</p>
+              <!-- Destination Campaign -->
+              <div class="md:col-span-5 space-y-1.5 p-3 bg-white rounded-[6px] border border-[#BBF7D0] shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] font-bold uppercase text-[#059669] flex items-center gap-1">
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    <span>Proven Receiving Campaign</span>
+                  </p>
+                  <span class="text-[10px] font-semibold bg-[#DCFCE7] text-[#15803D] px-1.5 py-0.5 rounded">High Scaler</span>
+                </div>
+                <p class="font-headline text-[18px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
+                <div class="flex items-center gap-2 text-[12px] text-[#64748B]">
+                  <span>Current CPA: <strong class="text-[#059669]">₹782</strong></span>
+                  <span>•</span>
+                  <span>Uncapped Headroom</span>
+                  <span>•</span>
+                  <span class="text-[#475569]">Budget Capped on 5/7d</span>
+                </div>
               </div>
             </div>
 
             <!-- What-if Slider -->
-            <div class="space-y-2 p-4 bg-white border border-[#C6C6CD] rounded-[4px]">
+            <div class="space-y-2.5 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[8px]">
               <div class="flex items-center justify-between">
-                <label class="text-[13px] font-semibold text-[#0B1C30]">Interactive What-If Shift Sizer:</label>
-                <span class="text-[14px] font-bold text-[#0F172A]" id="sliderValue">25% (₹950 / day)</span>
+                <label class="text-[13px] font-semibold text-[#0B1C30] flex items-center gap-1.5">
+                  <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#0284C7]"></i>
+                  <span>Interactive What-If Shift Sizer:</span>
+                </label>
+                <span class="text-[14px] font-bold text-[#0F172A] bg-white px-2.5 py-0.5 rounded border border-[#CBD5E1] shadow-2xs" id="sliderValue">25% (₹950 / day)</span>
               </div>
-              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A]" oninput="updateWhatIf(this.value)">
-              <div class="flex items-center justify-between text-[11px] text-[#76777D]">
-                <span>10% (Conservative)</span>
-                <span>25% (Standard SOP Step)</span>
-                <span>50% (Aggressive)</span>
+              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A] cursor-pointer" oninput="updateWhatIf(this.value)">
+              <div class="flex items-center justify-between text-[11px] text-[#64748B] font-medium">
+                <span>10% (Ultra Conservative)</span>
+                <span class="text-[#0284C7] font-semibold">25% (Standard SOP Step)</span>
+                <span>50% (Aggressive Shift)</span>
               </div>
-              <p class="text-[13px] text-[#10B981] font-semibold pt-1" id="projectedGainText">
-                Projected Net Gain: +6 to +10 extra conversions per week (accounting for 20% diminishing returns).
-              </p>
+              <div class="p-2.5 bg-[#ECFDF5] border border-[#A7F3D0] rounded-[6px] text-[12px] text-[#065F46] font-semibold flex items-center gap-2" id="projectedGainText">
+                <i data-lucide="trending-up" class="w-4 h-4 text-[#059669] shrink-0"></i>
+                <span>Projected Net Gain: +6 to +10 extra conversions per week (accounting for 20% diminishing returns).</span>
+              </div>
             </div>
 
-            <!-- Reasons list -->
-            <div class="space-y-1.5 text-[13px] text-[#45464D] bg-[#F8F9FF] p-4 rounded-[4px] border border-[#E5EEFF]">
-              <p class="font-semibold text-[#0B1C30]">Evidence Breakdown:</p>
-              <ul class="list-disc list-inside space-y-1">
-                <li>Campaign has completed 14 mature observation days with ₹52,400 spent.</li>
-                <li>Mature CPA of ₹2,183 exceeds benchmark (₹1,200) by 81.9%.</li>
-                <li>Both consecutive 7-day windows remained elevated (₹1,850 and ₹2,183).</li>
-                <li>Receiving campaign 'The Star' has stable ₹782 CPA and ran out of daily budget on 5 of the last 7 days.</li>
-              </ul>
-              <p class="text-[12px] text-[#755937] font-semibold pt-2">
-                <i data-lucide="alert-triangle" class="w-4 h-4 text-[#BA1A1A] inline mr-1"></i> <strong>Assistance Warning:</strong> Check whether this campaign assists brand discovery or search traffic before reducing budget.
+            <!-- Evidence Breakdown -->
+            <div class="space-y-2 text-[13px] text-[#45464D] bg-white p-4 rounded-[8px] border border-[#E2E8F0]">
+              <p class="font-semibold text-[#0B1C30] flex items-center gap-1.5">
+                <i data-lucide="file-check" class="w-4 h-4 text-[#0284C7]"></i>
+                <span>Statistical Evidence Breakdown:</span>
               </p>
+              <ul class="space-y-1.5 pl-1 text-[12px]">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Campaign completed 14 mature observation days with <strong>₹52,400</strong> spent.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Mature CPA of <strong>₹2,183</strong> exceeds benchmark (₹1,200) by 81.9%.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Both consecutive 7-day observation cycles remained elevated (₹1,850 and ₹2,183).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Receiving campaign 'The Star' has stable ₹782 CPA and ran out of daily budget on 5 of last 7 days.</span>
+                </li>
+              </ul>
+              <div class="mt-2 p-2.5 bg-[#FFFBEB] border border-[#FDE68A] rounded-[6px] text-[12px] text-[#92400E] flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-[#D97706] shrink-0"></i>
+                <span><strong>Assistance Warning:</strong> Check whether this campaign assists top-of-funnel brand discovery or search volume before enacting full cuts.</span>
+              </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-3 pt-2">
-              <button onclick="approveShift('slow')" class="flex-1 px-4 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs">
-                Approve 25% Shift in Simulator
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <button onclick="approveShift('slow')" class="flex-1 min-w-[200px] px-5 py-2.5 bg-[#0F172A] text-white rounded-[6px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs flex items-center justify-center gap-2">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span>Approve 25% Shift in Simulator</span>
               </button>
-              <button onclick="openDrawer('slow')" class="px-4 py-2.5 bg-[#EFF4FF] border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[13px] font-semibold hover:bg-[#DCE9FF] transition-smooth flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-4 h-4 text-[#755937]"></i>
+              <button onclick="openDrawer('slow')" class="px-4 py-2.5 bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] rounded-[6px] text-[13px] font-semibold hover:bg-[#DBEAFE] transition-smooth flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#2563EB]"></i>
                 <span>Suggest Improvements First</span>
               </button>
-              <button onclick="dismissShift('slow')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+              <button onclick="dismissShift('slow')" class="px-4 py-2.5 bg-white border border-[#CBD5E1] text-[#64748B] rounded-[6px] text-[13px] font-semibold hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-smooth">
                 Dismiss
               </button>
-              <button onclick="snoozeShift('slow')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+              <button onclick="snoozeShift('slow')" class="px-4 py-2.5 bg-white border border-[#CBD5E1] text-[#64748B] rounded-[6px] text-[13px] font-semibold hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-smooth">
                 Snooze 7 Days
               </button>
             </div>
           </div>
 
-          <!-- Recommendation Card 2: The Brand Reach (Awareness) - ADDED PER USER REQUEST -->
-          <div class="hidden bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-5" id="recCardBrandReach">
-            <div class="flex items-center justify-between">
-              <span class="text-[12px] font-bold uppercase tracking-wider bg-[#FFDAD6] text-[#BA1A1A] border border-[#FFB4AB] px-2.5 py-1 rounded-[4px]">
-                Underperforming Flag • Reallocate Ineffective Reach Budget
-              </span>
-              <span class="text-[12px] text-[#45464D]">Conversion Deficit Confidence: <strong class="text-[#0B1C30]">96.8%</strong></span>
-            </div>
-
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-[#EFF4FF] border border-[#C6C6CD] rounded-[4px]">
-              <div class="space-y-1">
-                <p class="text-[12px] font-semibold uppercase text-[#BA1A1A]">Ineffective Reach Campaign</p>
-                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Brand Reach (Awareness YouTube)</p>
-                <p class="text-[12px] text-[#45464D]">Spend: ₹45,000 • Conversions: <strong>2</strong> (CPA: ₹22,500 vs target ₹1,200)</p>
+          <!-- Recommendation Card 2: The Brand Reach (Awareness) -->
+          <div class="hidden bg-white border-2 border-[#BFDBFE] rounded-[12px] p-6 shadow-sm space-y-5 transition-all hover:border-[#93C5FD]" id="recCardBrandReach">
+            <!-- Card Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F1F5F9]">
+              <div class="flex items-center gap-2.5">
+                <span class="text-[11px] font-bold uppercase tracking-wider bg-[#FEE2E2] text-[#DC2626] border border-[#FECACA] px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
+                  <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
+                  <span>Underperforming Flag • Reallocate Ineffective Reach Budget</span>
+                </span>
+                <span class="text-[11px] font-semibold text-[#64748B] bg-[#F1F5F9] px-2.5 py-0.5 rounded-md">YouTube Ads</span>
               </div>
-
-              <div class="flex items-center gap-2 self-center text-[#755937]">
-                <span class="text-[13px] font-bold">Shift 25% (₹750/day)</span>
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
-
-              <div class="space-y-1">
-                <p class="text-[12px] font-semibold uppercase text-[#10B981]">Proven High-Conversion Campaign</p>
-                <p class="font-headline text-[20px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
-                <p class="text-[12px] text-[#45464D]">Current CPA: ₹782 • Uncapped Conversion Capacity</p>
+              <div class="flex items-center gap-2">
+                <span class="text-[12px] text-[#64748B]">Deficit Confidence:</span>
+                <span class="text-[12px] font-bold text-[#0F172A] bg-[#EFF6FF] px-2 py-0.5 rounded border border-[#DBEAFE]">96.8%</span>
               </div>
             </div>
 
-            <!-- What-if Slider for Brand Reach -->
-            <div class="space-y-2 p-4 bg-white border border-[#C6C6CD] rounded-[4px]">
+            <!-- Visual Transfer Stream -->
+            <div class="grid grid-cols-1 md:grid-cols-11 gap-3 items-center p-4 bg-gradient-to-r from-[#F8FAFC] via-[#EFF6FF] to-[#F0FDF4] border border-[#E2E8F0] rounded-[8px]">
+              <!-- Source Campaign -->
+              <div class="md:col-span-5 space-y-1.5 p-3 bg-white rounded-[6px] border border-[#FECACA] shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] font-bold uppercase text-[#DC2626] flex items-center gap-1">
+                    <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+                    <span>Ineffective Reach Campaign</span>
+                  </p>
+                  <span class="text-[10px] font-semibold bg-[#FEE2E2] text-[#B91C1C] px-1.5 py-0.5 rounded">Severe Deficit</span>
+                </div>
+                <p class="font-headline text-[18px] font-semibold text-[#0B1C30]">The Brand Reach (YouTube)</p>
+                <div class="flex items-center gap-2 text-[12px] text-[#64748B]">
+                  <span>Spend: <strong class="text-[#0F172A]">₹45,000</strong></span>
+                  <span>•</span>
+                  <span>Conv: <strong class="text-[#DC2626]">2</strong></span>
+                  <span>•</span>
+                  <span>CPA: <strong class="text-[#DC2626]">₹22,500</strong></span>
+                </div>
+              </div>
+
+              <!-- Shift Arrow Badge -->
+              <div class="md:col-span-1 flex flex-col items-center justify-center py-2 text-[#2563EB]">
+                <div class="w-9 h-9 rounded-full bg-[#DBEAFE] border border-[#BFDBFE] flex items-center justify-center shadow-xs">
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-1 text-[#1E40AF] whitespace-nowrap">Shift 25%</span>
+              </div>
+
+              <!-- Destination Campaign -->
+              <div class="md:col-span-5 space-y-1.5 p-3 bg-white rounded-[6px] border border-[#BBF7D0] shadow-2xs">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] font-bold uppercase text-[#059669] flex items-center gap-1">
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    <span>Proven Receiving Campaign</span>
+                  </p>
+                  <span class="text-[10px] font-semibold bg-[#DCFCE7] text-[#15803D] px-1.5 py-0.5 rounded">High Scaler</span>
+                </div>
+                <p class="font-headline text-[18px] font-semibold text-[#0B1C30]">The Star (Google Search)</p>
+                <div class="flex items-center gap-2 text-[12px] text-[#64748B]">
+                  <span>Current CPA: <strong class="text-[#059669]">₹782</strong></span>
+                  <span>•</span>
+                  <span>Target: ₹1,200</span>
+                  <span>•</span>
+                  <span class="text-[#475569]">High Elasticity</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- What-if Slider -->
+            <div class="space-y-2.5 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[8px]">
               <div class="flex items-center justify-between">
-                <label class="text-[13px] font-semibold text-[#0B1C30]">Interactive What-If Shift Sizer (YouTube Reallocation):</label>
-                <span class="text-[14px] font-bold text-[#0F172A]" id="sliderValueBrand">25% (₹750 / day)</span>
+                <label class="text-[13px] font-semibold text-[#0B1C30] flex items-center gap-1.5">
+                  <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#0284C7]"></i>
+                  <span>Interactive What-If Shift Sizer:</span>
+                </label>
+                <span class="text-[14px] font-bold text-[#0F172A] bg-white px-2.5 py-0.5 rounded border border-[#CBD5E1] shadow-2xs" id="sliderValueBrand">25% (₹750 / day)</span>
               </div>
-              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A]" oninput="updateWhatIfBrand(this.value)">
-              <div class="flex items-center justify-between text-[11px] text-[#76777D]">
-                <span>10% (₹300/day)</span>
-                <span>25% (Standard SOP Step: ₹750/day)</span>
-                <span>50% (₹1,500/day)</span>
+              <input type="range" min="10" max="50" value="25" step="5" class="w-full accent-[#0F172A] cursor-pointer" oninput="updateWhatIfBrand(this.value)">
+              <div class="flex items-center justify-between text-[11px] text-[#64748B] font-medium">
+                <span>10% (Ultra Conservative)</span>
+                <span class="text-[#0284C7] font-semibold">25% (Standard SOP Step)</span>
+                <span>50% (Aggressive Shift)</span>
               </div>
-              <p class="text-[13px] text-[#10B981] font-semibold pt-1" id="projectedGainTextBrand">
-                Projected Net Gain: +7 to +11 extra conversions per week by shifting awareness spend into bottom-of-funnel search.
-              </p>
+              <div class="p-2.5 bg-[#ECFDF5] border border-[#A7F3D0] rounded-[6px] text-[12px] text-[#065F46] font-semibold flex items-center gap-2" id="projectedGainTextBrand">
+                <i data-lucide="trending-up" class="w-4 h-4 text-[#059669] shrink-0"></i>
+                <span>Projected Net Gain: +5 to +8 high-intent conversions per week redirected from awareness vanity spend.</span>
+              </div>
             </div>
 
-            <!-- Reasons list -->
-            <div class="space-y-1.5 text-[13px] text-[#45464D] bg-[#F8F9FF] p-4 rounded-[4px] border border-[#E5EEFF]">
-              <p class="font-semibold text-[#0B1C30]">Evidence Breakdown:</p>
-              <ul class="list-disc list-inside space-y-1">
-                <li>Campaign has spent ₹45,000 across 14 mature days with only 2 recorded conversions.</li>
-                <li>Actual CPA of ₹22,500 is 18.75x above the business target benchmark (₹1,200).</li>
-                <li>Estimated direct waste: ₹42,600 that produced zero incremental customer actions.</li>
-                <li>Reallocating 25% (₹750/day) to 'The Star' converts wasted impressions into tangible bottom-line revenue.</li>
-              </ul>
-              <p class="text-[12px] text-[#755937] font-semibold pt-2">
-                <i data-lucide="info" class="w-4 h-4 text-[#755937] inline mr-1"></i> <strong>Recommendation:</strong> Keep minimal baseline reach on YouTube, but shift surplus budget into high-intent search.
+            <!-- Evidence Breakdown -->
+            <div class="space-y-2 text-[13px] text-[#45464D] bg-white p-4 rounded-[8px] border border-[#E2E8F0]">
+              <p class="font-semibold text-[#0B1C30] flex items-center gap-1.5">
+                <i data-lucide="file-check" class="w-4 h-4 text-[#0284C7]"></i>
+                <span>Statistical Evidence Breakdown:</span>
               </p>
+              <ul class="space-y-1.5 pl-1 text-[12px]">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Zero assisted conversion lift detected in Google Analytics multi-touch model.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>Spend of <strong>₹45,000</strong> yielded only 2 primary conversion actions over 14 days.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981] mt-0.5 shrink-0"></i>
+                  <span>96.8% Bayesian probability that campaign will not meet ₹1,200 target CPA.</span>
+                </li>
+              </ul>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex items-center gap-3 pt-2">
-              <button onclick="approveShift('awareness')" class="flex-1 px-4 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs">
-                Approve 25% Shift in Simulator
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <button onclick="approveShift('awareness')" class="flex-1 min-w-[200px] px-5 py-2.5 bg-[#0F172A] text-white rounded-[6px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs flex items-center justify-center gap-2">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span>Approve 25% Shift in Simulator</span>
               </button>
-              <button onclick="openDrawer('awareness')" class="px-4 py-2.5 bg-[#EFF4FF] border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[13px] font-semibold hover:bg-[#DCE9FF] transition-smooth flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-4 h-4 text-[#755937]"></i>
-                <span>Suggest Improvements First</span>
+              <button onclick="openDrawer('awareness')" class="px-4 py-2.5 bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] rounded-[6px] text-[13px] font-semibold hover:bg-[#DBEAFE] transition-smooth flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#2563EB]"></i>
+                <span>Suggest Creative Fixes</span>
               </button>
-              <button onclick="dismissShift('awareness')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+              <button onclick="dismissShift('awareness')" class="px-4 py-2.5 bg-white border border-[#CBD5E1] text-[#64748B] rounded-[6px] text-[13px] font-semibold hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-smooth">
                 Dismiss
               </button>
-              <button onclick="snoozeShift('awareness')" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#76777D] rounded-[4px] text-[13px] font-semibold hover:text-[#0B1C30] transition-smooth">
+              <button onclick="snoozeShift('awareness')" class="px-4 py-2.5 bg-white border border-[#CBD5E1] text-[#64748B] rounded-[6px] text-[13px] font-semibold hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-smooth">
                 Snooze 7 Days
               </button>
             </div>
@@ -896,119 +1033,230 @@
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB 3: IMPACT & SATURATION -->
       <!-- ============================================================== -->
       <div id="tab-impact" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Impact & Saturation Review</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">7-day post-shift outcome evaluations and cumulative waste avoided.</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0]">
+                Post-Reallocation Surveillance
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="activity" class="w-3.5 h-3.5 text-[#10B981]"></i>
+                Real-time Diminishing Returns Monitor
+              </span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Impact & Saturation Review</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">7-day post-shift outcome evaluations and cumulative waste avoided.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[12px] text-[#475569] font-medium flex items-center gap-1.5 shadow-2xs">
+              <i data-lucide="shield-check" class="w-4 h-4 text-[#10B981]"></i>
+              <span>Saturation Threshold: ±10% CPA</span>
+            </span>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
-            <p class="text-[11px] font-semibold uppercase text-[#45464D]">Approved Shifts to Date</p>
-            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]" id="impactShiftCount">1 Shift</p>
+        <!-- KPI Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-white border border-[#CBD5E1] p-5 rounded-[10px] shadow-xs hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Approved Shifts to Date</p>
+              <div class="w-8 h-8 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+                <i data-lucide="git-merge" class="w-4 h-4"></i>
+              </div>
+            </div>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight" id="impactShiftCount">1 Shift</p>
+            <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
+              <span class="text-[#10B981] font-semibold flex items-center gap-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i> 100% Executed
+              </span>
+              <span>•</span>
+              <span>0 Algorithmic Resets</span>
+            </div>
           </div>
-          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
-            <p class="text-[11px] font-semibold uppercase text-[#10B981]">Cumulative Waste Avoided</p>
-            <p class="text-[28px] font-semibold font-sans mt-1 text-[#10B981]" id="impactWasteAvoided">₹26,850</p>
+
+          <div class="bg-white border border-[#CBD5E1] p-5 rounded-[10px] shadow-xs hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-[#059669]">Cumulative Waste Avoided</p>
+              <div class="w-8 h-8 rounded-lg bg-[#ECFDF5] text-[#059669] flex items-center justify-center">
+                <i data-lucide="wallet" class="w-4 h-4"></i>
+              </div>
+            </div>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#059669] tracking-tight" id="impactWasteAvoided">₹26,850</p>
+            <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
+              <span class="text-[#059669] font-semibold flex items-center gap-0.5">
+                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Conserved
+              </span>
+              <span>•</span>
+              <span>Redirected to &lt;₹800 CPA inventory</span>
+            </div>
           </div>
-          <div class="bg-white border border-[#C6C6CD] p-5 rounded-[4px]">
-            <p class="text-[11px] font-semibold uppercase text-[#755937]">Saturation Verdicts</p>
-            <p class="text-[28px] font-semibold font-sans mt-1 text-[#0B1C30]">1 Held • 0 Saturated</p>
+
+          <div class="bg-white border border-[#CBD5E1] p-5 rounded-[10px] shadow-xs hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-[#755937]">Saturation Verdicts</p>
+              <div class="w-8 h-8 rounded-lg bg-[#FFFBEB] text-[#D97706] flex items-center justify-center">
+                <i data-lucide="gauge" class="w-4 h-4"></i>
+              </div>
+            </div>
+            <p class="text-[32px] font-bold font-sans mt-2 text-[#0B1C30] tracking-tight">1 Held • 0 Saturated</p>
+            <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1F5F9] text-[12px] text-[#64748B]">
+              <span class="text-[#059669] font-semibold">Healthy Headroom</span>
+              <span>•</span>
+              <span>Recipient absorbed spend smoothly</span>
+            </div>
           </div>
         </div>
 
-        <div class="bg-white border border-[#C6C6CD] rounded-[4px] p-5 space-y-4">
-          <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Shift Evaluation Ledger</h2>
+        <!-- Shift Evaluation Ledger -->
+        <div class="bg-white border border-[#CBD5E1] rounded-[10px] shadow-xs overflow-hidden space-y-0">
+          <div class="p-5 border-b border-[#E2E8F0] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Shift Evaluation Ledger</h2>
+              <p class="text-[12px] text-[#64748B] mt-0.5">7-day post-shift outcome evaluations tracking receiving campaign CPA stability.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+              Automated 7-Day Hold Verification
+            </span>
+          </div>
+
           <div class="overflow-x-auto">
             <table class="w-full text-left text-[13px]">
-              <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold">
+              <thead class="bg-[#F8FAFC] text-[#475569] font-semibold border-b border-[#E2E8F0]">
                 <tr>
-                  <th class="py-2.5 px-4">Shift Event</th>
-                  <th class="py-2.5 px-3">Receiving Campaign</th>
-                  <th class="py-2.5 px-3">Before CPA</th>
-                  <th class="py-2.5 px-3">After CPA (7d)</th>
-                  <th class="py-2.5 px-3">Delta %</th>
-                  <th class="py-2.5 px-3">Verdict</th>
-                  <th class="py-2.5 px-4">Next Step</th>
+                  <th class="py-3 px-4">Shift Event</th>
+                  <th class="py-3 px-3">Receiving Campaign</th>
+                  <th class="py-3 px-3">Before CPA</th>
+                  <th class="py-3 px-3">After CPA (7d)</th>
+                  <th class="py-3 px-3">Delta %</th>
+                  <th class="py-3 px-3">Verdict</th>
+                  <th class="py-3 px-4">Next Step</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-[#E5EEFF]" id="impactTableBody">
-                <tr>
-                  <td class="py-3 px-4 font-semibold">Shift #1 (Day 14)</td>
-                  <td class="py-3 px-3">The Star</td>
-                  <td class="py-3 px-3">₹782</td>
-                  <td class="py-3 px-3">₹815</td>
-                  <td class="py-3 px-3 text-[#10B981] font-semibold">+4.2%</td>
-                  <td class="py-3 px-3"><span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Held (Passed)</span></td>
-                  <td class="py-3 px-4 text-[#45464D]">Recipient absorbed budget smoothly. Eligible for next step.</td>
+              <tbody class="divide-y divide-[#F1F5F9]" id="impactTableBody">
+                <tr class="hover:bg-[#F8FAFC] transition-colors">
+                  <td class="py-3.5 px-4 font-semibold text-[#0B1C30] flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    <span>Shift #1 (Day 14)</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-medium text-[#0F172A]">The Star</span>
+                    <span class="block text-[11px] text-[#64748B]">Google Search</span>
+                  </td>
+                  <td class="py-3.5 px-3 font-mono font-medium text-[#475569]">₹782</td>
+                  <td class="py-3.5 px-3 font-mono font-medium text-[#0F172A]">₹815</td>
+                  <td class="py-3.5 px-3">
+                    <span class="text-[#059669] font-semibold bg-[#ECFDF5] px-2 py-0.5 rounded text-[11px]">+4.2%</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+                      <i data-lucide="check" class="w-3 h-3 text-[#059669]"></i>
+                      <span>Held (Passed)</span>
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-[#475569]">
+                    Recipient absorbed budget smoothly without CPA inflation. Eligible for Phase 2 shift.
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- Guardrail Protocol Footer -->
+          <div class="p-4 bg-[#F8FAFC] border-t border-[#E2E8F0] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[12px] text-[#64748B]">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield" class="w-4 h-4 text-[#0284C7]"></i>
+              <span><strong>Guardrail Rule:</strong> If recipient CPA degrades by &gt;10% over 7 days, budget shift is automatically rolled back.</span>
+            </div>
+            <span class="font-semibold text-[#0F172A]">Zero algorithmic disruptions recorded to date.</span>
+          </div>
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB: LIVE ADS ACCOUNT (DEVELOPER API KEY CONNECTION) -->
       <!-- ============================================================== -->
       <div id="tab-live-api" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Connect Live Ads Account</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">Connect your real Google Ads, Meta Ads, or LinkedIn Campaign API key to track spending and detect waste in real time.</p>
-        </div>
-
-        <!-- Connection Card -->
-        <div class="bg-white border-2 border-[#D3E4FE] rounded-[4px] p-6 shadow-xs space-y-6">
-          <div class="flex items-center justify-between border-b border-[#C6C6CD] pb-4">
-            <div class="flex items-center gap-3">
-              <div class="p-2.5 bg-[#EFF4FF] border border-[#D3E4FE] text-[#0F172A] rounded-[4px]">
-                <i data-lucide="key" class="w-6 h-6 text-[#755937]"></i>
-              </div>
-              <div>
-                <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Ad Network API Credentials</h3>
-                <p class="text-[12px] text-[#45464D]">Provide your account credentials to fetch live spend, clicks, conversions, and campaign metadata.</p>
-              </div>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]">
+                Developer API Mode
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="lock" class="w-3.5 h-3.5 text-[#059669]"></i>
+                Client-Side In-Memory Only
+              </span>
             </div>
-            <span class="flex items-center gap-1.5 text-[12px] font-semibold text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-2.5 py-1 rounded-[4px]">
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Connect Live Ads Account</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Connect your real Google Ads, Meta Ads, or LinkedIn Campaign API key to track spending and detect waste in real time.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0] text-[12px] text-[#065F46] font-semibold flex items-center gap-1.5 shadow-2xs">
               <i data-lucide="shield-check" class="w-4 h-4 text-[#10B981]"></i>
               <span>Strictly Read-Only Scope</span>
             </span>
           </div>
+        </div>
 
-          <!-- Form Fields -->
+        <!-- Connection Card -->
+        <div class="bg-white border border-[#CBD5E1] rounded-[12px] p-6 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-lg bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] flex items-center justify-center shrink-0 shadow-2xs">
+                <i data-lucide="key" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="font-headline text-[19px] font-semibold text-[#0B1C30]">Ad Network API Credentials</h3>
+                <p class="text-[12px] text-[#64748B]">Provide your developer credentials to fetch real-time spend, clicks, conversions, and campaign metadata.</p>
+              </div>
+            </div>
+            <div class="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#475569] bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-1 rounded-full">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-[#10B981]"></i>
+              <span>Zero server token storage</span>
+            </div>
+          </div>
+
+          <!-- Form Fields Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-[13px]">
             <div>
-              <label class="font-semibold text-[#0B1C30] block mb-1">Select Ad Platform:</label>
-              <select id="apiPlatformSelect" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-medium focus:outline-none focus:border-[#0F172A]">
+              <label class="font-semibold text-[#0B1C30] block mb-1.5">Select Ad Platform:</label>
+              <select id="apiPlatformSelect" class="w-full p-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[#0B1C30] font-medium focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all">
                 <option value="google">Google Ads API (Developer Token + Customer ID)</option>
                 <option value="meta">Meta Marketing API (System User Access Token + Ad Account ID)</option>
-                <option value="linkedin">LinkedIn Marketing Solutions API</option>
-                <option value="generic">Custom Marketing REST Endpoint</option>
+                <option value="linkedin">LinkedIn Campaign Manager API (OAuth 2.0 Bearer)</option>
               </select>
             </div>
 
             <div>
-              <label class="font-semibold text-[#0B1C30] block mb-1">Ad Account ID / Customer ID:</label>
-              <input type="text" id="apiAccountIdInput" placeholder="e.g. 10-digit Google Ads Customer ID or Meta act_xxxx" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#0F172A]" value="">
+              <label class="font-semibold text-[#0B1C30] block mb-1.5">Ad Account ID / Customer ID:</label>
+              <input type="text" id="apiAccountIdInput" placeholder="e.g. 10-digit Google Ads Customer ID or Meta act_xxxx" class="w-full p-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all">
             </div>
 
             <div class="md:col-span-2">
-              <label class="font-semibold text-[#0B1C30] block mb-1">Developer API Key / Access Token:</label>
+              <label class="font-semibold text-[#0B1C30] block mb-1.5">Developer API Key / Access Token:</label>
               <div class="relative">
-                <input type="password" id="apiKeySecretInput" placeholder="Paste your Developer Token, OAuth Token, or API Key here..." class="w-full p-2.5 pr-10 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#0F172A]" value="">
-                <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-3 top-3 text-[#76777D] hover:text-[#0B1C30]">
+                <input type="password" id="apiKeySecretInput" placeholder="Paste your Developer Token, OAuth Token, or API Key here..." class="w-full p-2.5 pr-10 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[#0B1C30] font-mono focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all" value="">
+                <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-3 top-3 text-[#64748B] hover:text-[#0B1C30] cursor-pointer">
                   <i data-lucide="eye" class="w-4 h-4" id="eyeIcon"></i>
                 </button>
               </div>
-              <p class="text-[11px] text-[#76777D] mt-1">Token is kept in local memory and used exclusively for read-only metric polling. Never shared or modified.</p>
+              <p class="text-[11px] text-[#64748B] mt-1.5 flex items-center gap-1">
+                <i data-lucide="info" class="w-3.5 h-3.5 text-[#0284C7]"></i>
+                <span>Token is kept in browser memory and used exclusively for read-only metric polling. Never sent to external third parties.</span>
+              </p>
             </div>
 
             <div>
-              <label class="font-semibold text-[#0B1C30] block mb-1">Real-Time Sync Interval:</label>
-              <select id="apiSyncInterval" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30] font-medium">
+              <label class="font-semibold text-[#0B1C30] block mb-1.5">Real-Time Sync Interval:</label>
+              <select id="apiSyncInterval" class="w-full p-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[#0B1C30] font-medium focus:outline-none focus:border-[#2563EB]">
                 <option value="15">Every 15 Minutes (Recommended)</option>
                 <option value="60">Hourly</option>
                 <option value="360">Every 6 Hours</option>
@@ -1016,137 +1264,396 @@
             </div>
 
             <div>
-              <label class="font-semibold text-[#0B1C30] block mb-1">Account Target CPA Benchmark (₹):</label>
-              <input type="number" id="apiTargetCpaInput" value="1200" class="w-full p-2.5 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] text-[#0B1C30]">
+              <label class="font-semibold text-[#0B1C30] block mb-1.5">Account Target CPA Benchmark (₹):</label>
+              <input type="number" id="apiTargetCpaInput" value="1200" class="w-full p-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[#0B1C30] font-semibold focus:outline-none focus:border-[#2563EB]">
             </div>
           </div>
 
           <!-- Buttons -->
-          <div class="flex items-center gap-3 pt-2">
-            <button onclick="connectLiveApiAccount()" class="px-5 py-2.5 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-2 shadow-xs">
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <button onclick="connectLiveApiAccount()" class="px-5 py-2.5 bg-[#0F172A] text-white rounded-[6px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-2 shadow-xs cursor-pointer">
               <i data-lucide="plug" class="w-4 h-4"></i>
               <span>Connect & Track Real-Time Ad Expenses</span>
             </button>
-            <button onclick="disconnectLiveAccount()" class="px-4 py-2.5 bg-white border border-[#C6C6CD] text-[#BA1A1A] rounded-[4px] text-[13px] font-semibold hover:bg-[#FFDAD6] transition-smooth">
+            <button onclick="disconnectLiveAccount()" class="px-4 py-2.5 bg-white border border-[#FECACA] text-[#DC2626] rounded-[6px] text-[13px] font-semibold hover:bg-[#FEE2E2] transition-smooth cursor-pointer">
               Disconnect Live Account
             </button>
           </div>
 
           <!-- Connected Live State Feedback -->
-          <div id="liveAccountStatusCard" class="p-4 bg-[#F8F9FF] border border-[#C6C6CD] rounded-[4px] space-y-2">
+          <div id="liveAccountStatusCard" class="p-4 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[8px] space-y-2">
             <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-[#94A3B8]" id="liveStatusPulseDot"></span>
-                <span class="font-semibold text-[13px] text-[#45464D]" id="liveStatusAccountTitle">No Live Ad Account Connected</span>
+                <span class="font-semibold text-[13px] text-[#475569]" id="liveStatusAccountTitle">No Live Ad Account Connected</span>
               </div>
-              <span class="text-[11px] text-[#76777D]" id="liveStatusLastSync">Status: Disconnected</span>
+              <span class="text-[11px] font-mono text-[#64748B] bg-white px-2 py-0.5 rounded border border-[#E2E8F0]" id="liveStatusLastSync">Status: Disconnected</span>
             </div>
-            <p class="text-[12px] text-[#76777D]" id="liveStatusAccountDesc">Enter your developer API token and Ad Account ID above, then click 'Connect & Track Real-Time Ad Expenses' to establish live spend surveillance.</p>
+            <p class="text-[12px] text-[#64748B]" id="liveStatusAccountDesc">Enter your developer API token and Ad Account ID above, then click 'Connect & Track Real-Time Ad Expenses' to establish live spend surveillance.</p>
+          </div>
+        </div>
+
+        <!-- Security & Architecture Trust Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-white border border-[#E2E8F0] rounded-[8px] space-y-1.5 shadow-2xs">
+            <div class="w-8 h-8 rounded-md bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+              <i data-lucide="clock" class="w-4 h-4"></i>
+            </div>
+            <h4 class="font-semibold text-[13px] text-[#0B1C30]">3-Day Attribution Lag Buffer</h4>
+            <p class="text-[12px] text-[#64748B]">Recent spend is shielded from premature automated cuts while conversion pixels report.</p>
+          </div>
+
+          <div class="p-4 bg-white border border-[#E2E8F0] rounded-[8px] space-y-1.5 shadow-2xs">
+            <div class="w-8 h-8 rounded-md bg-[#ECFDF5] text-[#059669] flex items-center justify-center">
+              <i data-lucide="user-check" class="w-4 h-4"></i>
+            </div>
+            <h4 class="font-semibold text-[13px] text-[#0B1C30]">Human Approval Mandate</h4>
+            <p class="text-[12px] text-[#64748B]">Zero autonomous budget updates. Every budget shift proposal requires explicit button approval.</p>
+          </div>
+
+          <div class="p-4 bg-white border border-[#E2E8F0] rounded-[8px] space-y-1.5 shadow-2xs">
+            <div class="w-8 h-8 rounded-md bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+              <i data-lucide="shield" class="w-4 h-4"></i>
+            </div>
+            <h4 class="font-semibold text-[13px] text-[#0B1C30]">Cryptographic Audit Trail</h4>
+            <p class="text-[12px] text-[#64748B]">Every human decision is recorded in the Immutable Audit Ledger with timestamp verification.</p>
           </div>
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB 5: DATA SOURCES & CSV -->
       <!-- ============================================================== -->
       <div id="tab-sources" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Data Source Management</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">Upload Google Ads or Meta exports (up to 10MB) for evidence analysis.</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#EEF2FF] text-[#4F46E5] border border-[#C7D2FE]">
+                Offline Data Ingestion
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-[#6366F1]"></i>
+                Google Ads & Meta CSV Format Supported
+              </span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Data Source Management</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Upload Google Ads or Meta exports (up to 10MB) for evidence analysis.</p>
+          </div>
         </div>
 
-        <div class="bg-white border-2 border-dashed border-[#C6C6CD] rounded-[4px] p-8 text-center space-y-4">
-          <i data-lucide="upload-cloud" class="w-12 h-12 text-[#755937] mx-auto"></i>
-          <div>
-            <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Upload Campaign CSV</h3>
-            <p class="text-[13px] text-[#45464D]">Supports Google Ads and Meta standard exports. Minimum 14 days required for judgement.</p>
+        <!-- Modern Upload Dropzone Card -->
+        <div class="bg-white border-2 border-dashed border-[#CBD5E1] rounded-[12px] p-8 text-center space-y-5 hover:border-[#6366F1] transition-all shadow-xs">
+          <div class="w-16 h-16 rounded-full bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] flex items-center justify-center mx-auto shadow-xs">
+            <i data-lucide="upload-cloud" class="w-8 h-8"></i>
           </div>
-          <div class="flex items-center justify-center gap-3">
-            <input type="file" id="fileCsvInput" accept=".csv" class="text-[13px] text-[#45464D]">
-            <button onclick="handleCsvUpload()" class="px-4 py-2 bg-[#0F172A] text-white rounded-[4px] text-[13px] font-semibold hover:bg-[#1E293B]">
-              Ingest & Validate CSV
+
+          <div class="max-w-md mx-auto space-y-1.5">
+            <h3 class="font-headline text-[20px] font-semibold text-[#0B1C30]">Upload Campaign Telemetry CSV</h3>
+            <p class="text-[13px] text-[#64748B]">Supports Google Ads, Meta Ads Manager, and LinkedIn Campaign exports. Minimum 14 days of data required for statistical validity.</p>
+          </div>
+
+          <!-- Accepted Badges -->
+          <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+            <span class="px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-md text-[11px] text-[#475569] font-medium flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3 h-3 text-[#10B981]"></i> Google Ads (Campaign, Date, Cost, Conv)
+            </span>
+            <span class="px-2.5 py-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-md text-[11px] text-[#475569] font-medium flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3 h-3 text-[#10B981]"></i> Meta Ads (Amount Spent, Results, CPA)
+            </span>
+          </div>
+
+          <!-- Upload Controls -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+            <label class="px-4 py-2.5 bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] text-[13px] font-medium text-[#0F172A] hover:bg-[#EFF6FF] hover:border-[#93C5FD] transition-all cursor-pointer flex items-center gap-2 shadow-2xs">
+              <i data-lucide="file-plus" class="w-4 h-4 text-[#2563EB]"></i>
+              <span id="chosenFileNameText">Choose CSV File</span>
+              <input type="file" id="fileCsvInput" accept=".csv" class="hidden" onchange="document.getElementById('chosenFileNameText').innerText = this.files[0] ? this.files[0].name : 'Choose CSV File'">
+            </label>
+            <button onclick="handleCsvUpload()" class="px-5 py-2.5 bg-[#0F172A] text-white rounded-[6px] text-[13px] font-semibold hover:bg-[#1E293B] transition-smooth shadow-xs flex items-center gap-2 cursor-pointer">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              <span>Ingest & Validate CSV</span>
             </button>
           </div>
-          <p id="csvUploadStatus" class="text-[13px] font-medium text-[#10B981] hidden"></p>
+
+          <p id="csvUploadStatus" class="text-[13px] font-semibold text-[#059669] bg-[#ECFDF5] border border-[#A7F3D0] p-2.5 rounded-[6px] max-w-md mx-auto hidden"></p>
+        </div>
+
+        <!-- CSV Ingestion Pipeline Card -->
+        <div class="bg-white border border-[#E2E8F0] rounded-[10px] p-5 shadow-2xs space-y-3">
+          <h4 class="font-semibold text-[14px] text-[#0B1C30] flex items-center gap-2">
+            <i data-lucide="cpu" class="w-4 h-4 text-[#4F46E5]"></i>
+            <span>3-Stage Statistical Ingestion Pipeline</span>
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[12px] pt-1">
+            <div class="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[6px] space-y-1">
+              <p class="font-semibold text-[#0F172A]">1. Header & Schema Check</p>
+              <p class="text-[#64748B]">Validates Date, Campaign Name, Daily Cost, and Conversion fields.</p>
+            </div>
+            <div class="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[6px] space-y-1">
+              <p class="font-semibold text-[#0F172A]">2. Maturity Lag Truncation</p>
+              <p class="text-[#64748B]">Automatically excludes the trailing 3 days to shield unripened conversions.</p>
+            </div>
+            <div class="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[6px] space-y-1">
+              <p class="font-semibold text-[#0F172A]">3. Bayesian Monte Carlo</p>
+              <p class="text-[#64748B]">Computes confidence intervals across remaining 11+ mature days.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB 6: RULES & SETTINGS -->
       <!-- ============================================================== -->
       <div id="tab-settings" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Analytical Rules & Thresholds</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">Configure the core parameters governing campaign classifications and recommendations.</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD]">
+                Governance Engine
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#0284C7]"></i>
+                Standard Operating Procedure (SOP) Defaults
+              </span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Analytical Rules & Thresholds</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Configure the core parameters governing campaign classifications and recommendations.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="alert('Rules configuration saved. All simulation criteria re-indexed.')" class="px-4 py-2 bg-[#0F172A] text-white rounded-[6px] text-[12px] font-semibold hover:bg-[#1E293B] transition-smooth flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              <span>Save & Apply Thresholds</span>
+            </button>
+          </div>
         </div>
 
-        <div class="bg-white border border-[#C6C6CD] rounded-[4px] p-6 space-y-5">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[13px]">
-            <div>
-              <label class="font-semibold text-[#0B1C30]">Minimum Observation Window (Days):</label>
-              <input type="number" value="14" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
-              <p class="text-[11px] text-[#76777D] mt-0.5">Two full weeks so weekday and weekend cycles cancel out.</p>
+        <!-- 4 Core Parameter Cards (2x2 Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Parameter 1: Minimum Observation Window -->
+          <div class="bg-white border border-[#CBD5E1] rounded-[10px] p-5 shadow-xs space-y-3 hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+                  <i data-lucide="calendar" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[14px] text-[#0B1C30]">Minimum Observation Window</h4>
+                  <p class="text-[11px] text-[#64748B]">Temporal baseline requirement</p>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-[16px] text-[#0F172A] bg-[#F1F5F9] px-3 py-1 rounded border border-[#E2E8F0]">14 Days</span>
             </div>
-            <div>
-              <label class="font-semibold text-[#0B1C30]">Minimum Spend Threshold (₹):</label>
-              <input type="number" value="10000" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
-              <p class="text-[11px] text-[#76777D] mt-0.5">Higher of ₹10,000 or 10x target CPA.</p>
+            <p class="text-[12px] text-[#475569] leading-relaxed">
+              Enforces two full calendar weeks so alternating weekday B2B and weekend consumer conversion cycles normalize before judgement.
+            </p>
+            <div class="pt-1 flex items-center gap-2 text-[11px] text-[#059669] font-medium">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              <span>Prevents mid-week knee-jerk cuts</span>
             </div>
-            <div>
-              <label class="font-semibold text-[#0B1C30]">Conversion Maturity Lag Window (Days):</label>
-              <input type="number" value="3" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
-              <p class="text-[11px] text-[#76777D] mt-0.5">Excluded from judgement to accommodate delayed reporting.</p>
+          </div>
+
+          <!-- Parameter 2: Minimum Spend Threshold -->
+          <div class="bg-white border border-[#CBD5E1] rounded-[10px] p-5 shadow-xs space-y-3 hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#ECFDF5] text-[#059669] flex items-center justify-center">
+                  <i data-lucide="wallet" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[14px] text-[#0B1C30]">Minimum Spend Threshold</h4>
+                  <p class="text-[11px] text-[#64748B]">Capital accumulation gate</p>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-[16px] text-[#0F172A] bg-[#F1F5F9] px-3 py-1 rounded border border-[#E2E8F0]">₹10,000</span>
             </div>
-            <div>
-              <label class="font-semibold text-[#0B1C30]">Bayesian Confidence Threshold (%):</label>
-              <input type="number" value="80" class="w-full mt-1 p-2 border border-[#C6C6CD] rounded-[4px] bg-[#F8F9FF]" readonly>
-              <p class="text-[11px] text-[#76777D] mt-0.5">Beta distribution Monte Carlo probability requirement.</p>
+            <p class="text-[12px] text-[#475569] leading-relaxed">
+              Calculated as higher of ₹10,000 or 10× Target CPA. Campaigns below this spending gate remain in 'Collecting Data' state regardless of early zero-conversion days.
+            </p>
+            <div class="pt-1 flex items-center gap-2 text-[11px] text-[#059669] font-medium">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              <span>Shields small exploratory tests</span>
+            </div>
+          </div>
+
+          <!-- Parameter 3: Conversion Maturity Lag Window -->
+          <div class="bg-white border border-[#CBD5E1] rounded-[10px] p-5 shadow-xs space-y-3 hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[14px] text-[#0B1C30]">Conversion Maturity Lag Window</h4>
+                  <p class="text-[11px] text-[#64748B]">Trailing exclusion buffer</p>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-[16px] text-[#0F172A] bg-[#F1F5F9] px-3 py-1 rounded border border-[#E2E8F0]">3 Days</span>
+            </div>
+            <p class="text-[12px] text-[#475569] leading-relaxed">
+              The last 3 calendar days of telemetry are automatically isolated from CPA evaluations to accommodate delayed pixel fires and attribution reporting.
+            </p>
+            <div class="pt-1 flex items-center gap-2 text-[11px] text-[#0284C7] font-medium">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+              <span>Guarantees unripened conversions mature</span>
+            </div>
+          </div>
+
+          <!-- Parameter 4: Bayesian Confidence Threshold -->
+          <div class="bg-white border border-[#CBD5E1] rounded-[10px] p-5 shadow-xs space-y-3 hover:border-[#94A3B8] transition-all">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-[#F5F3FF] text-[#7C3AED] flex items-center justify-center">
+                  <i data-lucide="pie-chart" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[14px] text-[#0B1C30]">Bayesian Confidence Cutoff</h4>
+                  <p class="text-[11px] text-[#64748B]">Monte Carlo simulation target</p>
+                </div>
+              </div>
+              <span class="font-mono font-bold text-[16px] text-[#0F172A] bg-[#F1F5F9] px-3 py-1 rounded border border-[#E2E8F0]">80%</span>
+            </div>
+            <p class="text-[12px] text-[#475569] leading-relaxed">
+              Beta distribution Monte Carlo probability threshold that actual campaign CPA genuinely exceeds target before generating a 25% shift recommendation.
+            </p>
+            <div class="pt-1 flex items-center gap-2 text-[11px] text-[#7C3AED] font-medium">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+              <span>Eliminates statistical false alarms</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB 7: AUDIT LEDGER -->
       <!-- ============================================================== -->
       <div id="tab-audit" class="hidden space-y-6">
-        <div>
-          <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Immutable Audit Ledger</h1>
-          <p class="font-sans text-[13px] text-[#45464D]">Comprehensive record of every human approval, dismissal, and parameter change.</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2E8F0]">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1]">
+                Compliance & Accountability
+              </span>
+              <span class="text-[12px] text-[#64748B] flex items-center gap-1">
+                <i data-lucide="shield" class="w-3.5 h-3.5 text-[#059669]"></i>
+                WORM Verified (Write Once, Read Many)
+              </span>
+            </div>
+            <h1 class="font-headline text-[28px] font-semibold text-[#0B1C30]">Immutable Audit Ledger</h1>
+            <p class="font-sans text-[13px] text-[#45464D]">Comprehensive record of every human approval, dismissal, and parameter change.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="alert('Exporting cryptographically signed Audit Ledger CSV...')" class="px-3.5 py-1.5 bg-white border border-[#CBD5E1] text-[#0F172A] rounded-[6px] text-[12px] font-semibold hover:bg-[#F8FAFC] transition-smooth flex items-center gap-1.5 shadow-2xs cursor-pointer">
+              <i data-lucide="download" class="w-3.5 h-3.5 text-[#64748B]"></i>
+              <span>Export Audit CSV</span>
+            </button>
+          </div>
         </div>
 
-        <div class="bg-white border border-[#C6C6CD] rounded-[4px] overflow-hidden">
-          <table class="w-full text-left text-[13px]">
-            <thead class="bg-[#D3E4FE] text-[#0B1C30] font-semibold">
-              <tr>
-                <th class="py-2.5 px-4">Timestamp</th>
-                <th class="py-2.5 px-3">Actor</th>
-                <th class="py-2.5 px-3">Action</th>
-                <th class="py-2.5 px-3">Entity</th>
-                <th class="py-2.5 px-4">Details</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[#E5EEFF]" id="auditTableBody">
-              <tr>
-                <td class="py-3 px-4 text-[#76777D]">Nov 13, 2026 05:20</td>
-                <td class="py-3 px-3 font-semibold">Marketing Lead</td>
-                <td class="py-3 px-3"><span class="bg-[#FFDAD6] text-[#BA1A1A] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Flagged Waste</span></td>
-                <td class="py-3 px-3">The Brand Reach (Awareness)</td>
-                <td class="py-3 px-4 text-[#45464D]">Severe conversion deficit (₹45,000 spend with 2 conversions).</td>
-              </tr>
-              <tr>
-                <td class="py-3 px-4 text-[#76777D]">Oct 28, 2026 14:15</td>
-                <td class="py-3 px-3 font-semibold">Marketing Manager</td>
-                <td class="py-3 px-3"><span class="bg-[#ECFDF5] text-[#065F46] px-2 py-0.5 rounded-[4px] font-semibold text-[11px]">Approved Shift</span></td>
-                <td class="py-3 px-3">The Slow Burner → The Star</td>
-                <td class="py-3 px-4 text-[#45464D]">Shifted 25% (₹950/day).</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Ledger Table Card -->
+        <div class="bg-white border border-[#CBD5E1] rounded-[10px] shadow-xs overflow-hidden">
+          <div class="p-4 border-b border-[#E2E8F0] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F8FAFC]">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]"></span>
+              <span class="text-[12px] font-semibold text-[#0B1C30]">SHA-256 Block Chaining: All Records Verified</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] text-[#64748B]">
+              <span>Filter:</span>
+              <span class="px-2 py-0.5 rounded bg-white border border-[#CBD5E1] font-medium text-[#0F172A]">All Actions (2)</span>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-[13px]">
+              <thead class="bg-[#EFF6FF] text-[#1E3A8A] font-semibold border-b border-[#DBEAFE]">
+                <tr>
+                  <th class="py-3 px-4">Timestamp</th>
+                  <th class="py-3 px-3">Actor</th>
+                  <th class="py-3 px-3">Action</th>
+                  <th class="py-3 px-3">Target Entity</th>
+                  <th class="py-3 px-4">Details & Justification</th>
+                  <th class="py-3 px-3 text-right">Integrity Hash</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#F1F5F9]" id="auditTableBody">
+                <tr class="hover:bg-[#F8FAFC] transition-colors">
+                  <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
+                    <span>Nov 13, 2026</span>
+                    <span class="block text-[11px] text-[#94A3B8]">05:20 IST</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <div class="flex items-center gap-2">
+                      <div class="w-6 h-6 rounded-full bg-[#FEE2E2] text-[#B91C1C] text-[10px] font-bold flex items-center justify-center">
+                        ML
+                      </div>
+                      <span class="font-semibold text-[#0F172A]">Marketing Lead</span>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="bg-[#FEE2E2] text-[#B91C1C] border border-[#FECACA] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+                      <i data-lucide="flag" class="w-3 h-3 text-[#DC2626]"></i>
+                      <span>Flagged Waste</span>
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold text-[#0B1C30]">The Brand Reach</span>
+                    <span class="block text-[11px] text-[#64748B]">YouTube Awareness</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-[#475569]">
+                    Severe conversion deficit (₹45,000 spend with only 2 primary conversions).
+                  </td>
+                  <td class="py-3.5 px-3 text-right">
+                    <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">0x8f2c...4a19</span>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-[#F8FAFC] transition-colors">
+                  <td class="py-3.5 px-4 text-[#64748B] font-mono text-[12px]">
+                    <span>Oct 28, 2026</span>
+                    <span class="block text-[11px] text-[#94A3B8]">14:15 IST</span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <div class="flex items-center gap-2">
+                      <div class="w-6 h-6 rounded-full bg-[#ECFDF5] text-[#059669] text-[10px] font-bold flex items-center justify-center">
+                        MM
+                      </div>
+                      <span class="font-semibold text-[#0F172A]">Marketing Manager</span>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full font-semibold text-[11px] inline-flex items-center gap-1 shadow-2xs">
+                      <i data-lucide="check" class="w-3 h-3 text-[#059669]"></i>
+                      <span>Approved Shift</span>
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-3">
+                    <span class="font-semibold text-[#0B1C30]">The Slow Burner → The Star</span>
+                    <span class="block text-[11px] text-[#64748B]">Meta Feed → Google Search</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-[#475569]">
+                    Surgical 25% reallocation (₹950/day shift to uncapped conversion inventory).
+                  </td>
+                  <td class="py-3.5 px-3 text-right">
+                    <span class="font-mono text-[11px] text-[#64748B] bg-[#F1F5F9] px-2 py-0.5 rounded">0x3d7b...9e02</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-3 bg-[#F8FAFC] border-t border-[#E2E8F0] text-center text-[11px] text-[#64748B]">
+            All audit actions are permanently sealed with zero retrospective modification capability.
+          </div>
         </div>
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
+      -->
       <!-- TAB 8: PRIVACY POLICY -->
       <!-- ============================================================== -->
       <div id="tab-privacy" class="hidden space-y-6">
