@@ -8,10 +8,10 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Newsreader + Inter -->
+  <!-- Premium Luxurious Google Fonts: Plus Jakarta Sans + Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -37,8 +37,8 @@
             outlineVariant: '#C6C6CD',
           },
           fontFamily: {
-            headline: ['Newsreader', 'serif'],
-            sans: ['Inter', 'sans-serif'],
+            headline: ['Playfair Display', 'Plus Jakarta Sans', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
           },
           borderRadius: {
             DEFAULT: '4px',
@@ -52,10 +52,12 @@
     body {
       background-color: #F8F9FF;
       color: #0B1C30;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: -0.01em;
     }
     .font-headline {
-      font-family: 'Newsreader', serif;
+      font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+      letter-spacing: -0.02em;
     }
     .transition-smooth {
       transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
@@ -122,20 +124,15 @@
             Stop burning capital on <span class="italic text-[#755937]">immature</span> ads.
           </h1>
 
-          <!-- Subheadline -->
-          <p class="text-base sm:text-xl text-[#45464D] max-w-2xl mx-auto leading-relaxed mb-10">
-            Ads Tracker isolates genuine waste from natural attribution lag across Google, Meta, and LinkedIn. Detect underperforming ad spend, calculate salvageable capital, and reallocate with mathematical certainty.
+          <!-- Subheadline (Short, Catchy, Premium) -->
+          <p class="text-base sm:text-xl text-[#475569] max-w-xl mx-auto leading-relaxed mb-8 font-medium">
+            Shield attribution lag. Identify true ad waste. Reallocate capital with mathematical certainty.
           </p>
 
-          <!-- CTA Action Buttons -->
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-            <button onclick="enterDashboard()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0F172A] text-white rounded-[4px] text-[15px] font-semibold hover:bg-[#1E293B] shadow-md transition-smooth cursor-pointer">
-              <span>Get Started — Launch Auditor</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-            <button onclick="enterSimulator()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/90 backdrop-blur-sm border border-[#C6C6CD] text-[#0B1C30] rounded-[4px] text-[15px] font-medium hover:bg-[#EFF4FF] transition-smooth cursor-pointer">
-              <i data-lucide="play-circle" class="w-5 h-5 text-[#755937]"></i>
-              <span>Explore Simulator Demo (₹85,250 Waste)</span>
+          <!-- Centered Single Black Get Started CTA Button -->
+          <div class="flex items-center justify-center mb-14">
+            <button onclick="enterDashboard()" class="inline-flex items-center justify-center px-10 py-3.5 bg-[#0F172A] text-white rounded-[6px] text-[15px] font-semibold hover:bg-[#1E293B] shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
+              Get Started
             </button>
           </div>
 
@@ -673,7 +670,7 @@
                 <thead class="bg-[#EFF4FF] text-[#0B1C30] font-semibold border-b border-[#CBD5E1]">
                   <tr>
                     <th class="py-3 px-4">Campaign Name & Channel</th>
-                    <th class="py-3 px-3">Telemetry Status</th>
+                    <th class="py-3 px-3 whitespace-nowrap min-w-[150px]">Telemetry Status</th>
                     <th class="py-3 px-3">Spend (INR)</th>
                     <th class="py-3 px-3">Conversions</th>
                     <th class="py-3 px-3">CPA (Target)</th>
@@ -2519,7 +2516,7 @@
               </div>
               <div class="mt-1">${channelBadge}</div>
             </td>
-            <td class="py-3 px-3">${getStatusBadge(c.status)}</td>
+            <td class="py-3 px-3 whitespace-nowrap min-w-[150px]">${getStatusBadge(c.status)}</td>
             <td class="py-3 px-3">
               <div class="font-bold text-[#0B1C30]">₹${c.spend.toLocaleString('en-IN')}</div>
               <div class="text-[10px] text-[#64748B]">Cumulative</div>
@@ -2560,21 +2557,21 @@
     }
 
     function getStatusBadge(status) {
-      switch (status) {
-        case "Strong":
-          return `<span class="bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Strong</span>`;
-        case "Underperforming":
-          return `<span class="bg-gradient-to-r from-[#FFF1F0] to-[#FFDAD6] text-[#B91C1C] border border-[#FCA5A5] px-2.5 py-0.5 rounded-full text-[11px] font-bold shadow-2xs">Underperforming</span>`;
-        case "Healthy":
-          return `<span class="bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Healthy</span>`;
-        case "Watch":
-          return `<span class="bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Watch</span>`;
-        case "Awareness":
-          return `<span class="bg-[#F5F3FF] text-[#6D28D9] border border-[#DDD6FE] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Awareness</span>`;
-        default:
-          return `<span class="bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-2.5 py-0.5 rounded-full text-[11px] font-semibold shadow-2xs">Collecting Data</span>`;
+        switch (status) {
+          case "Strong":
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-[#E0F2FE] text-[#0369A1] border border-[#BAE6FD] px-3 py-1 rounded-full text-[11px] font-semibold shadow-2xs">Strong</span>`;
+          case "Underperforming":
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-gradient-to-r from-[#FFF1F0] to-[#FFDAD6] text-[#B91C1C] border border-[#FCA5A5] px-3 py-1 rounded-full text-[11px] font-bold shadow-2xs">Underperforming</span>`;
+          case "Healthy":
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] px-3 py-1 rounded-full text-[11px] font-semibold shadow-2xs">Healthy</span>`;
+          case "Watch":
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] px-3 py-1 rounded-full text-[11px] font-semibold shadow-2xs">Watch</span>`;
+          case "Awareness":
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-[#F5F3FF] text-[#6D28D9] border border-[#DDD6FE] px-3 py-1 rounded-full text-[11px] font-semibold shadow-2xs">Awareness</span>`;
+          default:
+            return `<span class="inline-flex items-center justify-center whitespace-nowrap bg-[#F1F5F9] text-[#475569] border border-[#CBD5E1] px-3 py-1 rounded-full text-[11px] font-semibold shadow-2xs">Collecting Data</span>`;
+        }
       }
-    }
 
     // Render Live Surveillance Feed (Interactive & Engaging)
     function renderAlerts() {
